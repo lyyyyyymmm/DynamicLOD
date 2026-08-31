@@ -23,6 +23,15 @@ test("burst scenario contains four interaction and four recovery phases", () => 
   assert.equal(timeline.at(-1).endMs, 40000);
 });
 
+test("pressure burst scenario lengthens the near-view recovery workload", () => {
+  const timeline = buildScenarioTimeline("pressureBurst");
+  assert.equal(timeline.filter((phase) => phase.interacting).length, 4);
+  assert.equal(timeline.filter((phase) => !phase.interacting).length, 4);
+  assert.equal(timeline[0].endMs - timeline[0].startMs, 4000);
+  assert.equal(timeline[1].endMs - timeline[1].startMs, 6000);
+  assert.equal(timeline.at(-1).endMs, 40000);
+});
+
 test("seeded shuffle is deterministic", () => {
   const input = ["fixed8", "fixed16", "cesiumDynamic", "reactive", "pi", "proposed"];
   assert.deepEqual(seededShuffle(input, 20260823), seededShuffle(input, 20260823));
@@ -46,7 +55,7 @@ test("manifest records protocol v2 provenance, device and network fields", () =>
   });
 
   assert.equal(manifest.schemaVersion, 2);
-  assert.equal(manifest.protocolVersion, "2.3.5");
+  assert.equal(manifest.protocolVersion, "2.3.6");
   assert.equal(manifest.renderWidth, 960);
   assert.equal(manifest.renderHeight, 540);
   assert.equal(manifest.warmupMs, 10000);
@@ -75,6 +84,7 @@ test("protocol v2 separates calibration, main and restricted datasets", () => {
   assert.deepEqual(FROZEN_PROTOCOL.methods, [
     "fixed8", "fixed16", "cesiumDynamic", "reactive", "pi", "proposed",
   ]);
+  assert.deepEqual(FROZEN_PROTOCOL.scenarios, ["steady", "burst", "pressureBurst"]);
   assert.equal(DATASETS.dragon.studyRole, "calibration");
   assert.equal(DATASETS.publicStress.studyRole, "diagnostic");
   assert.equal(DATASETS.bagAmsterdam.studyRole, "main");
@@ -110,9 +120,10 @@ test("D1/S2 pilot queue schedules four paired six-method blocks outside confirma
   const queue = buildD1S2PilotQueue();
   assert.equal(queue.length, 24);
   assert.ok(queue.every((run) => run.dataset === "bagAmsterdam"));
-  assert.ok(queue.every((run) => run.scenario === "burst"));
+  assert.ok(queue.every((run) => run.scenario === "pressureBurst"));
   assert.ok(queue.every((run) => run.networkProfile === "lan"));
   assert.ok(queue.every((run) => run.studyPhase === "pilot"));
+  assert.ok(queue.every((run) => run.pilotPurpose === "full-pilot-v2.3.6-pressure-burst"));
   for (let repeat = 1; repeat <= 4; repeat += 1) {
     assert.deepEqual(
       queue.filter((run) => run.repeat === repeat).map((run) => run.method).sort(),
@@ -125,9 +136,9 @@ test("D1/S2 pressure probe schedules one auditable six-method pilot block", () =
   const queue = buildD1S2PressureProbeQueue();
   assert.equal(queue.length, 6);
   assert.ok(queue.every((run) => run.dataset === "bagAmsterdam"));
-  assert.ok(queue.every((run) => run.scenario === "burst"));
+  assert.ok(queue.every((run) => run.scenario === "pressureBurst"));
   assert.ok(queue.every((run) => run.studyPhase === "pilot"));
-  assert.ok(queue.every((run) => run.pilotPurpose === "request-peak-probe"));
+  assert.ok(queue.every((run) => run.pilotPurpose === "request-peak-probe-v2.3.6-pressure-burst"));
   assert.deepEqual(queue.map((run) => run.method).sort(), [...FROZEN_PROTOCOL.methods].sort());
 });
 

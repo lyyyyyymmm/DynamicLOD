@@ -2,12 +2,34 @@
 
 All notable protocol, implementation, and research-workflow changes are recorded here. Historical entries reconstructed from conversation and project records are marked accordingly.
 
+## v2.3.6 - 2026-08-31
+
+### Changed
+
+- Added `pressureBurst` as a separate S3 workload instead of silently changing the existing `burst` scenario.
+- Bumped `FROZEN_PROTOCOL.protocolVersion` to `2.3.6` and registered `pressureBurst` in the frozen scenario list.
+- Updated the D1 pilot and pressure-probe queues to use `pressureBurst` with explicit pilot purposes: `full-pilot-v2.3.6-pressure-burst` and `request-peak-probe-v2.3.6-pressure-burst`.
+- Added the UI option `S3 Pressure burst` and updated the E2E smoke run to exercise it.
+- Kept controller thresholds, SSE ladder, datasets, baselines, frame budget, rolling window, control interval, request-pressure thresholds, readiness policy, and statistical plan unchanged.
+
+### Evidence
+
+- Failing-first tests were added for protocol registration, v2.3.6 manifest provenance, pilot/probe queue routing, and the new pressure-burst camera path.
+- Fresh checks passed `npm.cmd test` (82 tests), `npm.cmd run test:lod:py` (17 tests), `npm.cmd run lod:analyze`, `npm.cmd run lod:verify-data`, `npm.cmd run lod:validate-ui`, and `npm.cmd run test:lod:e2e -- --reporter=line` on isolated port 8094 in the approved PowerShell environment.
+- Reanalysis still reports zero valid confirmatory runs; all physical v2.0-v2.3.5 records remain pilot, tuning, legacy, or audit evidence only.
+
+### Decision Gate
+
+- Run the v2.3.6 PC-A `pressureBurst` pressure probe first, then the four-repeat PC-A full pilot if the probe exposes meaningful request-pressure evidence.
+- Keep Android and confirmatory collection blocked until the v2.3.6 PC-A pilot gate passes and a separate freeze decision is recorded.
+
 ## v2.3.5 - 2026-08-31
 
 ### Changed
 
 - Delayed measured-phase controller sampling until the rolling frame-time window is fully populated for the formal 2,000 ms window.
 - Added `isControlWindowReady()` as the shared runtime/test guard for the full-window rule.
+- Repaired quality screenshot capture for continuously rendered Cesium canvases by using the canvas bounding box as a page-level screenshot clip instead of Playwright's element screenshot path.
 - Kept controller thresholds, camera paths, datasets, baselines, readiness policy, method set, and analysis taxonomy unchanged from v2.3.4.
 - Bumped `FROZEN_PROTOCOL.protocolVersion` to `2.3.5` so new physical runs are separated from the v2.3.4 probe.
 
@@ -18,11 +40,16 @@ All notable protocol, implementation, and research-workflow changes are recorded
 - A failing-first unit test now requires control sampling to wait until `elapsedMs >= windowMs` and the normal control interval has elapsed.
 - Fresh checks passed `npm.cmd test` (79 tests), `npm.cmd run test:lod:py` (17 tests), `npm.cmd run lod:analyze`, `npm.cmd run lod:verify-data`, `npm.cmd run lod:validate-ui`, and `npm run test:lod:e2e -- --reporter=line` in the approved PowerShell environment.
 - The 8088 benchmark server was restarted and `/api/health` returned protocol `2.3.5`, `windowMs=2000`, `controlIntervalMs=500`, and ready D1/D2 datasets.
+- The PC-A D1/S2 pressure probe then passed: the six valid methods began measured control at about 2.01 s, and Proposed loaded 96 tiles, transferred 62,659,162 bytes, reached `requestQueuePeak=36`, recorded six pressure windows, and triggered one `DOWNGRADE_PREEMPTIVE / predicted-tail-plus-request-pressure`.
+- The v2.3.5 PC-A D1/S2 full pilot completed with 35 attempts: 24 valid runs formed four complete six-method paired blocks and 11 invalid attempts were retained and retried. All valid runs passed readiness, began measured control at or after 2,000 ms, kept the `960 x 540` buffer, and emitted load-progress telemetry. Proposed repeats loaded 26-56 tiles, transferred 11.6-31.4 MB, and reached queue peaks of 13-21, avoiding the earlier low-content collapse.
+- The full pilot did not reproduce high request pressure consistently: only one of four valid Proposed repeats contained three pressure-safe-hold windows, and no full-pilot Proposed run made an exact preemptive request-pressure action. The dedicated v2.3.5 pressure probe remains the mechanism evidence; the repeatability/freeze gate is not yet closed.
+- Static D1/D2 quality calibration completed after the screenshot repair: `npm.cmd run lod:capture-quality` generated 108 canonical screenshots and `npm.cmd run lod:quality` generated 108 SSIM rows. Minimum SSIM was about 0.954 on `bagAmsterdam` and 0.952 on `bagRotterdam`; this calibrates the SSE ladder and is not formal Proposed-vs-baseline non-inferiority evidence.
+- D-023 records the post-pilot decision: v2.3.5 is not frozen for Android or confirmatory collection. The next step is a deliberately versioned pressure-workload revision with fresh tests and a PC-A pilot gate.
 
 ### Decision Gate
 
-- Run one PC-A D1/S2 pressure probe under v2.3.5 before any full pilot, Android pilot, or confirmatory collection.
-- Accept the probe only if the six methods are valid, the first telemetry/control row is at or after 2,000 ms, and Proposed shows meaningful content growth plus interpretable request-pressure taxonomy.
+- Design the next deliberately versioned pressure-workload protocol before changing camera paths, scenario timing, request-pressure thresholds, or gate criteria.
+- Keep Android and confirmatory collection blocked until the new protocol passes its PC-A pilot gate; do not claim full-pilot mechanism effects from the v2.3.5 pilot audit data.
 
 ## v2.3.4 - 2026-08-31
 

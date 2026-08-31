@@ -498,9 +498,7 @@ async function runCondition(condition) {
     loaded = await loadTileset(condition, runId, telemetry);
     setBufferSize();
     loadStartedAt = performance.now();
-    const initialFrame = condition.scenario === "steady"
-      ? getScenarioFrame("steady", 0, condition.seed)
-      : getScenarioFrame("burst", 0, condition.seed);
+    const initialFrame = getScenarioFrame(condition.scenario, 0, condition.seed);
     applyCamera(loaded.sphere, initialFrame);
     const initialContentReady = await waitForFirstTile(
       telemetry,
@@ -511,9 +509,10 @@ async function runCondition(condition) {
 
     loaded.tileset.maximumScreenSpaceError = 16;
     await runAnimation(warmupMs, ({ elapsed }) => {
-      const warmupFrame = condition.scenario === "steady"
-        ? getScenarioFrame("steady", (elapsed / warmupMs) * 40000, condition.seed)
-        : getScenarioFrame("burst", 0, condition.seed);
+      const warmupElapsed = condition.scenario === "steady"
+        ? (elapsed / warmupMs) * FROZEN_PROTOCOL.measurementMs
+        : 0;
+      const warmupFrame = getScenarioFrame(condition.scenario, warmupElapsed, condition.seed);
       applyCamera(loaded.sphere, warmupFrame);
     });
 

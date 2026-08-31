@@ -150,7 +150,7 @@ Reason: the readiness gate is a pre-treatment, method-independent criterion base
 
 ## D-019: Replace the single exact-action mechanism gate with a diagnostic taxonomy
 
-Date: 2026-08-31  
+Date: 2026-08-31
 Decision: release v2.3.4 as a pre-confirmatory diagnostic-taxonomy revision. Keep the controller behavior unchanged unless a focused regression test exposes a true logic defect. The analysis gate must separately count pressure observability, pressure-safe holds, pressure-tail overlap, exact `predicted-tail-plus-request-pressure` actions, and missed preemptive opportunities.
 
 Evidence: two physical PC-A v2.3.3 pressure probes passed readiness and workload gates but did not both produce the exact preemptive action. Probe 1 showed request pressure arriving after the current P95 had already crossed the 33.33 ms tail budget, so the higher-priority tail branch fired. Probe 2 showed request pressure arriving while P95 and prediction were still comfortably below the preemptive threshold, then a later predicted tail event after the request queue had cleared. In probe 2, Proposed loaded 125 tiles, transferred 84,849,002 bytes, reached `requestQueuePeak=36`, recorded five pressure windows in `all_runs.csv`, and had `violationRate=0`.
@@ -159,12 +159,51 @@ Reason: an exact action name is too narrow as the sole pre-confirmatory mechanis
 
 ## D-020: Wait for a full measured frame-time window before controller sampling
 
-Date: 2026-08-31  
+Date: 2026-08-31
 Decision: release protocol v2.3.5. During the measured phase, do not call the method controller or record a telemetry decision row until the 2-second rolling frame-time window is fully available. Keep the v2.3.4 controller behavior, thresholds, datasets, camera paths, baselines, readiness gate, and analysis taxonomy unchanged.
 
 Evidence: the v2.3.4 PC-A pressure probe produced six valid JSON records, but the valid Proposed run (`pc-a-bagAmsterdam-burst-proposed-r1-mtgspsyx`) loaded only eight tiles, transferred 813,058 bytes, reached `requestQueuePeak=1`, and entered coarse-SSE tail handling before any meaningful request-pressure workload emerged. Its first tail downgrade occurred at about 1,008 ms with `P95=33.2 ms` and `predictedP95=36.48 ms`, before the formal 2,000 ms rolling P95 window could be fully populated.
 
 Reason: the protocol describes a 2-second rolling P95 control signal. Acting on a partially filled start-of-measurement window makes early jitter disproportionately powerful and can suppress later tile refinement, creating the same low-content collapse that the previous protocol revisions were trying to remove. The fix repairs protocol execution rather than retuning the controller or weakening the request-pressure gate.
+
+## D-021: Keep the v2.3.5 freeze gate open after the PC-A full pilot
+
+Date: 2026-08-31
+Decision: accept the v2.3.5 PC-A D1/S2 full pilot as complete pilot audit evidence and as passing the readiness, full-window timing, content-growth, and Proposed repeat-stability checks. Do not yet freeze parameters or release Android/confirmatory collection because high request-pressure taxonomy was observed in only one of four valid Proposed repeats.
+
+Evidence: 35 v2.3.5 full-pilot attempts yielded 24 valid records in four complete six-method paired blocks and 11 retained invalid attempts (10 `pre-run-frame-instability`, 1 `window-blur`). Every valid run passed the two-window readiness gate, had its first measured row at or after 2,000 ms, used a `960 x 540` drawing buffer, and emitted load-progress telemetry. Proposed repeats loaded 26-56 tiles, transferred 11,559,954-31,372,926 bytes, and reached queue peaks of 13-21; none reproduced the earlier seven-root/coarse-SSE collapse. Only repeat 3 had high-pressure taxonomy rows (three safe holds), and no full-pilot Proposed run made an exact preemptive request-pressure action; the dedicated v2.3.5 pressure probe remains the focused mechanism evidence.
+
+Reason: the readiness gate repaired the prior method-independent start-state problem, and the full pilot is sufficiently complete to audit repeat stability. However, sparse high-pressure observations across the four Proposed repeats do not justify claiming repeatable request-pressure behavior or silently treating the pressure probe as a full-pilot effect. Complete quality calibration and record a deliberate freeze or new protocol decision before Android or confirmatory collection.
+
+## D-022: Treat v2.3.5 static quality calibration as complete but non-inferential
+
+Date: 2026-08-31
+
+Decision: accept the D1/D2 static SSE-ladder quality calibration artifacts as complete for the current pre-freeze review, while keeping them separate from formal Proposed-vs-baseline visual non-inferiority evidence.
+
+Evidence: `npm.cmd run lod:capture-quality` generated 108 canonical screenshots under `results/quality/captures`, covering `bagAmsterdam` and `bagRotterdam` across nine SSE levels and six views. `npm.cmd run lod:quality` generated 108 SSIM rows in `results/quality/quality_ssim.csv`. Dataset-level minimum SSIM values were about 0.954 for Amsterdam and 0.952 for Rotterdam, with means about 0.98 and 0.97. The capture script was repaired to use the canvas bounding box as a page screenshot clip after Playwright's element screenshot path timed out while waiting for the continuously rendered Cesium canvas to become stable.
+
+Reason: these artifacts verify that the fixed canonical viewpoints and SSE reference/candidate pipeline are operational and reproducible. They do not by themselves prove that the Proposed controller preserves quality relative to reactive or PI during confirmatory runs, because no confirmatory method-level quality analysis exists yet.
+
+## D-023: Do not freeze v2.3.5; design a deliberately versioned pressure-workload revision
+
+Date: 2026-08-31
+
+Decision: do not freeze v2.3.5 for Android or confirmatory collection. Treat the v2.3.5 pressure probe, PC-A full pilot, and static quality calibration as audit evidence showing that the harness is operational, while requiring a new explicitly versioned pressure-workload protocol before any formal collection. Any change to camera path, scenario timing, workload intensity, request-pressure threshold, or gate criteria must be released under a new protocol version and verified with fresh tests and a PC-A pilot.
+
+Evidence: D-021 shows that the v2.3.5 PC-A full pilot passed readiness, full-window timing, content-growth, and static execution checks, but high-pressure taxonomy appeared in only one of four valid Proposed repeats and no full-pilot Proposed record made an exact preemptive request-pressure action. D-022 shows that the D1/D2 static SSE-ladder quality pipeline is complete, with 108 screenshots and 108 SSIM rows, but that result is not formal method-level non-inferiority evidence.
+
+Reason: freezing v2.3.5 would turn sparse pilot taxonomy into a formal protocol despite the stated mechanism gate remaining weak. Starting Android or confirmatory collection now would multiply a known ambiguity across devices. A deliberately versioned revision keeps the evidence trail clean: v2.3.5 remains valid pilot/quality audit evidence, and the next protocol can target a repeatable pressure workload without silently rewriting prior results.
+
+## D-024: Release v2.3.6 pressureBurst as a pre-confirmatory workload revision
+
+Date: 2026-08-31
+
+Decision: release protocol v2.3.6 with a new `pressureBurst` scenario for the next PC-A pressure probe and full pilot. Keep the existing `burst` scenario available for historical compatibility and do not change controller thresholds, SSE ladder, datasets, baselines, frame budget, rolling frame-time window, control interval, request-pressure thresholds, readiness policy, or statistical analysis plan. The new scenario uses four 4-second interaction approaches and four 6-second stationary near-view holds, ending each approach closer to the tileset than the existing burst path.
+
+Evidence: v2.3.6 was implemented with failing-first JavaScript tests that require the protocol version bump, scenario registration, D1 pilot/probe queues to use `pressureBurst`, and the new camera path to reach a closer near-view hold earlier than `burst`. Fresh verification on 2026-08-31 passed `npm.cmd test` (82 tests), `npm.cmd run test:lod:py` (17 tests), `npm.cmd run lod:analyze`, `npm.cmd run lod:verify-data`, `npm.cmd run lod:validate-ui`, and `npm.cmd run test:lod:e2e -- --reporter=line` on isolated port 8094 in the approved PowerShell environment.
+
+Reason: v2.3.5 established that the harness, readiness gate, full-window control gate, and static quality calibration are operational, but the full pilot did not expose request-pressure taxonomy repeatably across Proposed repeats. `pressureBurst` is a deliberately versioned workload-intensity change that should increase cold-cache request-pressure exposure without retuning the controller or rewriting historical v2.3.5 evidence. Android and confirmatory collection remain blocked until the new PC-A pilot gate passes and a separate freeze decision is recorded.
 
 ## Update Rule
 

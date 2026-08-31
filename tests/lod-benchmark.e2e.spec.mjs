@@ -10,14 +10,15 @@ test("benchmark page renders Cesium and completes a finite smoke run", async ({ 
 
   await page.goto(`http://127.0.0.1:${port}/Apps/learnMapmost/lod-benchmark.html?smoke=1`);
   await expect(page.getByRole("heading", { name: "Tail Frame-Time LOD Benchmark" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Run D1/S2 pilot" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Run D1/S2 pressure probe" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Run D1/S3 pressureBurst pilot" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Run D1/S3 pressureBurst probe" })).toBeVisible();
+  await expect(page.locator("#scenario")).toContainText("S3 Pressure burst");
   await expect(page.locator("#cesiumContainer canvas")).toBeVisible();
   await expect(page.locator("#bufferSize")).toHaveText("960 × 540", { timeout: 20000 });
 
   await page.selectOption("#dataset", "publicStress");
   await page.selectOption("#method", "proposed");
-  await page.selectOption("#scenario", "burst");
+  await page.selectOption("#scenario", "pressureBurst");
   await page.getByRole("button", { name: "Run single" }).click();
   await expect(page.locator("#runState")).toHaveText("Complete", { timeout: 75000 });
 
@@ -26,7 +27,7 @@ test("benchmark page renders Cesium and completes a finite smoke run", async ({ 
   expect(result.rows.length).toBeGreaterThan(0);
   expect(JSON.stringify(result)).not.toContain("NaN");
   expect(result.manifest.method).toBe("proposed");
-  expect(result.manifest.protocolVersion).toBe("2.3.5");
+  expect(result.manifest.protocolVersion).toBe("2.3.6");
   expect(result.manifest.readinessP95ThresholdMs).toBe(25);
   expect(result.readiness.ready).toBe(true);
   expect(result.readiness.policy).toEqual({

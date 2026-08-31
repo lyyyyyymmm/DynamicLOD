@@ -38,19 +38,19 @@ npm run lod:analyze
 
 While a physical Android phone is unavailable, complete only these tasks:
 
-1. Capture all quality views and calculate SSIM.
-2. Confirm `/api/health` reports protocol v2.3.5, set the physical device ID, keep the seed at `20260823`, then select `Run D1/S2 pressure probe`.
-   It runs one shuffled six-method D1/S2 block (six planned runs) through the LAN route and records control-interval request peaks.
-3. Each v2.3.5 condition first unloads the previous tileset and waits for blank-scene readiness: two consecutive 2-second windows with P95 <= 25 ms, within 60 seconds.
+1. Capture all quality views and calculate SSIM. This is complete for v2.3.5 and does not need rerunning for v2.3.6 unless the capture code, dataset, view definitions, or SSE ladder changes.
+2. Confirm `/api/health` reports protocol v2.3.6, set the physical device ID, keep the seed at `20260823`, and select `pressureBurst` for the next PC-A pressure-workload probe.
+3. The v2.3.5 PC-A pressure probe and four-block D1/S2 full pilot are complete audit evidence only. The pilot produced 24 valid paired records plus retained invalid attempts, but high-pressure taxonomy was sparse across Proposed repeats.
+4. Each v2.3.6 condition first unloads the previous tileset and waits for blank-scene readiness: two consecutive 2-second windows with P95 <= 25 ms, within 60 seconds.
    A timeout keeps the JSON as invalid with `pre-run-frame-instability` and triggers retry. Do not manually delete these records.
-4. Run `npm run lod:analyze`, then inspect the six probe JSON files for readiness (`preRunReadinessReady=true`, readiness P95 <= 25 ms), first measured control row at or after 2,000 ms, nonzero `requestQueuePeak`, `loadProgressEventCount`, and the proposed controller's request-pressure taxonomy fields.
+5. Run the v2.3.6 PC-A `pressureBurst` pressure probe before a full pilot. After `npm run lod:analyze`, inspect readiness (`preRunReadinessReady=true`, readiness P95 <= 25 ms), first measured control row at or after 2,000 ms, nonzero `requestQueuePeak`, `loadProgressEventCount`, and the proposed controller's request-pressure taxonomy fields.
    Require meaningful content growth and observable request-pressure evidence. The v2.3.4 analysis gate distinguishes exact preemptive actions from safe pressure holds, pressure-tail overlap, and missed preemptive opportunities.
    The two v2.3.3 PC-A probes passed readiness and workload gates but showed that requiring only the exact `predicted-tail-plus-request-pressure` action is too timing-dependent: one run reached pressure after tail violation, while the second reached pressure while tail risk was still low.
-5. The v2.3.2 mechanism gate and Proposed repeat-stability gate passed on PC-A, but the full pilot exposed a transient cross-run frame-time slowdown in the second randomized block.
-   Pause Android and confirmatory collection until the v2.3.5 PC-A pressure probe and full pilot pass. All existing checkpoints remain pilot audit evidence and are excluded from formal statistics.
-6. Check request peak/AUC, controller actions, SSE occupancy, forecast MAE versus persistence, switches, reversals, recovery time, and invalid-run rate.
-7. Run a four-repeat ablation pilot only if the components produce distinguishable actions.
-8. Freeze all controller, camera, and analysis parameters before confirmatory collection.
+6. The v2.3.2 mechanism gate and Proposed repeat-stability gate passed on PC-A, but the earlier full pilot exposed a transient cross-run frame-time slowdown in the second randomized block. The v2.3.5 readiness gate prevented that pre-run instability from entering valid runs, although 11 invalid attempts remain in the audit trail.
+   Pause Android and confirmatory collection. D-024 implements the v2.3.6 `pressureBurst` workload revision, but a fresh PC-A pressure probe and full pilot must pass before any new device or confirmatory collection. All existing checkpoints remain pilot audit evidence and are excluded from formal statistics.
+7. Check request peak/AUC, controller actions, SSE occupancy, forecast MAE versus persistence, switches, reversals, recovery time, and invalid-run rate.
+8. Run a four-repeat ablation pilot only if the components produce distinguishable actions.
+9. Freeze all controller, camera, and analysis parameters before confirmatory collection.
 
 Desktop Android emulation is UI validation only. It is never Android experimental evidence.
 
@@ -72,14 +72,14 @@ npm run lod:capture-quality
 npm run lod:quality
 ```
 
-The mandatory output is six-view SSIM against SSE 4. LPIPS is supplementary:
+The mandatory output is six-view SSIM against SSE 4. The capture path uses a page-level canvas clip so the continuously rendered Cesium canvas does not block on Playwright element stability. LPIPS is supplementary:
 
 ```powershell
 python -m pip install -r learnMapmost/analysis/requirements-lpips.txt
 npm run lod:quality:lpips
 ```
 
-Record the Python environment and model version if LPIPS is reported.
+Record the Python environment and model version if LPIPS is reported. The v2.3.5 required SSIM calibration has already produced 108 comparison rows; v2.3.6 does not require rerunning it unless the capture code, dataset, view definitions, or SSE ladder changes.
 
 ## 7. Analyze and Gate
 

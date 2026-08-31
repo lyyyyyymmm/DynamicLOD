@@ -99,7 +99,7 @@ export const DATASETS = Object.freeze({
 
 export const FROZEN_PROTOCOL = Object.freeze({
   schemaVersion: 2,
-  protocolVersion: "2.3.5",
+  protocolVersion: "2.3.6",
   renderWidth: 960,
   renderHeight: 540,
   warmupMs: 10000,
@@ -120,7 +120,7 @@ export const FROZEN_PROTOCOL = Object.freeze({
     "fixed8", "fixed16", "cesiumDynamic", "reactive", "pi", "proposed",
   ]),
   datasets: Object.freeze(["bagAmsterdam", "bagRotterdam"]),
-  scenarios: Object.freeze(["steady", "burst"]),
+  scenarios: Object.freeze(["steady", "burst", "pressureBurst"]),
   networkProfiles: Object.freeze(["lan", "delay40", "delay80"]),
 });
 
@@ -154,24 +154,28 @@ export function buildScenarioTimeline(scenario) {
   if (scenario === "steady") {
     return [{ id: "steady-orbit", startMs: 0, endMs: 40000, interacting: false }];
   }
-  if (scenario !== "burst") throw new Error(`Unknown scenario: ${scenario}`);
+  if (!["burst", "pressureBurst"].includes(scenario)) {
+    throw new Error(`Unknown scenario: ${scenario}`);
+  }
+  const interactionMs = scenario === "pressureBurst" ? 4000 : 6000;
+  const recoveryMs = scenario === "pressureBurst" ? 6000 : 4000;
   const phases = [];
   let cursor = 0;
   for (let cycle = 0; cycle < 4; cycle += 1) {
     phases.push({
       id: `interaction-${cycle + 1}`,
       startMs: cursor,
-      endMs: cursor + 6000,
+      endMs: cursor + interactionMs,
       interacting: true,
     });
-    cursor += 6000;
+    cursor += interactionMs;
     phases.push({
       id: `recovery-${cycle + 1}`,
       startMs: cursor,
-      endMs: cursor + 4000,
+      endMs: cursor + recoveryMs,
       interacting: false,
     });
-    cursor += 4000;
+    cursor += recoveryMs;
   }
   return phases;
 }
@@ -310,7 +314,7 @@ export function buildAblationQueue(options = {}) {
 export function buildD1S2PilotQueue(options = {}) {
   return createQueue({
     datasets: ["bagAmsterdam"],
-    scenarios: ["burst"],
+    scenarios: ["pressureBurst"],
     methods: FROZEN_PROTOCOL.methods,
     repeats: options.repeats ?? 4,
     seed: options.seed ?? 20260823,
@@ -318,14 +322,14 @@ export function buildD1S2PilotQueue(options = {}) {
     ...run,
     networkProfile: "lan",
     studyPhase: "pilot",
-    pilotPurpose: "full-pilot",
+    pilotPurpose: "full-pilot-v2.3.6-pressure-burst",
   }));
 }
 
 export function buildD1S2PressureProbeQueue(options = {}) {
   return createQueue({
     datasets: ["bagAmsterdam"],
-    scenarios: ["burst"],
+    scenarios: ["pressureBurst"],
     methods: FROZEN_PROTOCOL.methods,
     repeats: 1,
     seed: options.seed ?? 20260823,
@@ -333,7 +337,7 @@ export function buildD1S2PressureProbeQueue(options = {}) {
     ...run,
     networkProfile: "lan",
     studyPhase: "pilot",
-    pilotPurpose: "request-peak-probe",
+    pilotPurpose: "request-peak-probe-v2.3.6-pressure-burst",
   }));
 }
 

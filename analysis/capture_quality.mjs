@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "playwright";
 
+import { captureCanvasScreenshot } from "./capture-quality-utils.mjs";
+
 const argumentsMap = new Map(
   process.argv.slice(2).map((argument) => {
     const [key, value = "1"] = argument.replace(/^--/, "").split("=");
@@ -35,9 +37,7 @@ try {
           throw new Error(`Quality capture did not settle: ${JSON.stringify(capture)}`);
         }
         const filename = `${dataset}__sse-${sse}__view-${view}.png`;
-        await page.locator("#cesiumContainer canvas").screenshot({
-          path: path.join(outputDir, filename),
-        });
+        await captureCanvasScreenshot(page, path.join(outputDir, filename));
         process.stdout.write(`${filename}\n`);
       }
     }

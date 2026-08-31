@@ -40,3 +40,19 @@ test("burst path ends with a close sweep and holds the near view during recovery
     getScenarioFrame("burst", 12345, 11),
   );
 });
+
+test("pressure burst reaches a closer near-view hold earlier than burst", () => {
+  const pressureApproachEnd = getScenarioFrame("pressureBurst", 3999, 11);
+  const pressureHold = getScenarioFrame("pressureBurst", 4000, 11);
+  const pressureLateHold = getScenarioFrame("pressureBurst", 9000, 11);
+  const burstAtSameTime = getScenarioFrame("burst", 4000, 11);
+
+  assert.equal(pressureApproachEnd.interacting, true);
+  assert.equal(pressureHold.interacting, false);
+  assert.equal(pressureLateHold.interacting, false);
+  assert.ok(pressureHold.rangeMultiplier < 0.75);
+  assert.ok(pressureHold.rangeMultiplier < burstAtSameTime.rangeMultiplier);
+  assert.equal(pressureLateHold.headingRad, pressureHold.headingRad);
+  assert.equal(pressureLateHold.pitchRad, pressureHold.pitchRad);
+  assert.equal(pressureLateHold.rangeMultiplier, pressureHold.rangeMultiplier);
+});

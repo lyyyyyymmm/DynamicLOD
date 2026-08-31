@@ -9,7 +9,7 @@
     "drawingBufferWidth": 960,
     "drawingBufferHeight": 540,
     "tilesLoadedTotal": 3,
-    "rgbStandardDeviationSum": 66.01348497788358
+    "rgbStandardDeviationSum": 92.18087837332135
   },
   {
     "name": "android-landscape",
@@ -21,6 +21,6 @@
     "drawingBufferWidth": 960,
     "drawingBufferHeight": 540,
     "tilesLoadedTotal": 3,
-    "rgbStandardDeviationSum": 65.00949248244082
+    "rgbStandardDeviationSum": 94.34599776882274
   }
 ]

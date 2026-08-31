@@ -4,8 +4,10 @@ Last reviewed: 2026-08-31
 
 ## In Progress
 
-- [ ] Run one PC-A D1/S2 pressure probe under protocol v2.3.5 before any full pilot.
-- [ ] Only if the v2.3.5 probe passes, rerun the four-block D1/S2 PC-A full pilot before Android or confirmatory collection.
+- [x] Design, implement, and automatically verify protocol v2.3.6 with a separate `pressureBurst` S3 workload for the next PC-A pilot gate.
+- [x] Record D-024 and keep v2.3.5 as pilot/quality audit evidence only.
+- [ ] Run the v2.3.6 PC-A `pressureBurst` pressure probe before any full pilot, Android run, or confirmatory collection.
+- [ ] If the v2.3.6 pressure probe passes, run the four-repeat PC-A `pressureBurst` full pilot and analyze repeatability.
 
 ## Decision Gates
 
@@ -14,12 +16,16 @@ Last reviewed: 2026-08-31
 - [x] Require at least one proposed action with reason `predicted-tail-plus-request-pressure` before launching a full pilot.
 - [x] Rerun the full D1/S2 PC-A pilot only after the v2.3.2 pressure probe passes.
 - [x] Require v2.3.3 readiness fields before interpreting any new physical-device run.
+- [x] Reject v2.3.5 parameter freeze after the PC-A full pilot because high-pressure taxonomy was sparse across Proposed repeats.
+- [ ] Require the v2.3.6 PC-A `pressureBurst` pressure probe to show meaningful request-pressure evidence before starting the v2.3.6 full pilot.
+- [ ] Require the v2.3.6 PC-A full pilot to pass repeatability before Android or confirmatory collection.
 
 ## Before Confirmatory Collection
 
-- [ ] Freeze the post-pilot controller parameters and write the decision in `DECISIONS.md`.
+- [x] Design, implement, and automatically verify the deliberately versioned v2.3.6 `pressureBurst` workload revision.
+- [ ] Freeze v2.3.6 only after its PC-A pressure probe and full pilot pass.
 - [ ] Confirm D1/D2 scenario difficulty provides measurable but not saturated frame-time pressure.
-- [ ] Complete the required visual-quality calibration and preserve reference images/SSIM artifacts.
+- [x] Complete the required visual-quality calibration and preserve reference images/SSIM artifacts.
 - [ ] Register PC-B if it will be part of the cross-PC evidence; otherwise revise the formal device scope before collection.
 - [ ] Reconfirm Android-A conditions immediately before its pilot and confirmatory blocks.
 - [ ] Freeze method order, repeats, seeds, browser conditions, and statistical-analysis inputs in the protocol.
@@ -70,6 +76,11 @@ Last reviewed: 2026-08-31
 - [x] Diagnose the v2.3.4 failure as premature measured-phase control on a partially filled 2-second rolling frame-time window.
 - [x] Add a failing-first unit test for full rolling-window control readiness and implement the v2.3.5 control-sampling gate.
 - [x] Complete v2.3.5 automatic verification: JS tests, Python analysis tests, analysis regeneration, dataset verification, UI validation, and E2E.
+- [x] Run and analyze the v2.3.5 PC-A pressure probe: six valid methods passed readiness and full-window control timing; Proposed loaded 96 tiles, reached `requestQueuePeak=36`, recorded one exact preemptive request-pressure action, and avoided the v2.3.4 low-content collapse.
+- [x] Run and analyze the v2.3.5 PC-A D1/S2 full pilot: 35 attempts yielded 24 valid runs in four complete paired blocks; all valid execution gates passed, Proposed avoided low-content collapse, and invalid attempts were retained and retried.
+- [x] Complete static D1/D2 visual-quality calibration under v2.3.5: 108 canonical screenshots and 108 SSIM rows generated; minimum SSIM was about 0.954 for Amsterdam and 0.952 for Rotterdam.
+- [x] Record D-023: do not freeze v2.3.5; require a new deliberately versioned pressure-workload protocol before Android or confirmatory collection.
+- [x] Implement v2.3.6 `pressureBurst`: protocol bump, scenario registration, D1 pilot/probe queue routing, UI option, failing-first tests, analysis regeneration, dataset verification, UI validation, and E2E.
 
 ## Update Rule
 

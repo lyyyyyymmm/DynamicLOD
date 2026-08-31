@@ -1,16 +1,16 @@
 # Frozen Experiment Protocol
 
-Protocol version: `2.3.5`  
-Freeze date: 2026-08-31
+Protocol version: `2.3.6`
+Revision date: 2026-08-31
 
-Protocol v2.3.5 is a pre-confirmatory protocol-execution revision after the
-v2.3.4 PC-A pressure probe exposed an early measured-phase control decision on a
-partially populated rolling frame-time window. The measured controller now waits
-until the full 2-second P95 window is available before its first decision row.
-The controller thresholds, datasets, camera paths, SSE ladder, request-pressure
-logic, readiness gate, analysis taxonomy, and statistical plan remain unchanged
-from v2.3.4. All v2.x probe and pilot records remain audit evidence until the
-confirmatory matrix is deliberately started.
+Protocol v2.3.6 is a pre-confirmatory pressure-workload revision after the
+v2.3.5 PC-A full pilot showed that high request-pressure taxonomy was not
+repeatable across Proposed repeats. It adds `pressureBurst` as a separate S3
+candidate workload for the next PC-A pressure probe and full pilot. The
+controller thresholds, datasets, SSE ladder, request-pressure logic, readiness
+gate, analysis taxonomy, and statistical plan remain unchanged from v2.3.5. All
+v2.x probe and pilot records remain audit evidence until the confirmatory matrix
+is deliberately frozen and started.
 
 ## Research Question
 
@@ -61,8 +61,9 @@ Ablations remove prediction, request pressure, interaction awareness, or stabili
 - After readiness passes, wait for the first tile for at most 60 seconds. This loading gate is outside warm-up and measurement; a timeout invalidates the attempt. The drawing-buffer target is `960 x 540`; a one-pixel browser rounding tolerance is allowed and the actual size is retained per telemetry row.
 - S1: 10-second fixed-SSE warm-up followed by a 40-second uniform orbit.
 - S2: the same warm-up followed by four cycles of a 6-second cross-direction monotonic approach from range multiplier 3.6 to 0.9 and a 4-second stationary near-view recovery.
+- S3 `pressureBurst`: the same warm-up followed by four cycles of a 4-second cross-direction monotonic approach from range multiplier 3.2 to 0.7 and a 6-second stationary near-view hold. This is the v2.3.6 PC-A pilot workload and is not confirmatory evidence until its pilot gate passes.
 
-Before a v2.3.5 full pilot, run one D1/S2 six-method `request-peak-probe` block.
+Before a v2.3.6 full pilot, run one D1/S3 six-method `request-peak-probe` block.
 The probe is pilot-only and records interval queue peaks plus `loadProgress` event counts.
 The v2.1.1 probe confirmed that the retained peak reaches the controller, but the original
 S2 path still produced only isolated queue pulses. v2.2.0 added a longer, cross-direction
@@ -92,8 +93,11 @@ therefore revised only the analysis taxonomy. Its PC-A probe then produced
 format-valid records, but the Proposed run downgraded on a partially filled
 start-of-measurement P95 window before meaningful request pressure appeared.
 Protocol v2.3.5 therefore delays the first measured controller update until the
-full 2-second frame-time window is available. A new PC-A pressure probe and full
-pilot must pass before Android or confirmatory collection begins.
+full 2-second frame-time window is available. Its PC-A full pilot passed
+execution checks but did not expose high-pressure taxonomy repeatably across
+Proposed repeats. Protocol v2.3.6 therefore adds S3 `pressureBurst` as a
+deliberately versioned workload-intensity revision. A new PC-A pressure probe
+and full pilot must pass before Android or confirmatory collection begins.
 
 All confirmatory runs use the `lan` profile. Artificial delay profiles are diagnostic-only and are rejected for D1/D2 by the server.
 
