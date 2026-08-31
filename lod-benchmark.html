@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>Tail Frame-Time LOD Benchmark</title>
+    <script src="../../Build/CesiumUnminified/Cesium.js"></script>
+    <link rel="stylesheet" href="../../Build/CesiumUnminified/Widgets/widgets.css" />
+    <link rel="stylesheet" href="./lod-benchmark.css" />
+  </head>
+  <body>
+    <main id="app">
+      <section id="viewportBand" aria-label="3D benchmark viewport">
+        <div id="viewportFrame">
+          <div id="cesiumContainer"></div>
+          <output id="hud" aria-live="polite">Initializing Cesium...</output>
+        </div>
+      </section>
+
+      <aside id="controlPanel">
+        <header>
+          <h1>Tail Frame-Time LOD Benchmark</h1>
+          <div class="protocolLine">
+            <span>Budget <strong>33.33 ms</strong></span>
+            <span>Buffer <strong id="bufferSize">-</strong></span>
+          </div>
+        </header>
+
+        <form id="runForm">
+          <label for="method">Method</label>
+          <select id="method" name="method"></select>
+
+          <label for="dataset">Dataset</label>
+          <select id="dataset" name="dataset"></select>
+
+          <label for="scenario">Scenario</label>
+          <select id="scenario" name="scenario">
+            <option value="steady">S1 Steady orbit</option>
+            <option value="burst">S2 Interaction burst</option>
+          </select>
+
+          <label for="networkProfile">Network</label>
+          <select id="networkProfile" name="networkProfile">
+            <option value="lan">LAN / local</option>
+            <option value="delay40">Diagnostic delay 40 ms</option>
+            <option value="delay80">Diagnostic delay 80 ms</option>
+          </select>
+
+          <div class="fieldRow">
+            <div>
+              <label for="repeat">Repeat</label>
+              <input id="repeat" name="repeat" type="number" min="1" value="1" />
+            </div>
+            <div>
+              <label for="seed">Seed</label>
+              <input id="seed" name="seed" type="number" value="20260823" />
+            </div>
+          </div>
+
+          <label for="deviceId">Physical device ID</label>
+          <input id="deviceId" name="deviceId" value="unregistered" />
+
+          <div class="buttonRow">
+            <button id="runSingle" type="submit">Run single</button>
+            <button id="stopRun" type="button" disabled>Stop</button>
+          </div>
+          <div class="buttonRow secondary">
+            <button id="runMainBatch" type="button">Run main batch</button>
+            <button id="runAblationBatch" type="button">Run ablations</button>
+          </div>
+          <div class="buttonRow secondary">
+            <button id="runD1S2Pilot" type="button">Run D1/S2 pilot</button>
+            <button id="runD1S2PressureProbe" type="button">Run D1/S2 pressure probe</button>
+          </div>
+          <div class="buttonRow secondary">
+            <button id="runPiCalibration" type="button">Run PI calibration</button>
+          </div>
+        </form>
+
+        <section class="statusBand" aria-label="Run status">
+          <div><span>State</span><strong id="runState">Ready</strong></div>
+          <div><span>Progress</span><strong id="runProgress">0 / 0</strong></div>
+          <progress id="progressBar" value="0" max="1"></progress>
+        </section>
+
+        <section class="metricGrid" aria-label="Live metrics">
+          <div><span>Window P95</span><strong id="metricP95">-</strong></div>
+          <div><span>Predicted P95</span><strong id="metricPredicted">-</strong></div>
+          <div><span>SSE</span><strong id="metricSse">-</strong></div>
+          <div><span>Request queue</span><strong id="metricQueue">-</strong></div>
+          <div><span>Controller</span><strong id="metricState">-</strong></div>
+          <div><span>Action</span><strong id="metricAction">-</strong></div>
+        </section>
+
+        <section class="resultsBand" aria-label="Results">
+          <div class="sectionHeading">
+            <h2>Completed runs</h2>
+            <div>
+              <button id="downloadJson" type="button" disabled>JSON</button>
+              <button id="downloadCsv" type="button" disabled>CSV</button>
+            </div>
+          </div>
+          <div class="tableWrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Data</th>
+                  <th>Scenario</th>
+                  <th>Phase</th>
+                  <th>Violation</th>
+                  <th>Valid</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </aside>
+    </main>
+    <script type="module" src="./lod-benchmark.mjs"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "screenshotPath": "D:\\myCesium202510\\Cesium-1.134\\Apps\\learnMapmost\\results\\visual\\desktop.png",
+    "drawingBufferWidth": 960,
+    "drawingBufferHeight": 540,
+    "tilesLoadedTotal": 3,
+    "rgbStandardDeviationSum": 66.01348497788358
+  },
+  {
+    "name": "android-landscape",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "screenshotPath": "D:\\myCesium202510\\Cesium-1.134\\Apps\\learnMapmost\\results\\visual\\android-landscape.png",
+    "drawingBufferWidth": 960,
+    "drawingBufferHeight": 540,
+    "tilesLoadedTotal": 3,
+    "rgbStandardDeviationSum": 65.00949248244082
+  }
+]

@@ -1,0 +1,296 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background: #111413;
+  color: #edf1ef;
+}
+
+* {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 370px;
+  background: #111413;
+}
+
+#viewportBand {
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #090c0b;
+}
+
+#viewportFrame {
+  position: relative;
+  width: min(100%, calc((100vh - 40px) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  outline: 1px solid #39413d;
+  background: #050706;
+}
+
+#cesiumContainer,
+#cesiumContainer canvas {
+  width: 100%;
+  height: 100%;
+}
+
+#hud {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  max-width: calc(100% - 20px);
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  background: rgba(6, 10, 8, 0.78);
+  color: #eef7f1;
+  font: 12px/1.45 Consolas, "SFMono-Regular", monospace;
+  white-space: pre-wrap;
+  pointer-events: none;
+}
+
+#controlPanel {
+  min-width: 0;
+  height: 100%;
+  overflow-y: auto;
+  border-left: 1px solid #303632;
+  background: #171b19;
+}
+
+#controlPanel > header,
+#runForm,
+.statusBand,
+.metricGrid,
+.resultsBand {
+  padding: 16px;
+  border-bottom: 1px solid #303632;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-weight: 650;
+}
+
+h1 {
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 13px;
+}
+
+.protocolLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  color: #aeb9b3;
+  font-size: 12px;
+}
+
+.protocolLine strong {
+  color: #f0f4f2;
+}
+
+#runForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+label,
+.statusBand span,
+.metricGrid span {
+  color: #aeb9b3;
+  font-size: 12px;
+}
+
+select,
+input[type="number"] {
+  width: 100%;
+  height: 34px;
+  padding: 0 9px;
+  border: 1px solid #4b554f;
+  border-radius: 4px;
+  outline: none;
+  background: #0f1211;
+  color: #edf1ef;
+}
+
+select:focus,
+input:focus,
+button:focus-visible {
+  border-color: #52a778;
+  box-shadow: 0 0 0 2px rgba(82, 167, 120, 0.2);
+}
+
+.fieldRow,
+.buttonRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.fieldRow > div {
+  display: grid;
+  gap: 8px;
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+}
+
+button {
+  min-height: 34px;
+  border: 1px solid #4a9168;
+  border-radius: 4px;
+  background: #247246;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #2e8253;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.secondary button,
+.sectionHeading button,
+#stopRun {
+  border-color: #4b554f;
+  background: #222824;
+}
+
+.statusBand {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.statusBand > div,
+.metricGrid > div {
+  display: grid;
+  gap: 4px;
+}
+
+.statusBand strong,
+.metricGrid strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+progress {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 6px;
+  accent-color: #4fa873;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 10px;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sectionHeading > div {
+  display: flex;
+  gap: 6px;
+}
+
+.sectionHeading button {
+  min-height: 28px;
+  padding: 3px 9px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+th,
+td {
+  padding: 7px 5px;
+  border-bottom: 1px solid #303632;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  color: #aeb9b3;
+  font-weight: 500;
+}
+
+.valid {
+  color: #72d397;
+}
+
+.invalid {
+  color: #f2a06d;
+}
+
+@media (max-width: 880px) {
+  body {
+    overflow: auto;
+  }
+
+  #app {
+    height: auto;
+    min-height: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  #viewportBand {
+    padding: 8px;
+  }
+
+  #viewportFrame {
+    width: 100%;
+  }
+
+  #controlPanel {
+    height: auto;
+    border-top: 1px solid #303632;
+    border-left: 0;
+  }
+}

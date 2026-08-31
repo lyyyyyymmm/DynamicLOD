@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500">
+<rect width="100%" height="100%" fill="white"/>
+<line x1="90" y1="35" x2="90" y2="420" stroke="#222"/>
+<line x1="90" y1="420" x2="870" y2="420" stroke="#222"/>
+<line x1="90" y1="420.00" x2="870" y2="420.00" stroke="#d8ddd9"/>
+<text x="80" y="424.00" text-anchor="end" font-family="Arial" font-size="12">0.00</text>
+<line x1="90" y1="343.00" x2="870" y2="343.00" stroke="#d8ddd9"/>
+<text x="80" y="347.00" text-anchor="end" font-family="Arial" font-size="12">0.22</text>
+<line x1="90" y1="266.00" x2="870" y2="266.00" stroke="#d8ddd9"/>
+<text x="80" y="270.00" text-anchor="end" font-family="Arial" font-size="12">0.43</text>
+<line x1="90" y1="189.00" x2="870" y2="189.00" stroke="#d8ddd9"/>
+<text x="80" y="193.00" text-anchor="end" font-family="Arial" font-size="12">0.65</text>
+<line x1="90" y1="112.00" x2="870" y2="112.00" stroke="#d8ddd9"/>
+<text x="80" y="116.00" text-anchor="end" font-family="Arial" font-size="12">0.86</text>
+<line x1="90" y1="35.00" x2="870" y2="35.00" stroke="#d8ddd9"/>
+<text x="80" y="39.00" text-anchor="end" font-family="Arial" font-size="12">1.08</text>
+<line x1="285.00" y1="420.00" x2="285.00" y2="375.44" stroke="#315d45"/>
+<rect x="257.00" y="420.00" width="56" height="1.00" fill="#9bc9ad" stroke="#315d45"/>
+<line x1="257.00" y1="420.00" x2="313.00" y2="420.00" stroke="#111" stroke-width="2"/>
+<text x="285.00" y="445" text-anchor="middle" font-family="Arial" font-size="12">pi</text>
+<line x1="675.00" y1="63.52" x2="675.00" y2="63.52" stroke="#315d45"/>
+<rect x="647.00" y="63.52" width="56" height="1.00" fill="#9bc9ad" stroke="#315d45"/>
+<line x1="647.00" y1="63.52" x2="703.00" y2="63.52" stroke="#111" stroke-width="2"/>
+<text x="675.00" y="445" text-anchor="middle" font-family="Arial" font-size="12">proposed</text>
+<text x="20" y="250.0" transform="rotate(-90 20 250.0)" text-anchor="middle" font-family="Arial" font-size="14">P95 window violation rate</text>
+</svg>

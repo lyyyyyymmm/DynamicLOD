@@ -1,0 +1,1546 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <title>3D Tiles 模型性能测试（Cesium）</title>
+
+    <script src="../../Build/CesiumUnminified/Cesium.js"></script>
+    <style>
+      @import url(../../Build/CesiumUnminified/Widgets/widgets.css);
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+          "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 440px;
+      }
+      #cesiumContainer {
+        width: 100%;
+        height: 100%;
+        min-width: 320px;
+        min-height: 360px;
+        background: #0b1020;
+        position: relative;
+      }
+      #panel {
+        height: 100%;
+        overflow: auto;
+        padding: 12px;
+        box-sizing: border-box;
+        background: rgba(30, 30, 30, 0.92);
+        color: #eee;
+      }
+      #hud {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        z-index: 5;
+        pointer-events: none;
+        background: rgba(0, 0, 0, 0.45);
+        color: #e9eefb;
+        border-radius: 6px;
+        padding: 8px 10px;
+        font-size: 12px;
+        line-height: 1.35;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+        white-space: pre;
+        max-width: 560px;
+      }
+      #panel h1 {
+        font-size: 16px;
+        margin: 0 0 10px 0;
+        font-weight: 600;
+      }
+      #panel h2 {
+        font-size: 13px;
+        margin: 14px 0 8px 0;
+        font-weight: 600;
+        opacity: 0.95;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .grid3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      label {
+        font-size: 12px;
+        opacity: 0.92;
+      }
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 6px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(0, 0, 0, 0.25);
+        color: #eee;
+        outline: none;
+      }
+      input[type="checkbox"] {
+        transform: translateY(1px);
+      }
+      button {
+        cursor: pointer;
+        padding: 6px 10px;
+      }
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+      }
+      .muted {
+        opacity: 0.8;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      #log {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+        font-size: 12px;
+        white-space: pre-wrap;
+        background: rgba(0, 0, 0, 0.25);
+        padding: 8px;
+        border-radius: 4px;
+        min-height: 64px;
+        margin-bottom: 10px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      th,
+      td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 6px 4px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        position: sticky;
+        top: 0;
+        background: rgba(30, 30, 30, 0.98);
+        z-index: 1;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <div id="cesiumContainer">
+        <div id="hud"></div>
+      </div>
+
+      <div id="panel">
+        <h1>3D Tiles 模型性能测试（Cesium）</h1>
+        <div class="muted">
+          目标：展示/调参/跑基准测试你的 3D Tiles（默认：<code>SampleData/models/statue_3dtiles</code>）。
+        </div>
+
+        <h2>数据</h2>
+        <div class="row">
+          <div style="flex: 1 1 260px">
+            <label>Tileset URL（相对 Apps/ 目录）</label>
+            <input id="tilesetUrl" type="text" spellcheck="false" />
+          </div>
+        </div>
+        <div class="row">
+          <button id="btnLoad">加载</button>
+          <button id="btnUnload" disabled>卸载</button>
+          <button id="btnZoom" disabled>ZoomTo</button>
+        </div>
+
+        <h2>放置（本地坐标模型建议设置）</h2>
+        <div class="grid3">
+          <div>
+            <label>经度 lon</label>
+            <input id="anchorLon" type="number" step="0.000001" />
+          </div>
+          <div>
+            <label>纬度 lat</label>
+            <input id="anchorLat" type="number" step="0.000001" />
+          </div>
+          <div>
+            <label>高度 height(m)</label>
+            <input id="anchorHeight" type="number" step="0.1" />
+          </div>
+        </div>
+        <div class="row">
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input id="autoLift" type="checkbox" />
+            自动抬升（读取 tileset.json 的 boundingVolume.box，避免模型落到地下）
+          </label>
+        </div>
+
+        <h2>关键参数（参考推文思路）</h2>
+        <div class="grid2">
+          <div>
+            <label>maxMemoryUsage(MB)</label>
+            <input id="maxMemoryUsage" type="number" min="0" step="50" />
+          </div>
+          <div>
+            <label>maximumScreenSpaceError</label>
+            <input id="maximumScreenSpaceError" type="number" min="0" step="1" />
+          </div>
+        </div>
+        <div class="row">
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input id="dynamicScreenSpaceError" type="checkbox" />
+            动态瓦片清晰度（dynamicScreenSpaceError）
+          </label>
+        </div>
+        <div class="grid2">
+          <div>
+            <label>dynamicSSEFactor</label>
+            <input id="dynamicSSEFactor" type="number" min="0" step="0.1" />
+          </div>
+          <div>
+            <label>dynamicSSEDensity</label>
+            <input id="dynamicSSEDensity" type="number" min="0" step="0.0001" />
+          </div>
+        </div>
+        <div class="row">
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input id="skipLevelOfDetail" type="checkbox" />
+            跳级渲染（skipLevelOfDetail）
+          </label>
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input id="immediatelyLoadDesiredLevelOfDetail" type="checkbox" />
+            直接加载期望层级（immediatelyLoadDesiredLevelOfDetail）
+          </label>
+        </div>
+        <div class="row">
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input id="preloadFlightDestinations" type="checkbox" />
+            目的地预加载（preloadFlightDestinations）
+          </label>
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input id="preloadWhenHidden" type="checkbox" />
+            隐藏时预加载（preloadWhenHidden）
+          </label>
+        </div>
+        <div class="row">
+          <button id="btnApply" disabled>应用到当前 Tileset</button>
+          <button id="btnReset">重置为默认</button>
+          <label class="muted" style="margin-left:auto; display:flex; gap:6px; align-items:center;">
+            <input id="persist" type="checkbox" />
+            记住设置
+          </label>
+        </div>
+
+        <h2>基准测试（相机绕模型旋转）</h2>
+        <div class="grid3">
+          <div>
+            <label>Warmup(s)</label>
+            <input id="warmupSec" type="number" min="0" step="0.5" />
+          </div>
+          <div>
+            <label>Duration(s)</label>
+            <input id="durationSec" type="number" min="1" step="1" />
+          </div>
+          <div>
+            <label>Orbits(圈数)</label>
+            <input id="orbits" type="number" min="0.1" step="0.1" />
+          </div>
+        </div>
+        <div class="grid3">
+          <div>
+            <label>Range = radius ×</label>
+            <input id="rangeMul" type="number" min="0.1" step="0.1" />
+          </div>
+          <div>
+            <label>Pitch(deg)</label>
+            <input id="pitchDeg" type="number" min="-89" max="0" step="1" />
+          </div>
+          <div>
+            <label>resolutionScale</label>
+            <input id="resolutionScale" type="number" min="0.1" max="2" step="0.1" />
+          </div>
+        </div>
+
+        <h2>卡顿检测与自适应</h2>
+        <div class="grid3">
+          <div>
+            <label>jankThreshold(ms)</label>
+            <input id="jankThresholdMs" type="number" min="0" step="1" />
+          </div>
+          <div>
+            <label>动态阈值系数 ×(基线P95)</label>
+            <input id="jankFactor" type="number" min="1" step="0.1" />
+          </div>
+          <div>
+            <label>lookahead(s)</label>
+            <input id="lookaheadSec" type="number" min="0" step="0.5" />
+          </div>
+        </div>
+        <div class="row">
+          <label style="display:flex; gap:6px; align-items:center;">
+            <input id="autoAdapt" type="checkbox" />
+            自动调清晰度（即将卡顿则提高 maximumScreenSpaceError）
+          </label>
+        </div>
+        <div class="grid3">
+          <div>
+            <label>SSE min</label>
+            <input id="sseMin" type="number" min="0" step="1" />
+          </div>
+          <div>
+            <label>SSE max</label>
+            <input id="sseMax" type="number" min="0" step="1" />
+          </div>
+          <div>
+            <label>Step up/down</label>
+            <input id="sseStep" type="text" spellcheck="false" />
+          </div>
+        </div>
+        <div class="muted">
+          说明：卡顿以“帧间隔(Δt)过大/jank 发生率”衡量；阈值会先在 warmup 阶段校准，再用趋势预测提前触发自适应。
+        </div>
+
+        <div class="row">
+          <button id="btnRun" disabled>开始跑分</button>
+          <button id="btnStop" disabled>停止</button>
+          <button id="btnDownload" disabled>下载 CSV</button>
+          <button id="btnDownloadSeries" disabled>下载 曲线CSV</button>
+          <button id="btnClear" disabled>清空结果</button>
+        </div>
+
+        <div id="log"></div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>FPS(avg)</th>
+              <th>Mean/P95/P99(ms)</th>
+              <th>Jank%</th>
+              <th>Tiles(loaded/visited/rendered)</th>
+              <th>Requests(pending)</th>
+              <th>备注</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+
+        <div class="muted" style="margin-top:10px;">
+          访问方式建议用：<code>node static-server.cjs</code>，然后打开<br />
+          <code>http://localhost:8080/Apps/learnMapmost/model_perf_3dtiles.html</code>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const hudEl = $("hud");
+      const logEl = $("log");
+      const tbodyEl = $("tbody");
+
+      const elTilesetUrl = $("tilesetUrl");
+      const elAnchorLon = $("anchorLon");
+      const elAnchorLat = $("anchorLat");
+      const elAnchorHeight = $("anchorHeight");
+      const elAutoLift = $("autoLift");
+
+      const elMaxMemoryUsage = $("maxMemoryUsage");
+      const elMaximumScreenSpaceError = $("maximumScreenSpaceError");
+      const elDynamicScreenSpaceError = $("dynamicScreenSpaceError");
+      const elDynamicSSEFactor = $("dynamicSSEFactor");
+      const elDynamicSSEDensity = $("dynamicSSEDensity");
+      const elSkipLevelOfDetail = $("skipLevelOfDetail");
+      const elImmediatelyLoadDesiredLevelOfDetail = $("immediatelyLoadDesiredLevelOfDetail");
+      const elPreloadFlightDestinations = $("preloadFlightDestinations");
+      const elPreloadWhenHidden = $("preloadWhenHidden");
+      const elPersist = $("persist");
+
+      const elWarmupSec = $("warmupSec");
+      const elDurationSec = $("durationSec");
+      const elOrbits = $("orbits");
+      const elRangeMul = $("rangeMul");
+      const elPitchDeg = $("pitchDeg");
+      const elResolutionScale = $("resolutionScale");
+
+      const elJankThresholdMs = $("jankThresholdMs");
+      const elJankFactor = $("jankFactor");
+      const elLookaheadSec = $("lookaheadSec");
+      const elAutoAdapt = $("autoAdapt");
+      const elSseMin = $("sseMin");
+      const elSseMax = $("sseMax");
+      const elSseStep = $("sseStep");
+
+      const btnLoad = $("btnLoad");
+      const btnUnload = $("btnUnload");
+      const btnZoom = $("btnZoom");
+      const btnApply = $("btnApply");
+      const btnReset = $("btnReset");
+      const btnRun = $("btnRun");
+      const btnStop = $("btnStop");
+      const btnDownload = $("btnDownload");
+      const btnDownloadSeries = $("btnDownloadSeries");
+      const btnClear = $("btnClear");
+
+      const STORAGE_KEY = "learnMapmost_model_perf_3dtiles_v1";
+
+      function nowIsoLocal() {
+        const d = new Date();
+        const pad2 = (n) => String(n).padStart(2, "0");
+        return (
+          d.getFullYear() +
+          "-" +
+          pad2(d.getMonth() + 1) +
+          "-" +
+          pad2(d.getDate()) +
+          " " +
+          pad2(d.getHours()) +
+          ":" +
+          pad2(d.getMinutes()) +
+          ":" +
+          pad2(d.getSeconds())
+        );
+      }
+
+      function log(line) {
+        logEl.textContent += line + "\n";
+        logEl.scrollTop = logEl.scrollHeight;
+      }
+
+      function clamp(v, a, b) {
+        return Math.min(b, Math.max(a, v));
+      }
+
+      function numOr(value, fallback) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : fallback;
+      }
+
+      function intOr(value, fallback) {
+        const n = Number(value);
+        if (!Number.isFinite(n)) return fallback;
+        return Math.trunc(n);
+      }
+
+      function percentileSorted(sortedArr, p) {
+        if (!sortedArr.length) return NaN;
+        const idx = Math.min(sortedArr.length - 1, Math.max(0, Math.floor(p * (sortedArr.length - 1))));
+        return sortedArr[idx];
+      }
+
+      function getWebglInfo(canvas) {
+        try {
+          const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+          if (!gl) return {};
+          const dbg = gl.getExtension("WEBGL_debug_renderer_info");
+          const renderer = dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : "";
+          const vendor = dbg ? gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) : "";
+          return {
+            webglVersion: gl instanceof WebGL2RenderingContext ? "2" : "1",
+            glRenderer: String(renderer || ""),
+            glVendor: String(vendor || ""),
+          };
+        } catch {
+          return {};
+        }
+      }
+
+      function getDefaultSettings() {
+        return {
+          tilesetUrl: "../SampleData/models/statue_3dtiles/tileset.json",
+          anchorLon: 120.15,
+          anchorLat: 30.25,
+          anchorHeight: 0,
+          autoLift: true,
+
+          maxMemoryUsage: 500,
+          maximumScreenSpaceError: 16,
+          dynamicScreenSpaceError: true,
+          dynamicSSEFactor: 4.0,
+          dynamicSSEDensity: 0.00278,
+          skipLevelOfDetail: true,
+          immediatelyLoadDesiredLevelOfDetail: false,
+          preloadFlightDestinations: false,
+          preloadWhenHidden: false,
+
+          warmupSec: 2.0,
+          durationSec: 12,
+          orbits: 1.0,
+          rangeMul: 2.2,
+          pitchDeg: -35,
+          resolutionScale: 1.0,
+
+          jankThresholdMs: 50,
+          jankFactor: 1.5,
+          lookaheadSec: 1.0,
+          autoAdapt: true,
+          sseMin: 4,
+          sseMax: 64,
+          sseStep: "2/1",
+
+          persist: true,
+        };
+      }
+
+      function loadSettings() {
+        const defaults = getDefaultSettings();
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return defaults;
+          const obj = JSON.parse(raw);
+          return { ...defaults, ...(obj || {}) };
+        } catch {
+          return defaults;
+        }
+      }
+
+      function saveSettings() {
+        if (!elPersist.checked) return;
+        const s = readSettingsFromUi();
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+        } catch {
+          // ignore
+        }
+      }
+
+      function applySettingsToUi(s) {
+        elTilesetUrl.value = s.tilesetUrl;
+        elAnchorLon.value = String(s.anchorLon);
+        elAnchorLat.value = String(s.anchorLat);
+        elAnchorHeight.value = String(s.anchorHeight);
+        elAutoLift.checked = !!s.autoLift;
+
+        elMaxMemoryUsage.value = String(s.maxMemoryUsage);
+        elMaximumScreenSpaceError.value = String(s.maximumScreenSpaceError);
+        elDynamicScreenSpaceError.checked = !!s.dynamicScreenSpaceError;
+        elDynamicSSEFactor.value = String(s.dynamicSSEFactor);
+        elDynamicSSEDensity.value = String(s.dynamicSSEDensity);
+        elSkipLevelOfDetail.checked = !!s.skipLevelOfDetail;
+        elImmediatelyLoadDesiredLevelOfDetail.checked = !!s.immediatelyLoadDesiredLevelOfDetail;
+        elPreloadFlightDestinations.checked = !!s.preloadFlightDestinations;
+        elPreloadWhenHidden.checked = !!s.preloadWhenHidden;
+
+        elWarmupSec.value = String(s.warmupSec);
+        elDurationSec.value = String(s.durationSec);
+        elOrbits.value = String(s.orbits);
+        elRangeMul.value = String(s.rangeMul);
+        elPitchDeg.value = String(s.pitchDeg);
+        elResolutionScale.value = String(s.resolutionScale);
+
+        elJankThresholdMs.value = String(s.jankThresholdMs);
+        elJankFactor.value = String(s.jankFactor);
+        elLookaheadSec.value = String(s.lookaheadSec);
+        elAutoAdapt.checked = !!s.autoAdapt;
+        elSseMin.value = String(s.sseMin);
+        elSseMax.value = String(s.sseMax);
+        elSseStep.value = String(s.sseStep);
+
+        elPersist.checked = !!s.persist;
+      }
+
+      function readSettingsFromUi() {
+        return {
+          tilesetUrl: String(elTilesetUrl.value || "").trim(),
+          anchorLon: numOr(elAnchorLon.value, 120.15),
+          anchorLat: numOr(elAnchorLat.value, 30.25),
+          anchorHeight: numOr(elAnchorHeight.value, 0),
+          autoLift: !!elAutoLift.checked,
+
+          maxMemoryUsage: numOr(elMaxMemoryUsage.value, 0),
+          maximumScreenSpaceError: numOr(elMaximumScreenSpaceError.value, 16),
+          dynamicScreenSpaceError: !!elDynamicScreenSpaceError.checked,
+          dynamicSSEFactor: numOr(elDynamicSSEFactor.value, 4.0),
+          dynamicSSEDensity: numOr(elDynamicSSEDensity.value, 0.00278),
+          skipLevelOfDetail: !!elSkipLevelOfDetail.checked,
+          immediatelyLoadDesiredLevelOfDetail: !!elImmediatelyLoadDesiredLevelOfDetail.checked,
+          preloadFlightDestinations: !!elPreloadFlightDestinations.checked,
+          preloadWhenHidden: !!elPreloadWhenHidden.checked,
+
+          warmupSec: numOr(elWarmupSec.value, 2),
+          durationSec: intOr(elDurationSec.value, 12),
+          orbits: numOr(elOrbits.value, 1),
+          rangeMul: numOr(elRangeMul.value, 2.2),
+          pitchDeg: numOr(elPitchDeg.value, -35),
+          resolutionScale: numOr(elResolutionScale.value, 1.0),
+
+          jankThresholdMs: numOr(elJankThresholdMs.value, 50),
+          jankFactor: numOr(elJankFactor.value, 1.5),
+          lookaheadSec: numOr(elLookaheadSec.value, 1.0),
+          autoAdapt: !!elAutoAdapt.checked,
+          sseMin: numOr(elSseMin.value, 4),
+          sseMax: numOr(elSseMax.value, 64),
+          sseStep: String(elSseStep.value || "").trim() || "2/1",
+
+          persist: !!elPersist.checked,
+        };
+      }
+
+      // ===== Cesium Viewer（尽量减小基线开销） =====
+      const viewer = new Cesium.Viewer("cesiumContainer", {
+        animation: false,
+        timeline: false,
+        baseLayerPicker: false,
+        geocoder: false,
+        homeButton: false,
+        navigationHelpButton: false,
+        sceneModePicker: false,
+        fullscreenButton: false,
+        infoBox: false,
+        selectionIndicator: false,
+        shouldAnimate: false,
+        useDefaultRenderLoop: false,
+        imageryProvider: false,
+        terrainProvider: new Cesium.EllipsoidTerrainProvider(),
+        contextOptions: {
+          webgl: {
+            alpha: false,
+            antialias: false,
+            stencil: false,
+            preserveDrawingBuffer: false,
+            powerPreference: "high-performance",
+          },
+        },
+      });
+
+      try {
+        viewer.imageryLayers.removeAll(true);
+      } catch {
+        // ignore
+      }
+
+      viewer.scene.globe.show = false;
+      viewer.scene.skyBox.show = false;
+      viewer.scene.skyAtmosphere.show = false;
+      viewer.scene.fog.enabled = false;
+      viewer.scene.postProcessStages.fxaa.enabled = false;
+      viewer.scene.requestRenderMode = false;
+      viewer.scene.backgroundColor = Cesium.Color.fromCssColorString("#0b1020");
+      viewer.scene.highDynamicRange = false;
+      viewer.scene.light = new Cesium.DirectionalLight({
+        direction: new Cesium.Cartesian3(0.25, 0.25, -1.0),
+        color: Cesium.Color.WHITE,
+        intensity: 1.2,
+      });
+
+      let webglLost = false;
+      let renderActive = true;
+      let renderedFrames = 0;
+      let lastCommandListLen = NaN;
+      let lastRectW = -1;
+      let lastRectH = -1;
+
+      const dtRing = [];
+      const dtRingMax = 240;
+
+      const frameDtRing = [];
+      const frameDtRingMax = 240;
+      let lastRafNow = performance.now();
+
+      function ensureCesiumSized() {
+        try {
+          const container = document.getElementById("cesiumContainer");
+          const rect = container?.getBoundingClientRect();
+          const w = rect?.width ?? 0;
+          const h = rect?.height ?? 0;
+          if (w > 2 && h > 2) viewer.resize();
+        } catch {
+          // ignore
+        }
+      }
+
+      function raf() {
+        return new Promise((r) => requestAnimationFrame(r));
+      }
+
+      function renderLoop() {
+        try {
+          if (renderActive && !webglLost) {
+            const rafNow = performance.now();
+            const frameDt = rafNow - lastRafNow;
+            lastRafNow = rafNow;
+            if (frameDt > 0 && frameDt < 1000) {
+              frameDtRing.push(frameDt);
+              if (frameDtRing.length > frameDtRingMax) frameDtRing.shift();
+            }
+
+            const container = document.getElementById("cesiumContainer");
+            const rect = container?.getBoundingClientRect();
+            const w = rect?.width ?? 0;
+            const h = rect?.height ?? 0;
+            if (w > 2 && h > 2) {
+              if (Math.abs(w - lastRectW) > 0.5 || Math.abs(h - lastRectH) > 0.5) {
+                lastRectW = w;
+                lastRectH = h;
+                viewer.resize();
+              }
+              if (viewer.scene.drawingBufferWidth > 0 && viewer.scene.drawingBufferHeight > 0) {
+                const t0 = performance.now();
+                viewer.render();
+                const t1 = performance.now();
+                renderedFrames++;
+                const dt = t1 - t0;
+                if (dt > 0 && dt < 250) {
+                  dtRing.push(dt);
+                  if (dtRing.length > dtRingMax) dtRing.shift();
+                }
+                try {
+                  const fs = viewer.scene.frameState;
+                  const len = fs?.commandList?.length;
+                  lastCommandListLen = Number.isFinite(len) ? len : NaN;
+                } catch {
+                  lastCommandListLen = NaN;
+                }
+              }
+            }
+          }
+        } catch (e) {
+          console.warn("Cesium render guarded error:", e);
+        }
+        requestAnimationFrame(renderLoop);
+      }
+
+      requestAnimationFrame(() => {
+        ensureCesiumSized();
+        requestAnimationFrame(renderLoop);
+      });
+      window.addEventListener("resize", ensureCesiumSized);
+      if (window.ResizeObserver) {
+        new ResizeObserver(() => ensureCesiumSized()).observe(document.getElementById("cesiumContainer"));
+      }
+
+      // ===== Tileset 管理 =====
+      let tileset = null;
+      let tilesetUrl = "";
+
+      async function computeAutoLiftMeters(tilesetJsonUrl) {
+        try {
+          const res = await fetch(tilesetJsonUrl, { cache: "no-store" });
+          if (!res.ok) return 0.0;
+          const json = await res.json();
+          const box = json?.root?.boundingVolume?.box;
+          if (!Array.isArray(box) || box.length !== 12) return 0.0;
+          const cz = Number(box[2]);
+          const hz = Math.abs(Number(box[11]));
+          if (!Number.isFinite(cz) || !Number.isFinite(hz)) return 0.0;
+          const minZ = cz - hz;
+          if (!Number.isFinite(minZ)) return 0.0;
+          return minZ < 0 ? -minZ : 0.0;
+        } catch {
+          return 0.0;
+        }
+      }
+
+      function getTilesetStatsSafe(ts) {
+        const s = ts?.statistics;
+        if (!s) return {};
+        const pick = (k) => {
+          const v = s[k];
+          return Number.isFinite(v) ? v : NaN;
+        };
+
+        // Cesium 1.134: Cesium3DTilesetStatistics 的字段名
+        // - selected: 当前选中用于渲染的 tile 数（可近似看作 rendered）
+        // - visited: 当前帧遍历过的 tile 数
+        // - numberOfTilesWithContentReady: 内容 ready 的 tile 数（不含空 tile，可近似 loaded）
+        return {
+          loaded: pick("numberOfTilesWithContentReady"),
+          visited: pick("visited"),
+          rendered: pick("selected"),
+          commands: pick("numberOfCommands"),
+          pendingReq: pick("numberOfPendingRequests"),
+          attemptingReq: pick("numberOfAttemptedRequests"),
+          processing: pick("numberOfTilesProcessing"),
+          tilesTotal: pick("numberOfTilesTotal"),
+          geomBytes: pick("geometryByteLength"),
+          texBytes: pick("texturesByteLength"),
+        };
+      }
+
+      function applyTilesetParams(ts, s) {
+        if (!ts) return;
+        if (Number.isFinite(s.maximumScreenSpaceError) && s.maximumScreenSpaceError >= 0) {
+          ts.maximumScreenSpaceError = s.maximumScreenSpaceError;
+        }
+        if (Number.isFinite(s.maxMemoryUsage) && s.maxMemoryUsage > 0) {
+          ts.maximumMemoryUsage = s.maxMemoryUsage;
+        }
+        ts.dynamicScreenSpaceError = !!s.dynamicScreenSpaceError;
+        if (Number.isFinite(s.dynamicSSEFactor) && s.dynamicSSEFactor >= 0) {
+          ts.dynamicScreenSpaceErrorFactor = s.dynamicSSEFactor;
+        }
+        if (Number.isFinite(s.dynamicSSEDensity) && s.dynamicSSEDensity >= 0) {
+          ts.dynamicScreenSpaceErrorDensity = s.dynamicSSEDensity;
+        }
+        ts.skipLevelOfDetail = !!s.skipLevelOfDetail;
+        ts.immediatelyLoadDesiredLevelOfDetail = !!s.immediatelyLoadDesiredLevelOfDetail;
+        ts.preloadFlightDestinations = !!s.preloadFlightDestinations;
+        ts.preloadWhenHidden = !!s.preloadWhenHidden;
+      }
+
+      function updateButtons() {
+        const has = !!tileset;
+        btnUnload.disabled = !has;
+        btnZoom.disabled = !has;
+        btnApply.disabled = !has;
+        btnRun.disabled = !has || running;
+        btnStop.disabled = !running;
+        btnDownload.disabled = results.length === 0;
+        btnDownloadSeries.disabled = seriesResults.length === 0;
+        btnClear.disabled = results.length === 0 && seriesResults.length === 0;
+      }
+
+      async function unloadTileset() {
+        if (!tileset) return;
+        const ts = tileset;
+        tileset = null;
+        tilesetUrl = "";
+        try {
+          viewer.scene.primitives.remove(ts);
+        } catch {
+          // ignore
+        }
+        try {
+          ts.destroy();
+        } catch {
+          // ignore
+        }
+        log("已卸载 tileset。\n");
+        updateButtons();
+      }
+
+      async function loadTileset() {
+        await unloadTileset();
+        if (webglLost) throw new Error("WebGL context lost");
+
+        const s = readSettingsFromUi();
+        if (!s.tilesetUrl) throw new Error("Tileset URL 为空");
+
+        viewer.resolutionScale = clamp(s.resolutionScale, 0.1, 2.0);
+
+        tilesetUrl = s.tilesetUrl;
+        log(`开始加载 tileset：${tilesetUrl}`);
+
+        const t0 = performance.now();
+        let autoLift = 0.0;
+        if (s.autoLift) {
+          autoLift = await computeAutoLiftMeters(tilesetUrl);
+          if (autoLift > 0) log(`autoLift: +${autoLift.toFixed(3)} m`);
+        }
+
+        const ts = await Cesium.Cesium3DTileset.fromUrl(tilesetUrl);
+        tileset = ts;
+
+        // 放置到地表（本地坐标 tileset 强烈建议这么做）
+        const origin = Cesium.Cartesian3.fromDegrees(s.anchorLon, s.anchorLat, s.anchorHeight + autoLift);
+        ts.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(origin);
+
+        applyTilesetParams(ts, s);
+
+        viewer.scene.primitives.add(ts);
+        await ts.readyPromise;
+
+        // 等几帧再 zoomTo，避免 boundingSphere/管线未稳定
+        for (let i = 0; i < 3; i++) await raf();
+
+        await viewer.zoomTo(ts);
+        for (let i = 0; i < 2; i++) await raf();
+
+        const loadMs = performance.now() - t0;
+        log(`✅ tileset ready & zoomTo: ${loadMs.toFixed(0)} ms\n`);
+
+        updateButtons();
+        saveSettings();
+      }
+
+      async function zoomToTileset() {
+        if (!tileset) return;
+        await viewer.zoomTo(tileset);
+      }
+
+      // ===== HUD（实时指标） =====
+      let hudLast = "";
+      const envInfo = {
+        ua: navigator.userAgent,
+        dpr: window.devicePixelRatio,
+        ...getWebglInfo(viewer.canvas),
+      };
+
+      function dtStatsFromRing() {
+        if (!dtRing.length) return { mean: NaN, p95: NaN, p99: NaN };
+        const a = dtRing.slice().sort((x, y) => x - y);
+        const sum = a.reduce((p, c) => p + c, 0);
+        const mean = sum / a.length;
+        return {
+          mean,
+          p95: percentileSorted(a, 0.95),
+          p99: percentileSorted(a, 0.99),
+        };
+      }
+
+      function statsFromRing(ring) {
+        if (!ring.length) return { mean: NaN, p95: NaN, p99: NaN };
+        const a = ring.slice().sort((x, y) => x - y);
+        const sum = a.reduce((p, c) => p + c, 0);
+        const mean = sum / a.length;
+        return {
+          mean,
+          p95: percentileSorted(a, 0.95),
+          p99: percentileSorted(a, 0.99),
+        };
+      }
+
+      function updateHud() {
+        try {
+          const s = tileset ? getTilesetStatsSafe(tileset) : {};
+          const ds = dtStatsFromRing();
+          const fps = Number.isFinite(ds.mean) && ds.mean > 0 ? 1000 / ds.mean : NaN;
+
+          const fs = statsFromRing(frameDtRing);
+          const fpsFrame = Number.isFinite(fs.mean) && fs.mean > 0 ? 1000 / fs.mean : NaN;
+
+          const lines = [
+            `FPS~(frame): ${Number.isFinite(fpsFrame) ? fpsFrame.toFixed(1) : "-"}`,
+            `Δt(frame ms) mean/p95/p99: ${Number.isFinite(fs.mean) ? fs.mean.toFixed(2) : "-"} / ${Number.isFinite(fs.p95) ? fs.p95.toFixed(2) : "-"} / ${Number.isFinite(fs.p99) ? fs.p99.toFixed(2) : "-"}`,
+            `render(ms) mean/p95/p99: ${Number.isFinite(ds.mean) ? ds.mean.toFixed(2) : "-"} / ${Number.isFinite(ds.p95) ? ds.p95.toFixed(2) : "-"} / ${Number.isFinite(ds.p99) ? ds.p99.toFixed(2) : "-"}`,
+            `commandList(mean): ${Number.isFinite(lastCommandListLen) ? lastCommandListLen.toFixed(0) : "-"}`,
+            tileset
+              ? `tiles loaded/visited/rendered: ${s.loaded ?? "-"} / ${s.visited ?? "-"} / ${s.rendered ?? "-"}`
+              : "tileset: -",
+            tileset ? `requests pending: ${s.pendingReq ?? "-"}` : "",
+            tileset
+              ? `maxSSE: ${Number.isFinite(tileset.maximumScreenSpaceError) ? Number(tileset.maximumScreenSpaceError).toFixed(0) : "-"}`
+              : "",
+            `resolutionScale: ${viewer.resolutionScale}`,
+            envInfo.glRenderer ? `GPU: ${envInfo.glRenderer}` : "",
+          ].filter(Boolean);
+
+          const text = lines.join("\n");
+          if (text !== hudLast) {
+            hudLast = text;
+            hudEl.textContent = text;
+          }
+        } catch {
+          // ignore
+        }
+      }
+      setInterval(updateHud, 250);
+
+      // ===== Benchmark =====
+      const results = [];
+      const seriesResults = [];
+      let running = false;
+      let stopRequested = false;
+
+      function setTable() {
+        tbodyEl.innerHTML = results
+          .map((r) => {
+            const fps = Number.isFinite(r.fpsAvg) ? r.fpsAvg.toFixed(1) : "-";
+            const mean = Number.isFinite(r.frameTimeMeanMs) ? r.frameTimeMeanMs.toFixed(2) : "-";
+            const p95 = Number.isFinite(r.frameTimeP95Ms) ? r.frameTimeP95Ms.toFixed(2) : "-";
+            const p99 = Number.isFinite(r.frameTimeP99Ms) ? r.frameTimeP99Ms.toFixed(2) : "-";
+            const jank = Number.isFinite(r.jankPct) ? r.jankPct.toFixed(1) + "%" : "-";
+            const tiles = `${r.tilesLoadedMax ?? "-"}/${r.tilesVisitedMax ?? "-"}/${r.tilesRenderedMax ?? "-"}`;
+            const req = `${r.pendingRequestsMax ?? "-"}`;
+            return `
+              <tr>
+                <td>${r.time}</td>
+                <td>${fps}</td>
+                <td>${mean}/${p95}/${p99}</td>
+                <td>${jank}</td>
+                <td>${tiles}</td>
+                <td>${req}</td>
+                <td>${r.note || ""}</td>
+              </tr>
+            `;
+          })
+          .join("");
+        updateButtons();
+      }
+
+      function parseUpDownStep(text) {
+        const m = /^\s*([0-9.]+)\s*\/\s*([0-9.]+)\s*$/.exec(String(text || ""));
+        if (m) {
+          const up = Number(m[1]);
+          const down = Number(m[2]);
+          if (Number.isFinite(up) && Number.isFinite(down) && up >= 0 && down >= 0) return { up, down };
+        }
+        return { up: 2, down: 1 };
+      }
+
+      function computeJankThresholdMsFromWarmup(warmFrameDts, s) {
+        const baseMin = Math.max(0, s.jankThresholdMs);
+        const factor = Math.max(1.0, s.jankFactor);
+        if (!warmFrameDts.length) return baseMin;
+        const arr = warmFrameDts.slice().sort((a, b) => a - b);
+        const baseP95 = percentileSorted(arr, 0.95);
+        if (!Number.isFinite(baseP95) || baseP95 <= 0) return baseMin;
+        return Math.max(baseMin, baseP95 * factor);
+      }
+
+      async function measureWhileOrbit(s) {
+        if (!tileset) throw new Error("未加载 tileset");
+        if (webglLost) throw new Error("WebGL context lost");
+
+        const ts = tileset;
+
+        // 以 tileset 的 boundingSphere 为中心做 orbit
+        const bs = ts.boundingSphere;
+        const center = bs?.center || Cesium.Cartesian3.fromDegrees(s.anchorLon, s.anchorLat, s.anchorHeight);
+        const radius = Number.isFinite(bs?.radius) && bs.radius > 0 ? bs.radius : 200.0;
+        const range = Math.max(10.0, radius * Math.max(0.1, s.rangeMul));
+        const pitch = Cesium.Math.toRadians(clamp(s.pitchDeg, -89, -1));
+        const orbits = Math.max(0.01, s.orbits);
+
+        // warmup：固定视角让瓦片先加载 + 校准基线
+        viewer.camera.lookAt(center, new Cesium.HeadingPitchRange(0.0, pitch, range));
+        viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+
+        const warmMs = Math.max(0, s.warmupSec * 1000);
+        const durMs = Math.max(1000, s.durationSec * 1000);
+
+        const warmFrameDts = [];
+        let warmLast = performance.now();
+        const tWarmEnd = warmLast + warmMs;
+        while (performance.now() < tWarmEnd) {
+          if (stopRequested) throw new Error("stopped");
+          await raf();
+          const now = performance.now();
+          const dt = now - warmLast;
+          warmLast = now;
+          if (dt > 0 && dt < 250) warmFrameDts.push(dt);
+        }
+
+        const jankThresholdMs = computeJankThresholdMsFromWarmup(warmFrameDts, s);
+
+        const frameTimes = [];
+        let jankCount = 0;
+        let last = performance.now();
+        const t0 = last;
+        const tEnd = t0 + durMs;
+
+        const perSecond = [];
+        let secIndex = 0;
+        let secStart = t0;
+        let secFrames = 0;
+        let secDts = [];
+        let lastSecMean = NaN;
+        let ewmaMean = NaN;
+        let stableSec = 0;
+        const lookaheadSec = Math.max(0, s.lookaheadSec);
+        const sseMin = Math.max(0, s.sseMin);
+        const sseMax = Math.max(sseMin, s.sseMax);
+        const step = parseUpDownStep(s.sseStep);
+        let lastPendingReq = NaN;
+
+        while (performance.now() < tEnd) {
+          if (stopRequested) throw new Error("stopped");
+          await raf();
+          const now = performance.now();
+          const dt = now - last;
+          last = now;
+          if (dt > 0 && dt < 250) frameTimes.push(dt);
+          if (dt > jankThresholdMs) jankCount++;
+
+          secFrames++;
+          if (dt > 0 && dt < 250) secDts.push(dt);
+
+          const t = (now - t0) / durMs;
+          const heading = t * (Math.PI * 2.0) * orbits;
+          viewer.camera.lookAt(center, new Cesium.HeadingPitchRange(heading, pitch, range));
+          viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+
+          if (now - secStart >= 1000) {
+            const stats = getTilesetStatsSafe(ts);
+            const secDur = Math.max(1, now - secStart);
+            const secFps = (secFrames * 1000) / secDur;
+            secDts.sort((a, b) => a - b);
+            const secMean = secDts.length ? secDts.reduce((a, b) => a + b, 0) / secDts.length : NaN;
+            const secP95 = secDts.length ? percentileSorted(secDts, 0.95) : NaN;
+            const secP99 = secDts.length ? percentileSorted(secDts, 0.99) : NaN;
+            const secJank = secDts.length ? secDts.filter((x) => x > jankThresholdMs).length : 0;
+            const secJankPct = secDts.length ? (secJank * 100) / secDts.length : NaN;
+
+            // 趋势与预警（用 mean 的 EWMA + 一阶差分预测）
+            if (!Number.isFinite(ewmaMean)) ewmaMean = secMean;
+            if (Number.isFinite(secMean)) ewmaMean = 0.7 * ewmaMean + 0.3 * secMean;
+            const slope = Number.isFinite(lastSecMean) && Number.isFinite(secMean) ? secMean - lastSecMean : 0;
+            const predicted = Number.isFinite(ewmaMean) ? ewmaMean + slope * lookaheadSec : NaN;
+
+            // 把 pending 请求也纳入“即将卡顿”判断（经验：pending 上升往往早于帧掉）
+            const pendingReq = stats.pendingReq;
+            const pendingDelta = Number.isFinite(lastPendingReq) && Number.isFinite(pendingReq) ? pendingReq - lastPendingReq : NaN;
+            lastPendingReq = pendingReq;
+            const riskByFrame = Number.isFinite(predicted) && predicted > jankThresholdMs;
+            const riskByReq = Number.isFinite(pendingDelta) && pendingDelta > 8;
+            const aboutToStutter = riskByFrame || riskByReq;
+
+            // 自适应：即将卡顿 -> 提升 SSE；稳定 -> 缓慢降低 SSE
+            let sseBefore = Number(ts.maximumScreenSpaceError);
+            if (!Number.isFinite(sseBefore)) sseBefore = s.maximumScreenSpaceError;
+            sseBefore = clamp(sseBefore, sseMin, sseMax);
+            let sseAfter = sseBefore;
+            let adaptAction = "";
+            if (s.autoAdapt) {
+              if (aboutToStutter) {
+                stableSec = 0;
+                sseAfter = clamp(sseBefore + step.up, sseMin, sseMax);
+                adaptAction = sseAfter !== sseBefore ? `SSE+${step.up}` : "SSE=max";
+              } else {
+                stableSec++;
+                if (stableSec >= 2) {
+                  sseAfter = clamp(sseBefore - step.down, sseMin, sseMax);
+                  if (sseAfter !== sseBefore) adaptAction = `SSE-${step.down}`;
+                }
+              }
+              if (sseAfter !== sseBefore) ts.maximumScreenSpaceError = sseAfter;
+              // 若开启自适应，默认也开启 dynamicSSE（更像推文“倾斜智能降精度”）
+              ts.dynamicScreenSpaceError = true;
+            }
+
+            perSecond.push({
+              runId: "",
+              secIndex,
+              tSec: ((now - t0) / 1000).toFixed(3),
+              fps: secFps,
+              frameDtMeanMs: secMean,
+              frameDtP95Ms: secP95,
+              frameDtP99Ms: secP99,
+              jankThresholdMs,
+              jankCount: secJank,
+              jankPct: secJankPct,
+              ewmaMeanMs: ewmaMean,
+              slopeMs: slope,
+              predictedMs: predicted,
+              aboutToStutter: aboutToStutter ? 1 : 0,
+              maximumScreenSpaceError: Number(ts.maximumScreenSpaceError),
+              tilesLoaded: stats.loaded,
+              tilesVisited: stats.visited,
+              tilesRendered: stats.rendered,
+              pendingReq: stats.pendingReq,
+              pendingDelta,
+              adaptAction,
+            });
+
+            lastSecMean = secMean;
+            secIndex++;
+            secStart = now;
+            secFrames = 0;
+            secDts = [];
+          }
+        }
+
+        if (!frameTimes.length) throw new Error("No frame samples");
+
+        frameTimes.sort((a, b) => a - b);
+        const sum = frameTimes.reduce((a, b) => a + b, 0);
+        const mean = sum / frameTimes.length;
+        const fpsAvg = (frameTimes.length * 1000) / (durMs || 1);
+
+        // 用 perSecond 里记录的峰值（比直接 tileset.statistics 在末尾读更稳）
+        const maxOf = (k) => {
+          let m = NaN;
+          for (const ss of perSecond) {
+            const v = ss[k];
+            if (!Number.isFinite(v)) continue;
+            m = Number.isFinite(m) ? Math.max(m, v) : v;
+          }
+          return m;
+        };
+
+        const jankPct = frameTimes.length ? (jankCount * 100) / frameTimes.length : NaN;
+
+        return {
+          fpsAvg,
+          frameTimeMeanMs: mean,
+          frameTimeP95Ms: percentileSorted(frameTimes, 0.95),
+          frameTimeP99Ms: percentileSorted(frameTimes, 0.99),
+          frameSamples: frameTimes.length,
+          jankThresholdMs,
+          jankCount,
+          jankPct,
+          tilesLoadedMax: maxOf("tilesLoaded"),
+          tilesVisitedMax: maxOf("tilesVisited"),
+          tilesRenderedMax: maxOf("tilesRendered"),
+          pendingRequestsMax: maxOf("pendingReq"),
+          perSecond,
+        };
+      }
+
+      function csvEscape(v) {
+        const s = String(v ?? "");
+        if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+        return s;
+      }
+
+      function downloadCsv() {
+        const header = [
+          "time",
+          "runId",
+          "tilesetUrl",
+          "anchorLon",
+          "anchorLat",
+          "anchorHeight",
+          "autoLift",
+          "maxMemoryUsageMB",
+          "maximumScreenSpaceError",
+          "dynamicScreenSpaceError",
+          "dynamicSSEFactor",
+          "dynamicSSEDensity",
+          "jankThresholdMs",
+          "jankFactor",
+          "lookaheadSec",
+          "autoAdapt",
+          "sseMin",
+          "sseMax",
+          "sseStep",
+          "skipLevelOfDetail",
+          "immediatelyLoadDesiredLevelOfDetail",
+          "preloadFlightDestinations",
+          "preloadWhenHidden",
+          "warmupSec",
+          "durationSec",
+          "orbits",
+          "rangeMul",
+          "pitchDeg",
+          "resolutionScale",
+          "fpsAvg",
+          "frameTimeMeanMs",
+          "frameTimeP95Ms",
+          "frameTimeP99Ms",
+          "frameSamples",
+          "jankCount",
+          "jankPct",
+          "tilesLoadedMax",
+          "tilesVisitedMax",
+          "tilesRenderedMax",
+          "pendingRequestsMax",
+          "note",
+          "ua",
+          "dpr",
+          "webglVersion",
+          "glVendor",
+          "glRenderer",
+        ];
+
+        const rows = results.map((r) =>
+          header
+            .map((k) => {
+              const v = r[k];
+              return csvEscape(Number.isFinite(v) ? v : v ?? "");
+            })
+            .join(",")
+        );
+
+        const csv = "\ufeff" + header.join(",") + "\n" + rows.join("\n") + "\n";
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Cesium_PerfLog_${new Date().toISOString().replace(/[:.]/g, "-")}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      }
+
+      function downloadSeriesCsv() {
+        const header = [
+          "runId",
+          "time",
+          "tilesetUrl",
+          "secIndex",
+          "tSec",
+          "fps",
+          "frameDtMeanMs",
+          "frameDtP95Ms",
+          "frameDtP99Ms",
+          "jankThresholdMs",
+          "jankCount",
+          "jankPct",
+          "ewmaMeanMs",
+          "slopeMs",
+          "predictedMs",
+          "aboutToStutter",
+          "maximumScreenSpaceError",
+          "tilesLoaded",
+          "tilesVisited",
+          "tilesRendered",
+          "pendingReq",
+          "pendingDelta",
+          "adaptAction",
+        ];
+
+        const rows = seriesResults.map((r) =>
+          header
+            .map((k) => {
+              const v = r[k];
+              return csvEscape(Number.isFinite(v) ? v : v ?? "");
+            })
+            .join(",")
+        );
+
+        const csv = "\ufeff" + header.join(",") + "\n" + rows.join("\n") + "\n";
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Cesium_PerfSeries_${new Date().toISOString().replace(/[:.]/g, "-")}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      }
+
+      async function runBenchmark() {
+        stopRequested = false;
+        running = true;
+        updateButtons();
+
+        const s = readSettingsFromUi();
+        saveSettings();
+
+        // 确保参数已应用
+        viewer.resolutionScale = clamp(s.resolutionScale, 0.1, 2.0);
+        applyTilesetParams(tileset, s);
+
+        const base = {
+          runId: "",
+          tilesetUrl: tilesetUrl,
+          anchorLon: s.anchorLon,
+          anchorLat: s.anchorLat,
+          anchorHeight: s.anchorHeight,
+          autoLift: s.autoLift,
+          maxMemoryUsageMB: s.maxMemoryUsage,
+          maximumScreenSpaceError: s.maximumScreenSpaceError,
+          dynamicScreenSpaceError: s.dynamicScreenSpaceError,
+          dynamicSSEFactor: s.dynamicSSEFactor,
+          dynamicSSEDensity: s.dynamicSSEDensity,
+          jankThresholdMs: s.jankThresholdMs,
+          jankFactor: s.jankFactor,
+          lookaheadSec: s.lookaheadSec,
+          autoAdapt: s.autoAdapt,
+          sseMin: s.sseMin,
+          sseMax: s.sseMax,
+          sseStep: s.sseStep,
+          skipLevelOfDetail: s.skipLevelOfDetail,
+          immediatelyLoadDesiredLevelOfDetail: s.immediatelyLoadDesiredLevelOfDetail,
+          preloadFlightDestinations: s.preloadFlightDestinations,
+          preloadWhenHidden: s.preloadWhenHidden,
+          warmupSec: s.warmupSec,
+          durationSec: s.durationSec,
+          orbits: s.orbits,
+          rangeMul: s.rangeMul,
+          pitchDeg: s.pitchDeg,
+          resolutionScale: viewer.resolutionScale,
+          ua: envInfo.ua,
+          dpr: envInfo.dpr,
+          webglVersion: envInfo.webglVersion,
+          glVendor: envInfo.glVendor,
+          glRenderer: envInfo.glRenderer,
+        };
+
+        const runId = new Date().toISOString();
+        base.runId = runId;
+        log(`开始跑分：warmup=${s.warmupSec}s duration=${s.durationSec}s orbits=${s.orbits} (runId=${runId})`);
+        try {
+          const m = await measureWhileOrbit(s);
+          // 把 per-second 曲线挂到全局
+          if (Array.isArray(m.perSecond)) {
+            for (const row of m.perSecond) {
+              row.runId = runId;
+              row.time = nowIsoLocal();
+              row.tilesetUrl = tilesetUrl;
+              seriesResults.push(row);
+            }
+          }
+          const r = {
+            ...base,
+            ...m,
+            time: nowIsoLocal(),
+            note: "ok",
+          };
+          results.push(r);
+          log(
+            `完成：FPS(avg)=${m.fpsAvg.toFixed(1)} mean=${m.frameTimeMeanMs.toFixed(2)}ms jank=${m.jankPct.toFixed(
+              1
+            )}% (thr=${m.jankThresholdMs.toFixed(0)}ms)`
+          );
+        } catch (e) {
+          const r = {
+            ...base,
+            time: nowIsoLocal(),
+            note: String(e?.message || e),
+          };
+          results.push(r);
+          log(`失败：${r.note}`);
+        } finally {
+          running = false;
+          updateButtons();
+          setTable();
+          log("\n");
+        }
+      }
+
+      // ===== UI events =====
+      btnLoad.addEventListener("click", () => {
+        loadTileset().catch((e) => {
+          console.error(e);
+          log("加载失败：" + (e?.message || e) + "\n");
+          updateButtons();
+        });
+      });
+
+      btnUnload.addEventListener("click", () => {
+        unloadTileset().catch(() => {});
+      });
+
+      btnZoom.addEventListener("click", () => {
+        zoomToTileset().catch(() => {});
+      });
+
+      btnApply.addEventListener("click", () => {
+        const s = readSettingsFromUi();
+        viewer.resolutionScale = clamp(s.resolutionScale, 0.1, 2.0);
+        applyTilesetParams(tileset, s);
+        saveSettings();
+        log("已应用参数到当前 tileset。\n");
+      });
+
+      btnReset.addEventListener("click", () => {
+        const s = getDefaultSettings();
+        applySettingsToUi(s);
+        if (tileset) {
+          viewer.resolutionScale = clamp(s.resolutionScale, 0.1, 2.0);
+          applyTilesetParams(tileset, s);
+        }
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch {
+          // ignore
+        }
+        log("已重置为默认设置。\n");
+        updateButtons();
+      });
+
+      btnRun.addEventListener("click", () => {
+        runBenchmark().catch((e) => {
+          console.error(e);
+          log("跑分发生错误：" + (e?.message || e) + "\n");
+          running = false;
+          updateButtons();
+        });
+      });
+
+      btnStop.addEventListener("click", () => {
+        stopRequested = true;
+        log("已请求停止...\n");
+        updateButtons();
+      });
+
+      btnDownload.addEventListener("click", () => downloadCsv());
+      btnDownloadSeries.addEventListener("click", () => downloadSeriesCsv());
+      btnClear.addEventListener("click", () => {
+        results.length = 0;
+        seriesResults.length = 0;
+        setTable();
+        log("已清空结果。\n");
+      });
+
+      for (const el of [
+        elTilesetUrl,
+        elAnchorLon,
+        elAnchorLat,
+        elAnchorHeight,
+        elAutoLift,
+        elMaxMemoryUsage,
+        elMaximumScreenSpaceError,
+        elDynamicScreenSpaceError,
+        elDynamicSSEFactor,
+        elDynamicSSEDensity,
+        elSkipLevelOfDetail,
+        elImmediatelyLoadDesiredLevelOfDetail,
+        elPreloadFlightDestinations,
+        elPreloadWhenHidden,
+        elWarmupSec,
+        elDurationSec,
+        elOrbits,
+        elRangeMul,
+        elPitchDeg,
+        elResolutionScale,
+
+        elJankThresholdMs,
+        elJankFactor,
+        elLookaheadSec,
+        elAutoAdapt,
+        elSseMin,
+        elSseMax,
+        elSseStep,
+        elPersist,
+      ]) {
+        el.addEventListener("change", () => saveSettings());
+      }
+
+      // WebGL context lost handling
+      viewer.canvas.addEventListener(
+        "webglcontextlost",
+        (e) => {
+          try {
+            e.preventDefault();
+          } catch {
+            // ignore
+          }
+          webglLost = true;
+          stopRequested = true;
+          running = false;
+          renderActive = false;
+          log("[警告] WebGL CONTEXT_LOST_WEBGL：请刷新页面后重试。\n");
+          updateButtons();
+        },
+        { passive: false }
+      );
+
+      viewer.canvas.addEventListener("webglcontextrestored", () => {
+        webglLost = false;
+        renderActive = true;
+        log("[信息] WebGL context restored。\n");
+        updateButtons();
+      });
+
+      // init
+      const s0 = loadSettings();
+      applySettingsToUi(s0);
+      log("就绪：点击“加载”开始。\n");
+      updateButtons();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3539 @@
+{
+  "asset": {
+    "version": "1.0",
+    "tilesetVersion": "public-stress-v1"
+  },
+  "geometricError": 64,
+  "root": {
+    "boundingVolume": {
+      "box": [
+        0,
+        0,
+        0,
+        40,
+        0,
+        0,
+        0,
+        40,
+        0,
+        0,
+        0,
+        40
+      ]
+    },
+    "geometricError": 64,
+    "refine": "REPLACE",
+    "content": {
+      "uri": "tile-content.b3dm?tile=0"
+    },
+    "children": [
+      {
+        "boundingVolume": {
+          "box": [
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40
+          ]
+        },
+        "geometricError": 32,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "tile-content.b3dm?tile=0-0"
+        },
+        "children": [
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-0-0"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-0-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-0-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-0-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-0-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-0-1"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-1-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-1-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-1-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-1-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-0-2"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-2-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-2-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-2-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-2-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-0-3"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-3-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-3-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-3-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-0-3-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              40,
+              0,
+              1
+            ]
+          }
+        ],
+        "transform": [
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          -40,
+          -40,
+          0,
+          1
+        ]
+      },
+      {
+        "boundingVolume": {
+          "box": [
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40
+          ]
+        },
+        "geometricError": 32,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "tile-content.b3dm?tile=0-1"
+        },
+        "children": [
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-1-0"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-0-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-0-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-0-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-0-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-1-1"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-1-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-1-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-1-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-1-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-1-2"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-2-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-2-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-2-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-2-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-1-3"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-3-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-3-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-3-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-1-3-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              40,
+              0,
+              1
+            ]
+          }
+        ],
+        "transform": [
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          40,
+          -40,
+          0,
+          1
+        ]
+      },
+      {
+        "boundingVolume": {
+          "box": [
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40
+          ]
+        },
+        "geometricError": 32,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "tile-content.b3dm?tile=0-2"
+        },
+        "children": [
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-2-0"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-0-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-0-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-0-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-0-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-2-1"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-1-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-1-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-1-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-1-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-2-2"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-2-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-2-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-2-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-2-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-2-3"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-3-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-3-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-3-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-2-3-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              40,
+              0,
+              1
+            ]
+          }
+        ],
+        "transform": [
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          -40,
+          40,
+          0,
+          1
+        ]
+      },
+      {
+        "boundingVolume": {
+          "box": [
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40,
+            0,
+            0,
+            0,
+            40
+          ]
+        },
+        "geometricError": 32,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "tile-content.b3dm?tile=0-3"
+        },
+        "children": [
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-3-0"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-0-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-0-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-0-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-0-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-3-1"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-1-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-1-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-1-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-1-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              -40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-3-2"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-2-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-2-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-2-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-2-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              -40,
+              40,
+              0,
+              1
+            ]
+          },
+          {
+            "boundingVolume": {
+              "box": [
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40,
+                0,
+                0,
+                0,
+                40
+              ]
+            },
+            "geometricError": 16,
+            "refine": "REPLACE",
+            "content": {
+              "uri": "tile-content.b3dm?tile=0-3-3"
+            },
+            "children": [
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-3-0"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-3-1"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  -40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-3-2"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  -40,
+                  40,
+                  0,
+                  1
+                ]
+              },
+              {
+                "boundingVolume": {
+                  "box": [
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40,
+                    0,
+                    0,
+                    0,
+                    40
+                  ]
+                },
+                "geometricError": 0,
+                "refine": "REPLACE",
+                "content": {
+                  "uri": "tile-content.b3dm?tile=0-3-3-3"
+                },
+                "transform": [
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.5,
+                  0,
+                  40,
+                  40,
+                  0,
+                  1
+                ]
+              }
+            ],
+            "transform": [
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              0,
+              0,
+              0,
+              0.5,
+              0,
+              40,
+              40,
+              0,
+              1
+            ]
+          }
+        ],
+        "transform": [
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          0,
+          0,
+          0,
+          0.5,
+          0,
+          40,
+          40,
+          0,
+          1
+        ]
+      }
+    ],
+    "transform": [
+      96.86356343768793,
+      24.848542777253734,
+      0,
+      0,
+      -15.986465724980844,
+      62.317780594908875,
+      76.5566922962899,
+      0,
+      19.02322243409411,
+      -74.15554020821229,
+      64.3356267137516,
+      0,
+      1215107.7612304366,
+      -4736682.902037748,
+      4081926.095098698,
+      1
+    ]
+  },
+  "extras": {
+    "purpose": "Synthetic request-pressure benchmark; not a real-world scene",
+    "sourceContent": "Bundled Cesium Stanford Dragon discrete-LOD sample",
+    "tileCount": 85
+  }
+}
