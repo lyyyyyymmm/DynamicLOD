@@ -7,6 +7,7 @@ import {
   buildAblationQueue,
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
+  buildD2S3PilotQueue,
   buildMainExperimentQueue,
   buildPiCalibrationQueue,
   buildScenarioTimeline,
@@ -124,6 +125,22 @@ test("D1/S2 pilot queue schedules four paired six-method blocks outside confirma
   assert.ok(queue.every((run) => run.networkProfile === "lan"));
   assert.ok(queue.every((run) => run.studyPhase === "pilot"));
   assert.ok(queue.every((run) => run.pilotPurpose === "full-pilot-v2.3.6-pressure-burst"));
+  for (let repeat = 1; repeat <= 4; repeat += 1) {
+    assert.deepEqual(
+      queue.filter((run) => run.repeat === repeat).map((run) => run.method).sort(),
+      [...FROZEN_PROTOCOL.methods].sort(),
+    );
+  }
+});
+
+test("D2/S3 pilot queue schedules Rotterdam pressureBurst paired blocks outside confirmation", () => {
+  const queue = buildD2S3PilotQueue();
+  assert.equal(queue.length, 24);
+  assert.ok(queue.every((run) => run.dataset === "bagRotterdam"));
+  assert.ok(queue.every((run) => run.scenario === "pressureBurst"));
+  assert.ok(queue.every((run) => run.networkProfile === "lan"));
+  assert.ok(queue.every((run) => run.studyPhase === "pilot"));
+  assert.ok(queue.every((run) => run.pilotPurpose === "full-pilot-v2.3.6-d2-pressure-burst"));
   for (let repeat = 1; repeat <= 4; repeat += 1) {
     assert.deepEqual(
       queue.filter((run) => run.repeat === repeat).map((run) => run.method).sort(),

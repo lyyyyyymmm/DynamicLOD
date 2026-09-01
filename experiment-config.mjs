@@ -326,6 +326,21 @@ export function buildD1S2PilotQueue(options = {}) {
   }));
 }
 
+export function buildD2S3PilotQueue(options = {}) {
+  return createQueue({
+    datasets: ["bagRotterdam"],
+    scenarios: ["pressureBurst"],
+    methods: FROZEN_PROTOCOL.methods,
+    repeats: options.repeats ?? 4,
+    seed: options.seed ?? 20260823,
+  }).map((run) => ({
+    ...run,
+    networkProfile: "lan",
+    studyPhase: "pilot",
+    pilotPurpose: "full-pilot-v2.3.6-d2-pressure-burst",
+  }));
+}
+
 export function buildD1S2PressureProbeQueue(options = {}) {
   return createQueue({
     datasets: ["bagAmsterdam"],

@@ -2,6 +2,65 @@
 
 All notable protocol, implementation, and research-workflow changes are recorded here. Historical entries reconstructed from conversation and project records are marked accordingly.
 
+## Android-A true D2/S3 pressureBurst pilot - 2026-09-01
+
+- The true Android-A D2/S3 pilot was collected with the new `Run D2/S3 pressureBurst pilot` button and reanalyzed. The new records are correctly marked `deviceId=android-a`, `dataset=bagRotterdam`, `scenario=pressureBurst`, `protocolVersion=2.3.6`, `networkProfile=lan`, `studyPhase=pilot`, and `pilotPurpose=full-pilot-v2.3.6-d2-pressure-burst`.
+- The pilot produced 24 valid records in four complete six-method paired blocks and no invalid attempts.
+- All valid methods had median violation rate `0.0` and median frame-time P95 about `16.7 ms`.
+- Proposed repeats loaded 95, 90, 98, and 98 tiles; transferred 80,495,838, 73,057,866, 83,251,158, and 83,251,458 bytes; reached request-queue peaks 41, 39, 40, and 40; and recorded pressure-safe holds 23, 27, 24, and 27.
+- No Proposed repeat produced pressure-tail overlap, preemptive opportunities, exact `predicted-tail-plus-request-pressure` actions, missed opportunities, or tail downgrades under pressure.
+- Interpretation: D2/S3 execution is valid as Android pilot evidence, but it reproduces the Android low-tail-pressure problem. It does not support formal Android comparative effect claims.
+
+### Next Step
+
+- Decide how to handle Android-A low-tail-pressure before confirmatory release: narrow Android claims, release a deliberately versioned heavier Android workload, or treat Android as execution/generalization evidence rather than tail-pressure effect evidence.
+
+## D2/S3 pilot UI path - 2026-09-01
+
+- Added a dedicated `Run D2/S3 pressureBurst pilot` button and `buildD2S3PilotQueue()` so Android-A D2/S3 can be collected without relying on the dataset dropdown while using the fixed D1/S3 button.
+- The D2/S3 pilot queue is explicitly `bagRotterdam + pressureBurst`, six methods, four repeats, `networkProfile=lan`, `studyPhase=pilot`, and `pilotPurpose=full-pilot-v2.3.6-d2-pressure-burst`.
+- Added a regression test to ensure the D2/S3 pilot queue cannot silently run `bagAmsterdam`, and updated the Playwright smoke test to require the D2/S3 button to be visible.
+- Fresh checks passed `npm.cmd test` (83 tests), `npm.cmd run test:lod:py` (17 tests), `npm.cmd run lod:verify-data`, `npm.cmd run lod:validate-ui`, and `npm.cmd run test:lod:e2e -- --reporter=line` on isolated port 8095 in the approved PowerShell environment. A follow-up `npm.cmd run lod:analyze` regenerated `STATUS.md` / `all_runs.csv` after the E2E smoke left an additional retained `unregistered-publicStress` audit result.
+
+### Follow-up
+
+- The true D2/S3 pilot was later collected with this new button; see the newer Android-A true D2/S3 entry above.
+
+## Android-A attempted D2/S3 check - 2026-09-01
+
+- The user reported completing a D2/S3 Android-A pilot and `npm.cmd run lod:analyze`, but the regenerated analysis and raw filenames show no `android-a + bagRotterdam + pressureBurst` records. All Android-A v2.3.6 `pressureBurst` full-pilot rows are still `dataset=bagAmsterdam`.
+- The new second batch contains 24 additional valid Android-A D1/S3 records in four complete six-method paired blocks, with no new invalid attempts. Median violation rate remained `0.0` for every method, with median frame-time P95 about `16.7 ms`.
+- Proposed in the second D1/S3 batch loaded 94, 98, 97, and 101 tiles; transferred 58,779,910, 60,780,090, 60,695,022, and 64,441,710 bytes; reached request-queue peaks 34, 34, 35, and 37; and again produced pressure-safe holds without pressure-tail overlap or exact request-pressure actions.
+- Interpretation: this is useful repeatability/audit evidence for Android-A D1/S3 low-tail-pressure behavior, but it is not D2/S3 evidence. Real Android-A D2/S3 was still uncollected at this point; it was later collected with the new D2/S3 button.
+
+### Next Step
+
+- Do not start confirmatory collection. Add or use an unambiguous D2/S3 pilot path before collecting D2, because the current `Run D1/S3 pressureBurst pilot` button is fixed to `bagAmsterdam`.
+
+## Android-A v2.3.6 pressureBurst pilot - 2026-09-01
+
+- The Android-A D1/S3 `pressureBurst` full pilot was collected and reanalyzed under protocol v2.3.6. The raw files are marked `deviceId=android-a`, `dataset=bagAmsterdam`, `scenario=pressureBurst`, `protocolVersion=2.3.6`, `networkProfile=lan`, and `pilotPurpose=full-pilot-v2.3.6-pressure-burst`.
+- The run produced 25 attempts: 24 valid records in four complete six-method paired blocks and one retained invalid PI repeat-3 attempt (`window-blur|document-hidden`) followed by a valid retry.
+- All valid Android-A methods had median violation rate `0.0` and median frame-time P95 about `16.7 ms`. Proposed repeats loaded 96, 98, 98, and 101 tiles; transferred 59,430,530, 60,780,990, 61,742,658, and 64,361,750 bytes; reached request-queue peaks 34, 34, 35, and 37; and recorded pressure-safe holds 19, 20, 22, and 19.
+- No valid Proposed Android-A repeat produced pressure-tail overlap, preemptive opportunities, exact `predicted-tail-plus-request-pressure` actions, missed opportunities, or tail downgrades under pressure.
+- Interpretation: the Android-A pilot passed execution, metadata, readiness, paired-block, and request-pressure exposure checks, but D1/S3 did not create measurable tail-frame pressure on this phone. It is therefore low-pressure pilot evidence only, not confirmatory comparative evidence.
+- A later attempted D2/S3 run was found to be a second D1/S3 run because the fixed D1/S3 pilot button uses `bagAmsterdam`; true D2/S3 was still pending at this point and was later collected with the new D2/S3 button.
+
+### Next Step
+
+- Before any confirmatory release, decide how to handle Android-A low-tail-pressure behavior: test whether D2/S3 is more informative under the already implemented v2.3.6 protocol, revise the Android claim boundary, or create a deliberately versioned heavier workload if needed.
+- Keep confirmatory collection blocked until Android-A workload difficulty and formal device scope are resolved.
+
+## Android-A pilot setup conditions - 2026-09-01
+
+- Reconfirmed and recorded Android-A setup conditions for the frozen v2.3.6 pilot: landscape orientation, 50% battery while charging, cooled / thermally stabilized state with exact temperature `[待填]`, 5 GHz Wi-Fi, Chrome 151.0.7922.173, hardware acceleration enabled, and `960 x 540` drawing-buffer target.
+- This condition record differs from the earlier 2026-08-25 Android readiness state of 100% battery, not charging, and Chrome 151.0.7922.171. Interpret the upcoming Android-A pilot under the 2026-09-01 recorded conditions; do not mix it with older readiness evidence or treat it as confirmatory evidence.
+
+### Next Step
+
+- The Android-A `pressureBurst` pilot has now been run and analyzed. Keep the 2026-09-01 condition record attached to that pilot when interpreting it.
+- Keep confirmatory collection blocked until Android-A workload difficulty and formal device scope are resolved.
+
 ## v2.3.6 - 2026-08-31
 
 ### Changed
@@ -16,12 +75,15 @@ All notable protocol, implementation, and research-workflow changes are recorded
 
 - Failing-first tests were added for protocol registration, v2.3.6 manifest provenance, pilot/probe queue routing, and the new pressure-burst camera path.
 - Fresh checks passed `npm.cmd test` (82 tests), `npm.cmd run test:lod:py` (17 tests), `npm.cmd run lod:analyze`, `npm.cmd run lod:verify-data`, `npm.cmd run lod:validate-ui`, and `npm.cmd run test:lod:e2e -- --reporter=line` on isolated port 8094 in the approved PowerShell environment.
-- Reanalysis still reports zero valid confirmatory runs; all physical v2.0-v2.3.5 records remain pilot, tuning, legacy, or audit evidence only.
+- Reanalysis still reports zero valid confirmatory runs; all physical v2.0-v2.3.6 records remain pilot, tuning, legacy, or audit evidence only.
+- The PC-A D1/S3 `pressureBurst` pressure probe completed under protocol v2.3.6. The latest records are `bagAmsterdam`, not `publicStress`; one first-attempt Reactive run was invalid due to `window-blur` and its retry was valid. Proposed loaded 129 tiles, transferred 88,418,782 bytes, reached `requestQueuePeak=38`, recorded three pressure-safe holds and three pressure-tail-overlap windows, but no exact preemptive request-pressure action.
+- The four-repeat PC-A D1/S3 `pressureBurst` full pilot completed with 28 attempts: 24 valid records in four complete six-method paired blocks and four retained invalid attempts. Proposed repeats loaded 139, 139, 119, and 97 tiles; reached queue peaks 38, 34, 35, and 35; and produced pressure taxonomy in all four repeats. Exact `predicted-tail-plus-request-pressure` actions appeared in three of four Proposed repeats.
+- D-025 freezes v2.3.6 for Android-A pilot after the PC-A pressure probe and full pilot passed the practical workload/repeatability gate. This is not a release for confirmatory collection.
 
 ### Decision Gate
 
-- Run the v2.3.6 PC-A `pressureBurst` pressure probe first, then the four-repeat PC-A full pilot if the probe exposes meaningful request-pressure evidence.
-- Keep Android and confirmatory collection blocked until the v2.3.6 PC-A pilot gate passes and a separate freeze decision is recorded.
+- Reconfirm Android-A physical device conditions, then run Android-A pilot under frozen v2.3.6.
+- Keep confirmatory collection blocked until Android-A pilot evidence and formal device scope are resolved.
 
 ## v2.3.5 - 2026-08-31
 

@@ -205,6 +205,16 @@ Evidence: v2.3.6 was implemented with failing-first JavaScript tests that requir
 
 Reason: v2.3.5 established that the harness, readiness gate, full-window control gate, and static quality calibration are operational, but the full pilot did not expose request-pressure taxonomy repeatably across Proposed repeats. `pressureBurst` is a deliberately versioned workload-intensity change that should increase cold-cache request-pressure exposure without retuning the controller or rewriting historical v2.3.5 evidence. Android and confirmatory collection remain blocked until the new PC-A pilot gate passes and a separate freeze decision is recorded.
 
+## D-025: Freeze v2.3.6 for Android-A pilot after PC-A pressureBurst gate
+
+Date: 2026-08-31
+
+Decision: freeze protocol v2.3.6 for the next Android-A pilot. Keep `pressureBurst` as the S3 pressure-workload path and keep controller thresholds, datasets, baselines, SSE ladder, readiness policy, request-pressure thresholds, frame budget, rolling window, control interval, and statistical plan unchanged. This decision permits Android-A pilot preparation and collection after physical device conditions are reconfirmed. It does not release confirmatory collection and does not convert PC-A pilot records into formal manuscript results.
+
+Evidence: the v2.3.6 PC-A D1/S3 pressure probe used `bagAmsterdam`, `pressureBurst`, protocol `2.3.6`, device `pc-a`, and pilot purpose `request-peak-probe-v2.3.6-pressure-burst`; the effective six-method block was complete after one invalid Reactive `window-blur` retry. Proposed loaded 129 tiles, transferred 88,418,782 bytes, reached `requestQueuePeak=38`, and produced pressure-tail-overlap evidence. The subsequent v2.3.6 PC-A full pilot produced 28 attempts: 24 valid records in four complete six-method paired blocks and four retained invalid attempts. Every valid run passed readiness. Proposed repeats loaded 139, 139, 119, and 97 tiles; reached queue peaks 38, 34, 35, and 35; and produced pressure taxonomy rows in all four repeats, with exact `predicted-tail-plus-request-pressure` actions in three of four repeats. Reanalysis after the full pilot reported 338 result files, 289 valid all-phase runs, 204 valid pilot runs, 49 invalid runs, and zero valid confirmatory runs.
+
+Reason: the PC-A pilot gate repaired the v2.3.5 weakness: request-pressure exposure is now repeatable across Proposed repeats rather than sparse. Freezing v2.3.6 at this point preserves the successful workload/controller configuration for cross-device pilot validation. However, evidence remains pre-confirmatory and single-PC; Android behavior, cross-device stability, and eventual confirmatory statistics must still be collected under the frozen protocol before manuscript effect claims are allowed.
+
 ## Update Rule
 
 Add a new decision when the protocol, datasets, evidence boundary, frozen parameters, or manuscript claim boundary changes. Reference the supporting file or raw result when available.

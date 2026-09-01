@@ -1,7 +1,7 @@
 # Device Registry
 
-Protocol: `2.0.0`  
-Recorded: 2026-08-25  
+Protocol: `2.0.0`
+Recorded: 2026-08-25; Android-A pilot-condition reconfirmation added 2026-09-01
 Status: preparation; neither device has entered confirmatory collection.
 
 ## PC-A
@@ -34,17 +34,35 @@ run notes.
 | SoC | MediaTek Dimensity 9400, octa-core |
 | RAM | 12 GB physical + 12 GB memory expansion |
 | Operating system | Android 16 |
-| Browser | Chrome 151.0.7922.171 |
+| Browser | Chrome 151.0.7922.173 for the v2.3.6 pilot-condition reconfirmation; earlier readiness record used Chrome 151.0.7922.171 |
 | Display refresh rate | Standard mode, maximum 60 Hz |
-| Battery before collection | 100%, not charging |
+| Battery before v2.3.6 Android-A pilot setup | 50%, charging |
 | Network | 5 GHz Wi-Fi |
 
-The battery threshold is satisfied. Before collection, keep the device unplugged,
-disable battery saver, wait 10 minutes for thermal stabilization after opening the
-benchmark, and use landscape orientation at 60 Hz. Do not charge during a measured run.
-The physical Chrome renderer reports a stable `959 x 540` drawing buffer at the
-`960 x 540` target; this is within the frozen one-pixel browser-rounding tolerance and
-is recorded in every telemetry row.
+The 2026-09-01 Android-A v2.3.6 pilot-condition reconfirmation records: landscape
+orientation, 50% battery while charging, cooled / thermally stabilized state with exact
+device temperature `[待填]`, 5 GHz Wi-Fi, Chrome 151.0.7922.173, hardware acceleration
+enabled, and a `960 x 540` drawing-buffer target. Keep this power/charging state fixed
+through the v2.3.6 Android-A pilot and do not mix it with the earlier unplugged
+readiness condition when interpreting results.
+
+The earlier 2026-08-25 readiness condition used 100% battery, not charging, and Chrome
+151.0.7922.171. For any future confirmatory collection, reconfirm the Android-A
+physical conditions immediately before the confirmatory block and record whether the
+device is charging or unplugged. The physical Chrome renderer previously reported a
+stable `959 x 540` drawing buffer at the `960 x 540` target; this is within the frozen
+one-pixel browser-rounding tolerance and must be recorded in telemetry rows.
+
+The Android-A v2.3.6 D1/S3 `pressureBurst` pilot was collected on 2026-09-01 under the
+recorded pilot setup conditions. Raw manifests report `deviceId=android-a`,
+`protocolVersion=2.3.6`, `networkProfile=lan`, Chrome mobile user-agent
+`Chrome/151.0.0.0`, and `renderWidth=960`, `renderHeight=540`.
+
+The true Android-A v2.3.6 D2/S3 `pressureBurst` pilot was also collected on 2026-09-01
+with the new D2/S3 UI button. It produced 24 valid `bagRotterdam + pressureBurst`
+records in four complete six-method pilot blocks and no invalid attempts. Interpret it
+under the same recorded Android-A pilot setup conditions; it is not confirmatory
+evidence.
 
 Android readiness passed on 2026-08-25 with run
 `android-a-acceptance2-publicStress-burst-proposed-r1-mt8e8tcc`: 78 valid windows,

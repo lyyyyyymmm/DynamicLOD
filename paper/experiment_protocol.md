@@ -1,16 +1,17 @@
 # Frozen Experiment Protocol
 
 Protocol version: `2.3.6`
-Revision date: 2026-08-31
+Freeze date for Android-A pilot: 2026-08-31
 
-Protocol v2.3.6 is a pre-confirmatory pressure-workload revision after the
+Protocol v2.3.6 is a frozen Android-A pilot protocol after the
 v2.3.5 PC-A full pilot showed that high request-pressure taxonomy was not
 repeatable across Proposed repeats. It adds `pressureBurst` as a separate S3
-candidate workload for the next PC-A pressure probe and full pilot. The
+candidate workload; the PC-A pressure probe and full pilot passed their
+pre-confirmatory workload/repeatability gates. The
 controller thresholds, datasets, SSE ladder, request-pressure logic, readiness
 gate, analysis taxonomy, and statistical plan remain unchanged from v2.3.5. All
 v2.x probe and pilot records remain audit evidence until the confirmatory matrix
-is deliberately frozen and started.
+is separately frozen and started.
 
 ## Research Question
 
@@ -61,7 +62,7 @@ Ablations remove prediction, request pressure, interaction awareness, or stabili
 - After readiness passes, wait for the first tile for at most 60 seconds. This loading gate is outside warm-up and measurement; a timeout invalidates the attempt. The drawing-buffer target is `960 x 540`; a one-pixel browser rounding tolerance is allowed and the actual size is retained per telemetry row.
 - S1: 10-second fixed-SSE warm-up followed by a 40-second uniform orbit.
 - S2: the same warm-up followed by four cycles of a 6-second cross-direction monotonic approach from range multiplier 3.6 to 0.9 and a 4-second stationary near-view recovery.
-- S3 `pressureBurst`: the same warm-up followed by four cycles of a 4-second cross-direction monotonic approach from range multiplier 3.2 to 0.7 and a 6-second stationary near-view hold. This is the v2.3.6 PC-A pilot workload and is not confirmatory evidence until its pilot gate passes.
+- S3 `pressureBurst`: the same warm-up followed by four cycles of a 4-second cross-direction monotonic approach from range multiplier 3.2 to 0.7 and a 6-second stationary near-view hold. This is the frozen v2.3.6 Android-A pilot workload and is not confirmatory evidence.
 
 Before a v2.3.6 full pilot, run one D1/S3 six-method `request-peak-probe` block.
 The probe is pilot-only and records interval queue peaks plus `loadProgress` event counts.
@@ -96,8 +97,11 @@ Protocol v2.3.5 therefore delays the first measured controller update until the
 full 2-second frame-time window is available. Its PC-A full pilot passed
 execution checks but did not expose high-pressure taxonomy repeatably across
 Proposed repeats. Protocol v2.3.6 therefore adds S3 `pressureBurst` as a
-deliberately versioned workload-intensity revision. A new PC-A pressure probe
-and full pilot must pass before Android or confirmatory collection begins.
+deliberately versioned workload-intensity revision. The v2.3.6 PC-A pressure
+probe and full pilot passed the pre-confirmatory workload gate, so D-025 freezes
+v2.3.6 for Android-A pilot. Confirmatory collection still requires a separate
+release decision after Android-A pilot evidence and formal device scope are
+resolved.
 
 All confirmatory runs use the `lan` profile. Artificial delay profiles are diagnostic-only and are rejected for D1/D2 by the server.
 

@@ -1,13 +1,20 @@
 # TODO
 
-Last reviewed: 2026-08-31
+Last reviewed: 2026-09-01
 
 ## In Progress
 
 - [x] Design, implement, and automatically verify protocol v2.3.6 with a separate `pressureBurst` S3 workload for the next PC-A pilot gate.
 - [x] Record D-024 and keep v2.3.5 as pilot/quality audit evidence only.
-- [ ] Run the v2.3.6 PC-A `pressureBurst` pressure probe before any full pilot, Android run, or confirmatory collection.
-- [ ] If the v2.3.6 pressure probe passes, run the four-repeat PC-A `pressureBurst` full pilot and analyze repeatability.
+- [x] Run and analyze the v2.3.6 PC-A `pressureBurst` pressure probe before any full pilot, Android run, or confirmatory collection.
+- [x] Run and analyze the four-repeat PC-A `pressureBurst` full pilot.
+- [x] Record D-025: freeze v2.3.6 for Android-A pilot based on the PC-A pressure probe and full-pilot evidence.
+- [x] Reconfirm Android-A physical conditions for the v2.3.6 Android-A pilot setup.
+- [x] Run and analyze the v2.3.6 Android-A `pressureBurst` pilot under the recorded 2026-09-01 phone conditions.
+- [x] Inspect the reported Android-A D2/S3 pilot and identify it as a second D1/S3 `bagAmsterdam` run, not D2 evidence.
+- [x] Add an unambiguous Android-A D2/S3 `bagRotterdam + pressureBurst` pilot path before collecting D2.
+- [x] Run and analyze true Android-A D2/S3 with the new `Run D2/S3 pressureBurst pilot` button.
+- [ ] Decide how to handle the Android-A low-tail-pressure result before confirmatory release.
 
 ## Decision Gates
 
@@ -17,17 +24,18 @@ Last reviewed: 2026-08-31
 - [x] Rerun the full D1/S2 PC-A pilot only after the v2.3.2 pressure probe passes.
 - [x] Require v2.3.3 readiness fields before interpreting any new physical-device run.
 - [x] Reject v2.3.5 parameter freeze after the PC-A full pilot because high-pressure taxonomy was sparse across Proposed repeats.
-- [ ] Require the v2.3.6 PC-A `pressureBurst` pressure probe to show meaningful request-pressure evidence before starting the v2.3.6 full pilot.
-- [ ] Require the v2.3.6 PC-A full pilot to pass repeatability before Android or confirmatory collection.
+- [x] Require the v2.3.6 PC-A `pressureBurst` pressure probe to show meaningful request-pressure evidence before starting the v2.3.6 full pilot.
+- [x] Require the v2.3.6 PC-A full pilot to pass repeatability before Android or confirmatory collection.
 
 ## Before Confirmatory Collection
 
 - [x] Design, implement, and automatically verify the deliberately versioned v2.3.6 `pressureBurst` workload revision.
-- [ ] Freeze v2.3.6 only after its PC-A pressure probe and full pilot pass.
-- [ ] Confirm D1/D2 scenario difficulty provides measurable but not saturated frame-time pressure.
+- [x] Freeze v2.3.6 for Android-A pilot after D-025 records the PC-A full-pilot gate as accepted.
+- [ ] Resolve Android-A scenario difficulty before confirmatory collection: D1/S3, its rerun, and true D2/S3 all show request pressure but zero tail-frame violations across valid methods.
 - [x] Complete the required visual-quality calibration and preserve reference images/SSIM artifacts.
 - [ ] Register PC-B if it will be part of the cross-PC evidence; otherwise revise the formal device scope before collection.
-- [ ] Reconfirm Android-A conditions immediately before its pilot and confirmatory blocks.
+- [x] Reconfirm Android-A conditions immediately before the v2.3.6 Android-A pilot setup.
+- [ ] Reconfirm Android-A conditions again immediately before any later confirmatory block.
 - [ ] Freeze method order, repeats, seeds, browser conditions, and statistical-analysis inputs in the protocol.
 
 ## Completed
@@ -81,6 +89,14 @@ Last reviewed: 2026-08-31
 - [x] Complete static D1/D2 visual-quality calibration under v2.3.5: 108 canonical screenshots and 108 SSIM rows generated; minimum SSIM was about 0.954 for Amsterdam and 0.952 for Rotterdam.
 - [x] Record D-023: do not freeze v2.3.5; require a new deliberately versioned pressure-workload protocol before Android or confirmatory collection.
 - [x] Implement v2.3.6 `pressureBurst`: protocol bump, scenario registration, D1 pilot/probe queue routing, UI option, failing-first tests, analysis regeneration, dataset verification, UI validation, and E2E.
+- [x] Run and analyze the v2.3.6 PC-A D1/S3 pressure probe: six effective valid methods after one invalid Reactive `window-blur` retry; Proposed loaded 129 tiles, reached `requestQueuePeak=38`, and produced pressure-tail-overlap evidence.
+- [x] Run and analyze the v2.3.6 PC-A D1/S3 full pilot: 24 valid records in four complete paired blocks, four retained invalid attempts, and repeatable Proposed request-pressure evidence across all four repeats.
+- [x] Record D-025: v2.3.6 is frozen for Android-A pilot only; confirmatory collection and manuscript effect claims remain blocked.
+- [x] Record Android-A v2.3.6 pilot setup conditions on 2026-09-01: landscape orientation, 50% battery while charging, cooled / thermally stabilized state with exact temperature `[待填]`, 5 GHz Wi-Fi, Chrome 151.0.7922.173, hardware acceleration enabled, and `960 x 540` drawing-buffer target.
+- [x] Run and analyze the Android-A v2.3.6 D1/S3 full pilot: 25 attempts, 24 valid records in four complete paired blocks, one retained invalid PI repeat-3 attempt (`window-blur|document-hidden`) followed by a valid retry, and zero tail-frame violations across all valid methods.
+- [x] Inspect the reported Android-A D2/S3 pilot after `lod:analyze`: no `bagRotterdam + pressureBurst` Android-A records were produced; the new batch is 24 additional valid D1/S3 `bagAmsterdam` records and remains audit evidence only.
+- [x] Add a dedicated D2/S3 pilot queue and UI button: `Run D2/S3 pressureBurst pilot` now schedules `bagRotterdam + pressureBurst`, six methods, four repeats, `networkProfile=lan`, and pilot purpose `full-pilot-v2.3.6-d2-pressure-burst`.
+- [x] Run and analyze the true Android-A v2.3.6 D2/S3 pilot: 24 valid `bagRotterdam + pressureBurst` records in four complete paired blocks, no invalid attempts, request-pressure exposure in Proposed/PI/Reactive, and zero tail-frame violations across all valid methods.
 
 ## Update Rule
 

@@ -11,6 +11,7 @@ test("benchmark page renders Cesium and completes a finite smoke run", async ({ 
   await page.goto(`http://127.0.0.1:${port}/Apps/learnMapmost/lod-benchmark.html?smoke=1`);
   await expect(page.getByRole("heading", { name: "Tail Frame-Time LOD Benchmark" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Run D1/S3 pressureBurst pilot" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Run D2/S3 pressureBurst pilot" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Run D1/S3 pressureBurst probe" })).toBeVisible();
   await expect(page.locator("#scenario")).toContainText("S3 Pressure burst");
   await expect(page.locator("#cesiumContainer canvas")).toBeVisible();

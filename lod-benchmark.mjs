@@ -5,6 +5,7 @@ import {
   buildAblationQueue,
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
+  buildD2S3PilotQueue,
   buildMainExperimentQueue,
   buildPiCalibrationQueue,
   createRunManifest,
@@ -39,7 +40,7 @@ if (!Cesium) throw new Error("Cesium failed to load");
 const elements = Object.fromEntries(
   [
     "runForm", "method", "dataset", "scenario", "networkProfile", "deviceId", "repeat", "seed",
-    "runSingle", "stopRun", "runMainBatch", "runAblationBatch", "runD1S2Pilot", "runD1S2PressureProbe", "runPiCalibration", "downloadJson",
+    "runSingle", "stopRun", "runMainBatch", "runAblationBatch", "runD1S2Pilot", "runD2S3Pilot", "runD1S2PressureProbe", "runPiCalibration", "downloadJson",
     "downloadCsv", "runState", "runProgress", "progressBar", "resultsBody", "hud",
     "bufferSize", "metricP95", "metricPredicted", "metricSse", "metricQueue",
     "metricState", "metricAction", "viewportFrame",
@@ -158,6 +159,7 @@ function setRunning(running) {
   elements.runMainBatch.disabled = running;
   elements.runAblationBatch.disabled = running;
   elements.runD1S2Pilot.disabled = running;
+  elements.runD2S3Pilot.disabled = running;
   elements.runD1S2PressureProbe.disabled = running;
   elements.runPiCalibration.disabled = running;
   elements.stopRun.disabled = !running;
@@ -758,6 +760,15 @@ elements.runD1S2Pilot.addEventListener("click", () => {
     { requireReady: true, requirePiFrozen: true },
   );
 });
+elements.runD2S3Pilot.addEventListener("click", () => {
+  void runQueue(
+    buildD2S3PilotQueue({
+      repeats: smokeMode ? 1 : 4,
+      seed: Number(elements.seed.value),
+    }),
+    { requireReady: true, requirePiFrozen: true },
+  );
+});
 elements.runD1S2PressureProbe.addEventListener("click", () => {
   void runQueue(
     buildD1S2PressureProbeQueue({ seed: Number(elements.seed.value) }),
@@ -798,6 +809,7 @@ window.__lodBenchmark = {
   runCondition,
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
+  buildD2S3PilotQueue,
   buildPiCalibrationQueue,
   viewer,
 };
