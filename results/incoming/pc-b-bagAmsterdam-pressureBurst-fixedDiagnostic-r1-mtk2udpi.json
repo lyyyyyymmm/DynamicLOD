@@ -1,0 +1,6435 @@
+{
+  "manifest": {
+    "schemaVersion": 2,
+    "protocolVersion": "2.3.6",
+    "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+    "createdAt": "2026-09-02T12:33:18.055Z",
+    "method": "fixedDiagnostic",
+    "dataset": "bagAmsterdam",
+    "scenario": "pressureBurst",
+    "repeat": 1,
+    "retryAttempt": 0,
+    "seed": 20260823,
+    "renderWidth": 960,
+    "renderHeight": 540,
+    "warmupMs": 10000,
+    "measurementMs": 40000,
+    "initialContentTimeoutMs": 60000,
+    "readinessWindowMs": 2000,
+    "readinessRequiredStableWindows": 2,
+    "readinessP95ThresholdMs": 25,
+    "readinessTimeoutMs": 60000,
+    "drawingBufferTolerancePx": 1,
+    "frameBudgetMs": 33.333333333333336,
+    "datasetVersion": "v20250903",
+    "sourceSha256": "5632a6307cced8bd32451c9a561a77b46d9dcf3cd6ca607079ae5e75ea679a7a",
+    "sourceLicense": "CC-BY-4.0",
+    "deviceId": "pc-b",
+    "networkProfile": "lan",
+    "studyPhase": "diagnostic",
+    "pilotPurpose": "none",
+    "diagnosticPurpose": "server-topology-identifiability",
+    "fixedSse": 4,
+    "excludeFromFormalAggregation": true,
+    "serverTopology": "remote",
+    "pageOrigin": "http://192.168.0.112:8088",
+    "pageHost": "192.168.0.112:8088",
+    "browserVersion": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "gpuRenderer": "ANGLE (Intel, Intel(R) Arc(TM) 140V GPU (16GB) (0x000064A0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "methodParameters": {
+      "fixedSse": 4
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 8,
+    "deviceMemoryGb": null,
+    "viewport": {
+      "width": 1920,
+      "height": 945
+    },
+    "smokeMode": false,
+    "actualWarmupMs": 10000,
+    "actualMeasurementMs": 40000
+  },
+  "policy": {
+    "fixedSse": 4
+  },
+  "dataset": {
+    "label": "3DBAG Amsterdam frozen subset",
+    "path": "learnMapmost/datasets/3dbag-amsterdam/tileset.json",
+    "sourceUrl": "https://data.3dbag.nl/v20250903/cesium3dtiles/lod12/tileset.json",
+    "version": "v20250903",
+    "license": "CC-BY-4.0",
+    "sourceSha256": "5632a6307cced8bd32451c9a561a77b46d9dcf3cd6ca607079ae5e75ea679a7a",
+    "studyRole": "main",
+    "accessRoute": "publicRepository",
+    "allowedForMainStudy": true
+  },
+  "readiness": {
+    "policy": {
+      "windowMs": 2000,
+      "requiredStableWindows": 2,
+      "p95ThresholdMs": 25,
+      "timeoutMs": 60000
+    },
+    "ready": true,
+    "timedOut": false,
+    "waitMs": 4033.0999999046326,
+    "p95Ms": 16.80000000000291,
+    "checkCount": 2,
+    "stableWindows": 2,
+    "windows": [
+      {
+        "index": 1,
+        "p95Ms": 16.799999999999272,
+        "durationMs": 2016.7000000476837,
+        "sampleCount": 121,
+        "stableWindows": 1,
+        "ready": false
+      },
+      {
+        "index": 2,
+        "p95Ms": 16.80000000000291,
+        "durationMs": 2016.3999998569489,
+        "sampleCount": 121,
+        "stableWindows": 2,
+        "ready": true
+      }
+    ]
+  },
+  "valid": true,
+  "invalidReasons": [],
+  "summary": {
+    "validWindowCount": 76,
+    "violationWindowCount": 0,
+    "violationRate": 0,
+    "frameTimeP95Ms": 16.900000000001455,
+    "frameTimeP99Ms": 16.900000000001455,
+    "timeWeightedMeanSse": 4,
+    "requestQueuePeak": 40,
+    "requestQueueAuc": 608518.1000000001,
+    "switchCount": 0,
+    "reversalCount": 0,
+    "switchesPerMinute": 0,
+    "forecastPairCount": 75,
+    "predictionMaeMs": 0.009466666666140877,
+    "persistenceMaeMs": 0.009466666666140877,
+    "violationPrecision": null,
+    "violationRecall": null,
+    "violationF1": null,
+    "meanWarningLeadMs": null,
+    "rawFrameTimeP95Ms": 16.80000000000291,
+    "rawFrameTimeP99Ms": 17.19999999999709,
+    "rawFrameTimeMaxMs": 33.30000000000291,
+    "frameTimeOver20Rate": 0.0004166666666666667,
+    "frameBudgetViolationRate": 0,
+    "frameTimeHistogram": [
+      {
+        "binStartMs": 0,
+        "binEndMs": 20,
+        "count": 2399
+      },
+      {
+        "binStartMs": 20,
+        "binEndMs": 33.33,
+        "count": 1
+      },
+      {
+        "binStartMs": 33.33,
+        "binEndMs": 50,
+        "count": 0
+      },
+      {
+        "binStartMs": 50,
+        "binEndMs": 66.67,
+        "count": 0
+      },
+      {
+        "binStartMs": 66.67,
+        "binEndMs": null,
+        "count": 0
+      }
+    ],
+    "preRunReadinessReady": true,
+    "preRunReadinessWaitMs": 4033.0999999046326,
+    "preRunReadinessP95Ms": 16.80000000000291,
+    "preRunReadinessCheckCount": 2,
+    "firstStableDisplayMs": 10129.199999809265,
+    "tilesLoadedTotal": 159,
+    "loadProgressEventCount": 347,
+    "tileFailureCount": 0,
+    "stateWindowCounts": {
+      "STABLE": 76
+    },
+    "resourceCount": 212,
+    "transferBytes": 110580178,
+    "encodedBodyBytes": 110529178,
+    "resourceCompletionPeak100Ms": 18,
+    "resourceCompletionTransferBytesPeak100Ms": 4108192,
+    "tileLoadPeak100Ms": 7,
+    "loadProgressEventPeak100Ms": 6,
+    "loadProgressQueuePeak100Ms": 40,
+    "resourceCompletionPeak250Ms": 24,
+    "resourceCompletionTransferBytesPeak250Ms": 4978680,
+    "tileLoadPeak250Ms": 7,
+    "loadProgressEventPeak250Ms": 11,
+    "loadProgressQueuePeak250Ms": 40,
+    "resourceCompletionPeak500Ms": 24,
+    "resourceCompletionTransferBytesPeak500Ms": 8033816,
+    "tileLoadPeak500Ms": 8,
+    "loadProgressEventPeak500Ms": 18,
+    "loadProgressQueuePeak500Ms": 40,
+    "resourceCompletionBins100Ms": {
+      "binMs": 100,
+      "originMs": 28139.60000014305,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 100,
+          "eventCount": 6,
+          "transferBytes": 112164,
+          "encodedBodyBytes": 110364
+        },
+        {
+          "startMs": 100,
+          "endMs": 200,
+          "eventCount": 18,
+          "transferBytes": 147918,
+          "encodedBodyBytes": 146718
+        },
+        {
+          "startMs": 14300,
+          "endMs": 14400,
+          "eventCount": 1,
+          "transferBytes": 113436,
+          "encodedBodyBytes": 113136
+        },
+        {
+          "startMs": 14400,
+          "endMs": 14500,
+          "eventCount": 1,
+          "transferBytes": 67304,
+          "encodedBodyBytes": 67004
+        },
+        {
+          "startMs": 14600,
+          "endMs": 14700,
+          "eventCount": 1,
+          "transferBytes": 483192,
+          "encodedBodyBytes": 482892
+        },
+        {
+          "startMs": 14800,
+          "endMs": 14900,
+          "eventCount": 1,
+          "transferBytes": 373508,
+          "encodedBodyBytes": 373208
+        },
+        {
+          "startMs": 14900,
+          "endMs": 15000,
+          "eventCount": 2,
+          "transferBytes": 2324812,
+          "encodedBodyBytes": 2324212
+        },
+        {
+          "startMs": 15400,
+          "endMs": 15500,
+          "eventCount": 4,
+          "transferBytes": 2332668,
+          "encodedBodyBytes": 2331468
+        },
+        {
+          "startMs": 15500,
+          "endMs": 15600,
+          "eventCount": 1,
+          "transferBytes": 357376,
+          "encodedBodyBytes": 357076
+        },
+        {
+          "startMs": 15600,
+          "endMs": 15700,
+          "eventCount": 1,
+          "transferBytes": 883284,
+          "encodedBodyBytes": 882984
+        },
+        {
+          "startMs": 15800,
+          "endMs": 15900,
+          "eventCount": 1,
+          "transferBytes": 467800,
+          "encodedBodyBytes": 467500
+        },
+        {
+          "startMs": 15900,
+          "endMs": 16000,
+          "eventCount": 1,
+          "transferBytes": 405796,
+          "encodedBodyBytes": 405496
+        },
+        {
+          "startMs": 16200,
+          "endMs": 16300,
+          "eventCount": 2,
+          "transferBytes": 1718032,
+          "encodedBodyBytes": 1717432
+        },
+        {
+          "startMs": 16800,
+          "endMs": 16900,
+          "eventCount": 1,
+          "transferBytes": 872808,
+          "encodedBodyBytes": 872508
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17100,
+          "eventCount": 2,
+          "transferBytes": 2718240,
+          "encodedBodyBytes": 2717640
+        },
+        {
+          "startMs": 17100,
+          "endMs": 17200,
+          "eventCount": 1,
+          "transferBytes": 547976,
+          "encodedBodyBytes": 547676
+        },
+        {
+          "startMs": 17200,
+          "endMs": 17300,
+          "eventCount": 2,
+          "transferBytes": 2266040,
+          "encodedBodyBytes": 2265440
+        },
+        {
+          "startMs": 17400,
+          "endMs": 17500,
+          "eventCount": 3,
+          "transferBytes": 2501560,
+          "encodedBodyBytes": 2500660
+        },
+        {
+          "startMs": 17600,
+          "endMs": 17700,
+          "eventCount": 1,
+          "transferBytes": 342744,
+          "encodedBodyBytes": 342444
+        },
+        {
+          "startMs": 17900,
+          "endMs": 18000,
+          "eventCount": 1,
+          "transferBytes": 533984,
+          "encodedBodyBytes": 533684
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18100,
+          "eventCount": 2,
+          "transferBytes": 2075832,
+          "encodedBodyBytes": 2075232
+        },
+        {
+          "startMs": 18100,
+          "endMs": 18200,
+          "eventCount": 1,
+          "transferBytes": 676000,
+          "encodedBodyBytes": 675700
+        },
+        {
+          "startMs": 18200,
+          "endMs": 18300,
+          "eventCount": 1,
+          "transferBytes": 1054684,
+          "encodedBodyBytes": 1054384
+        },
+        {
+          "startMs": 18300,
+          "endMs": 18400,
+          "eventCount": 1,
+          "transferBytes": 12684,
+          "encodedBodyBytes": 12384
+        },
+        {
+          "startMs": 18400,
+          "endMs": 18500,
+          "eventCount": 2,
+          "transferBytes": 1045852,
+          "encodedBodyBytes": 1045252
+        },
+        {
+          "startMs": 18500,
+          "endMs": 18600,
+          "eventCount": 1,
+          "transferBytes": 43484,
+          "encodedBodyBytes": 43184
+        },
+        {
+          "startMs": 18600,
+          "endMs": 18700,
+          "eventCount": 1,
+          "transferBytes": 1201236,
+          "encodedBodyBytes": 1200936
+        },
+        {
+          "startMs": 18800,
+          "endMs": 18900,
+          "eventCount": 1,
+          "transferBytes": 238404,
+          "encodedBodyBytes": 238104
+        },
+        {
+          "startMs": 19300,
+          "endMs": 19400,
+          "eventCount": 1,
+          "transferBytes": 721544,
+          "encodedBodyBytes": 721244
+        },
+        {
+          "startMs": 19400,
+          "endMs": 19500,
+          "eventCount": 1,
+          "transferBytes": 1013092,
+          "encodedBodyBytes": 1012792
+        },
+        {
+          "startMs": 19500,
+          "endMs": 19600,
+          "eventCount": 2,
+          "transferBytes": 2745896,
+          "encodedBodyBytes": 2745296
+        },
+        {
+          "startMs": 19700,
+          "endMs": 19800,
+          "eventCount": 1,
+          "transferBytes": 1151928,
+          "encodedBodyBytes": 1151628
+        },
+        {
+          "startMs": 19900,
+          "endMs": 20000,
+          "eventCount": 3,
+          "transferBytes": 3345468,
+          "encodedBodyBytes": 3344568
+        },
+        {
+          "startMs": 20000,
+          "endMs": 20100,
+          "eventCount": 1,
+          "transferBytes": 467760,
+          "encodedBodyBytes": 467460
+        },
+        {
+          "startMs": 20100,
+          "endMs": 20200,
+          "eventCount": 18,
+          "transferBytes": 1800,
+          "encodedBodyBytes": 0
+        },
+        {
+          "startMs": 24100,
+          "endMs": 24200,
+          "eventCount": 1,
+          "transferBytes": 16704,
+          "encodedBodyBytes": 16404
+        },
+        {
+          "startMs": 24300,
+          "endMs": 24400,
+          "eventCount": 2,
+          "transferBytes": 417876,
+          "encodedBodyBytes": 417276
+        },
+        {
+          "startMs": 24400,
+          "endMs": 24500,
+          "eventCount": 1,
+          "transferBytes": 272472,
+          "encodedBodyBytes": 272172
+        },
+        {
+          "startMs": 24500,
+          "endMs": 24600,
+          "eventCount": 2,
+          "transferBytes": 290016,
+          "encodedBodyBytes": 289416
+        },
+        {
+          "startMs": 24700,
+          "endMs": 24800,
+          "eventCount": 2,
+          "transferBytes": 872168,
+          "encodedBodyBytes": 871568
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25100,
+          "eventCount": 1,
+          "transferBytes": 769188,
+          "encodedBodyBytes": 768888
+        },
+        {
+          "startMs": 25100,
+          "endMs": 25200,
+          "eventCount": 1,
+          "transferBytes": 188052,
+          "encodedBodyBytes": 187752
+        },
+        {
+          "startMs": 25300,
+          "endMs": 25400,
+          "eventCount": 1,
+          "transferBytes": 1369548,
+          "encodedBodyBytes": 1369248
+        },
+        {
+          "startMs": 25400,
+          "endMs": 25500,
+          "eventCount": 1,
+          "transferBytes": 376916,
+          "encodedBodyBytes": 376616
+        },
+        {
+          "startMs": 25500,
+          "endMs": 25600,
+          "eventCount": 2,
+          "transferBytes": 2545476,
+          "encodedBodyBytes": 2544876
+        },
+        {
+          "startMs": 25900,
+          "endMs": 26000,
+          "eventCount": 1,
+          "transferBytes": 685992,
+          "encodedBodyBytes": 685692
+        },
+        {
+          "startMs": 26100,
+          "endMs": 26200,
+          "eventCount": 2,
+          "transferBytes": 2315328,
+          "encodedBodyBytes": 2314728
+        },
+        {
+          "startMs": 26300,
+          "endMs": 26400,
+          "eventCount": 3,
+          "transferBytes": 1965700,
+          "encodedBodyBytes": 1964800
+        },
+        {
+          "startMs": 26500,
+          "endMs": 26600,
+          "eventCount": 2,
+          "transferBytes": 2229864,
+          "encodedBodyBytes": 2229264
+        },
+        {
+          "startMs": 26600,
+          "endMs": 26700,
+          "eventCount": 1,
+          "transferBytes": 1248368,
+          "encodedBodyBytes": 1248068
+        },
+        {
+          "startMs": 26900,
+          "endMs": 27000,
+          "eventCount": 3,
+          "transferBytes": 1865216,
+          "encodedBodyBytes": 1864316
+        },
+        {
+          "startMs": 27400,
+          "endMs": 27500,
+          "eventCount": 1,
+          "transferBytes": 433876,
+          "encodedBodyBytes": 433576
+        },
+        {
+          "startMs": 27500,
+          "endMs": 27600,
+          "eventCount": 2,
+          "transferBytes": 1039332,
+          "encodedBodyBytes": 1038732
+        },
+        {
+          "startMs": 27600,
+          "endMs": 27700,
+          "eventCount": 1,
+          "transferBytes": 971076,
+          "encodedBodyBytes": 970776
+        },
+        {
+          "startMs": 27700,
+          "endMs": 27800,
+          "eventCount": 2,
+          "transferBytes": 1504196,
+          "encodedBodyBytes": 1503596
+        },
+        {
+          "startMs": 27800,
+          "endMs": 27900,
+          "eventCount": 1,
+          "transferBytes": 509328,
+          "encodedBodyBytes": 509028
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28100,
+          "eventCount": 3,
+          "transferBytes": 953168,
+          "encodedBodyBytes": 952268
+        },
+        {
+          "startMs": 28100,
+          "endMs": 28200,
+          "eventCount": 1,
+          "transferBytes": 1635824,
+          "encodedBodyBytes": 1635524
+        },
+        {
+          "startMs": 28200,
+          "endMs": 28300,
+          "eventCount": 1,
+          "transferBytes": 291720,
+          "encodedBodyBytes": 291420
+        },
+        {
+          "startMs": 28500,
+          "endMs": 28600,
+          "eventCount": 2,
+          "transferBytes": 1418652,
+          "encodedBodyBytes": 1418052
+        },
+        {
+          "startMs": 28600,
+          "endMs": 28700,
+          "eventCount": 3,
+          "transferBytes": 1929288,
+          "encodedBodyBytes": 1928388
+        },
+        {
+          "startMs": 28900,
+          "endMs": 29000,
+          "eventCount": 1,
+          "transferBytes": 378448,
+          "encodedBodyBytes": 378148
+        },
+        {
+          "startMs": 29100,
+          "endMs": 29200,
+          "eventCount": 3,
+          "transferBytes": 2782632,
+          "encodedBodyBytes": 2781732
+        },
+        {
+          "startMs": 29200,
+          "endMs": 29300,
+          "eventCount": 2,
+          "transferBytes": 1074752,
+          "encodedBodyBytes": 1074152
+        },
+        {
+          "startMs": 29500,
+          "endMs": 29600,
+          "eventCount": 1,
+          "transferBytes": 1769580,
+          "encodedBodyBytes": 1769280
+        },
+        {
+          "startMs": 29600,
+          "endMs": 29700,
+          "eventCount": 1,
+          "transferBytes": 1623372,
+          "encodedBodyBytes": 1623072
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30100,
+          "eventCount": 4,
+          "transferBytes": 3589660,
+          "encodedBodyBytes": 3588460
+        },
+        {
+          "startMs": 30100,
+          "endMs": 30200,
+          "eventCount": 18,
+          "transferBytes": 600,
+          "encodedBodyBytes": 0
+        },
+        {
+          "startMs": 34400,
+          "endMs": 34500,
+          "eventCount": 3,
+          "transferBytes": 537564,
+          "encodedBodyBytes": 536664
+        },
+        {
+          "startMs": 34600,
+          "endMs": 34700,
+          "eventCount": 3,
+          "transferBytes": 594704,
+          "encodedBodyBytes": 593804
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35100,
+          "eventCount": 1,
+          "transferBytes": 1207592,
+          "encodedBodyBytes": 1207292
+        },
+        {
+          "startMs": 35200,
+          "endMs": 35300,
+          "eventCount": 2,
+          "transferBytes": 1018036,
+          "encodedBodyBytes": 1017436
+        },
+        {
+          "startMs": 35400,
+          "endMs": 35500,
+          "eventCount": 3,
+          "transferBytes": 2930416,
+          "encodedBodyBytes": 2929516
+        },
+        {
+          "startMs": 35600,
+          "endMs": 35700,
+          "eventCount": 1,
+          "transferBytes": 92204,
+          "encodedBodyBytes": 91904
+        },
+        {
+          "startMs": 35700,
+          "endMs": 35800,
+          "eventCount": 1,
+          "transferBytes": 580932,
+          "encodedBodyBytes": 580632
+        },
+        {
+          "startMs": 36100,
+          "endMs": 36200,
+          "eventCount": 1,
+          "transferBytes": 19060,
+          "encodedBodyBytes": 18760
+        },
+        {
+          "startMs": 36400,
+          "endMs": 36500,
+          "eventCount": 1,
+          "transferBytes": 405408,
+          "encodedBodyBytes": 405108
+        },
+        {
+          "startMs": 36500,
+          "endMs": 36600,
+          "eventCount": 3,
+          "transferBytes": 3154304,
+          "encodedBodyBytes": 3153404
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37100,
+          "eventCount": 1,
+          "transferBytes": 705144,
+          "encodedBodyBytes": 704844
+        },
+        {
+          "startMs": 37100,
+          "endMs": 37200,
+          "eventCount": 3,
+          "transferBytes": 3507596,
+          "encodedBodyBytes": 3506696
+        },
+        {
+          "startMs": 37200,
+          "endMs": 37300,
+          "eventCount": 1,
+          "transferBytes": 191536,
+          "encodedBodyBytes": 191236
+        },
+        {
+          "startMs": 37400,
+          "endMs": 37500,
+          "eventCount": 1,
+          "transferBytes": 1530804,
+          "encodedBodyBytes": 1530504
+        },
+        {
+          "startMs": 37500,
+          "endMs": 37600,
+          "eventCount": 1,
+          "transferBytes": 451432,
+          "encodedBodyBytes": 451132
+        },
+        {
+          "startMs": 37900,
+          "endMs": 38000,
+          "eventCount": 2,
+          "transferBytes": 1094700,
+          "encodedBodyBytes": 1094100
+        },
+        {
+          "startMs": 38200,
+          "endMs": 38300,
+          "eventCount": 3,
+          "transferBytes": 4108192,
+          "encodedBodyBytes": 4107292
+        },
+        {
+          "startMs": 38300,
+          "endMs": 38400,
+          "eventCount": 1,
+          "transferBytes": 1260224,
+          "encodedBodyBytes": 1259924
+        },
+        {
+          "startMs": 44200,
+          "endMs": 44300,
+          "eventCount": 2,
+          "transferBytes": 157116,
+          "encodedBodyBytes": 156516
+        },
+        {
+          "startMs": 44300,
+          "endMs": 44400,
+          "eventCount": 1,
+          "transferBytes": 103420,
+          "encodedBodyBytes": 103120
+        },
+        {
+          "startMs": 44400,
+          "endMs": 44500,
+          "eventCount": 2,
+          "transferBytes": 91840,
+          "encodedBodyBytes": 91240
+        },
+        {
+          "startMs": 44800,
+          "endMs": 44900,
+          "eventCount": 1,
+          "transferBytes": 422920,
+          "encodedBodyBytes": 422620
+        },
+        {
+          "startMs": 45300,
+          "endMs": 45400,
+          "eventCount": 1,
+          "transferBytes": 1659088,
+          "encodedBodyBytes": 1658788
+        },
+        {
+          "startMs": 45600,
+          "endMs": 45700,
+          "eventCount": 1,
+          "transferBytes": 357864,
+          "encodedBodyBytes": 357564
+        },
+        {
+          "startMs": 45700,
+          "endMs": 45800,
+          "eventCount": 2,
+          "transferBytes": 1511904,
+          "encodedBodyBytes": 1511304
+        },
+        {
+          "startMs": 46100,
+          "endMs": 46200,
+          "eventCount": 2,
+          "transferBytes": 2964260,
+          "encodedBodyBytes": 2963660
+        },
+        {
+          "startMs": 46200,
+          "endMs": 46300,
+          "eventCount": 1,
+          "transferBytes": 691316,
+          "encodedBodyBytes": 691016
+        },
+        {
+          "startMs": 46300,
+          "endMs": 46400,
+          "eventCount": 1,
+          "transferBytes": 40744,
+          "encodedBodyBytes": 40444
+        },
+        {
+          "startMs": 46600,
+          "endMs": 46700,
+          "eventCount": 1,
+          "transferBytes": 547176,
+          "encodedBodyBytes": 546876
+        },
+        {
+          "startMs": 46700,
+          "endMs": 46800,
+          "eventCount": 3,
+          "transferBytes": 2625452,
+          "encodedBodyBytes": 2624552
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47100,
+          "eventCount": 1,
+          "transferBytes": 1316536,
+          "encodedBodyBytes": 1316236
+        }
+      ]
+    },
+    "tileLoadBins100Ms": {
+      "binMs": 100,
+      "originMs": 28207,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 100,
+          "eventCount": 7
+        },
+        {
+          "startMs": 14300,
+          "endMs": 14400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 14400,
+          "endMs": 14500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 14600,
+          "endMs": 14700,
+          "eventCount": 1
+        },
+        {
+          "startMs": 14800,
+          "endMs": 14900,
+          "eventCount": 1
+        },
+        {
+          "startMs": 14900,
+          "endMs": 15000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 15400,
+          "endMs": 15500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 15500,
+          "endMs": 15600,
+          "eventCount": 2
+        },
+        {
+          "startMs": 15800,
+          "endMs": 15900,
+          "eventCount": 1
+        },
+        {
+          "startMs": 15900,
+          "endMs": 16000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 16200,
+          "endMs": 16300,
+          "eventCount": 2
+        },
+        {
+          "startMs": 16700,
+          "endMs": 16800,
+          "eventCount": 1
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17100,
+          "eventCount": 2
+        },
+        {
+          "startMs": 17100,
+          "endMs": 17200,
+          "eventCount": 1
+        },
+        {
+          "startMs": 17200,
+          "endMs": 17300,
+          "eventCount": 2
+        },
+        {
+          "startMs": 17400,
+          "endMs": 17500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 17600,
+          "endMs": 17700,
+          "eventCount": 1
+        },
+        {
+          "startMs": 17900,
+          "endMs": 18000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18100,
+          "eventCount": 2
+        },
+        {
+          "startMs": 18100,
+          "endMs": 18200,
+          "eventCount": 1
+        },
+        {
+          "startMs": 18200,
+          "endMs": 18300,
+          "eventCount": 1
+        },
+        {
+          "startMs": 18300,
+          "endMs": 18400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 18400,
+          "endMs": 18500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 18500,
+          "endMs": 18600,
+          "eventCount": 1
+        },
+        {
+          "startMs": 18600,
+          "endMs": 18700,
+          "eventCount": 1
+        },
+        {
+          "startMs": 18800,
+          "endMs": 18900,
+          "eventCount": 1
+        },
+        {
+          "startMs": 19300,
+          "endMs": 19400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 19400,
+          "endMs": 19500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 19500,
+          "endMs": 19600,
+          "eventCount": 2
+        },
+        {
+          "startMs": 19700,
+          "endMs": 19800,
+          "eventCount": 1
+        },
+        {
+          "startMs": 19900,
+          "endMs": 20000,
+          "eventCount": 4
+        },
+        {
+          "startMs": 24100,
+          "endMs": 24200,
+          "eventCount": 1
+        },
+        {
+          "startMs": 24300,
+          "endMs": 24400,
+          "eventCount": 2
+        },
+        {
+          "startMs": 24400,
+          "endMs": 24500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 24500,
+          "endMs": 24600,
+          "eventCount": 1
+        },
+        {
+          "startMs": 24700,
+          "endMs": 24800,
+          "eventCount": 2
+        },
+        {
+          "startMs": 24900,
+          "endMs": 25000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 25100,
+          "endMs": 25200,
+          "eventCount": 1
+        },
+        {
+          "startMs": 25300,
+          "endMs": 25400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 25400,
+          "endMs": 25500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 25500,
+          "endMs": 25600,
+          "eventCount": 2
+        },
+        {
+          "startMs": 25900,
+          "endMs": 26000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 26100,
+          "endMs": 26200,
+          "eventCount": 2
+        },
+        {
+          "startMs": 26200,
+          "endMs": 26300,
+          "eventCount": 2
+        },
+        {
+          "startMs": 26300,
+          "endMs": 26400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 26500,
+          "endMs": 26600,
+          "eventCount": 2
+        },
+        {
+          "startMs": 26600,
+          "endMs": 26700,
+          "eventCount": 1
+        },
+        {
+          "startMs": 26800,
+          "endMs": 26900,
+          "eventCount": 1
+        },
+        {
+          "startMs": 26900,
+          "endMs": 27000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 27400,
+          "endMs": 27500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 27500,
+          "endMs": 27600,
+          "eventCount": 2
+        },
+        {
+          "startMs": 27600,
+          "endMs": 27700,
+          "eventCount": 1
+        },
+        {
+          "startMs": 27700,
+          "endMs": 27800,
+          "eventCount": 2
+        },
+        {
+          "startMs": 27800,
+          "endMs": 27900,
+          "eventCount": 1
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28100,
+          "eventCount": 3
+        },
+        {
+          "startMs": 28100,
+          "endMs": 28200,
+          "eventCount": 1
+        },
+        {
+          "startMs": 28200,
+          "endMs": 28300,
+          "eventCount": 1
+        },
+        {
+          "startMs": 28500,
+          "endMs": 28600,
+          "eventCount": 2
+        },
+        {
+          "startMs": 28600,
+          "endMs": 28700,
+          "eventCount": 3
+        },
+        {
+          "startMs": 28900,
+          "endMs": 29000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29100,
+          "eventCount": 1
+        },
+        {
+          "startMs": 29100,
+          "endMs": 29200,
+          "eventCount": 2
+        },
+        {
+          "startMs": 29200,
+          "endMs": 29300,
+          "eventCount": 2
+        },
+        {
+          "startMs": 29500,
+          "endMs": 29600,
+          "eventCount": 1
+        },
+        {
+          "startMs": 29600,
+          "endMs": 29700,
+          "eventCount": 1
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30100,
+          "eventCount": 4
+        },
+        {
+          "startMs": 34400,
+          "endMs": 34500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 34600,
+          "endMs": 34700,
+          "eventCount": 3
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35100,
+          "eventCount": 1
+        },
+        {
+          "startMs": 35200,
+          "endMs": 35300,
+          "eventCount": 2
+        },
+        {
+          "startMs": 35300,
+          "endMs": 35400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 35400,
+          "endMs": 35500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 35600,
+          "endMs": 35700,
+          "eventCount": 1
+        },
+        {
+          "startMs": 35700,
+          "endMs": 35800,
+          "eventCount": 1
+        },
+        {
+          "startMs": 36100,
+          "endMs": 36200,
+          "eventCount": 1
+        },
+        {
+          "startMs": 36400,
+          "endMs": 36500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 36500,
+          "endMs": 36600,
+          "eventCount": 1
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37100,
+          "eventCount": 2
+        },
+        {
+          "startMs": 37100,
+          "endMs": 37200,
+          "eventCount": 2
+        },
+        {
+          "startMs": 37200,
+          "endMs": 37300,
+          "eventCount": 1
+        },
+        {
+          "startMs": 37400,
+          "endMs": 37500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 37500,
+          "endMs": 37600,
+          "eventCount": 1
+        },
+        {
+          "startMs": 37900,
+          "endMs": 38000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 38100,
+          "endMs": 38200,
+          "eventCount": 3
+        },
+        {
+          "startMs": 38200,
+          "endMs": 38300,
+          "eventCount": 1
+        },
+        {
+          "startMs": 44200,
+          "endMs": 44300,
+          "eventCount": 3
+        },
+        {
+          "startMs": 44300,
+          "endMs": 44400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 44400,
+          "endMs": 44500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 44800,
+          "endMs": 44900,
+          "eventCount": 1
+        },
+        {
+          "startMs": 45300,
+          "endMs": 45400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 45600,
+          "endMs": 45700,
+          "eventCount": 2
+        },
+        {
+          "startMs": 45700,
+          "endMs": 45800,
+          "eventCount": 1
+        },
+        {
+          "startMs": 46100,
+          "endMs": 46200,
+          "eventCount": 2
+        },
+        {
+          "startMs": 46200,
+          "endMs": 46300,
+          "eventCount": 1
+        },
+        {
+          "startMs": 46300,
+          "endMs": 46400,
+          "eventCount": 1
+        },
+        {
+          "startMs": 46600,
+          "endMs": 46700,
+          "eventCount": 2
+        },
+        {
+          "startMs": 46700,
+          "endMs": 46800,
+          "eventCount": 2
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47100,
+          "eventCount": 1
+        }
+      ]
+    },
+    "loadProgressBins100Ms": {
+      "binMs": 100,
+      "originMs": 28162.400000095367,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 100,
+          "eventCount": 4,
+          "requestQueuePeak": 31
+        },
+        {
+          "startMs": 100,
+          "endMs": 200,
+          "eventCount": 2,
+          "requestQueuePeak": 2
+        },
+        {
+          "startMs": 14100,
+          "endMs": 14200,
+          "eventCount": 2,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 14300,
+          "endMs": 14400,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 14400,
+          "endMs": 14500,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 14600,
+          "endMs": 14700,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 14800,
+          "endMs": 14900,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 14900,
+          "endMs": 15000,
+          "eventCount": 5,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 15400,
+          "endMs": 15500,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 15500,
+          "endMs": 15600,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 15600,
+          "endMs": 15700,
+          "eventCount": 2,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 15800,
+          "endMs": 15900,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 15900,
+          "endMs": 16000,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 16200,
+          "endMs": 16300,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 16300,
+          "endMs": 16400,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 16700,
+          "endMs": 16800,
+          "eventCount": 1,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 16800,
+          "endMs": 16900,
+          "eventCount": 2,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17100,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17100,
+          "endMs": 17200,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 17200,
+          "endMs": 17300,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17300,
+          "endMs": 17400,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 17400,
+          "endMs": 17500,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17600,
+          "endMs": 17700,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17700,
+          "endMs": 17800,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 17900,
+          "endMs": 18000,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18100,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18100,
+          "endMs": 18200,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18200,
+          "endMs": 18300,
+          "eventCount": 2,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 18300,
+          "endMs": 18400,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18400,
+          "endMs": 18500,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 18500,
+          "endMs": 18600,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18600,
+          "endMs": 18700,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18800,
+          "endMs": 18900,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18900,
+          "endMs": 19000,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 19300,
+          "endMs": 19400,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19400,
+          "endMs": 19500,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19500,
+          "endMs": 19600,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19600,
+          "endMs": 19700,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 19700,
+          "endMs": 19800,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19900,
+          "endMs": 20000,
+          "eventCount": 6,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 20000,
+          "endMs": 20100,
+          "eventCount": 3,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 20100,
+          "endMs": 20200,
+          "eventCount": 1,
+          "requestQueuePeak": 0
+        },
+        {
+          "startMs": 24100,
+          "endMs": 24200,
+          "eventCount": 3,
+          "requestQueuePeak": 27
+        },
+        {
+          "startMs": 24200,
+          "endMs": 24300,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 24300,
+          "endMs": 24400,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 24400,
+          "endMs": 24500,
+          "eventCount": 5,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 24500,
+          "endMs": 24600,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 24600,
+          "endMs": 24700,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 24700,
+          "endMs": 24800,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 24800,
+          "endMs": 24900,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 24900,
+          "endMs": 25000,
+          "eventCount": 1,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25100,
+          "eventCount": 2,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 25100,
+          "endMs": 25200,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 25200,
+          "endMs": 25300,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 25300,
+          "endMs": 25400,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 25400,
+          "endMs": 25500,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 25500,
+          "endMs": 25600,
+          "eventCount": 2,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 25900,
+          "endMs": 26000,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26100,
+          "endMs": 26200,
+          "eventCount": 5,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26200,
+          "endMs": 26300,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26300,
+          "endMs": 26400,
+          "eventCount": 4,
+          "requestQueuePeak": 40
+        },
+        {
+          "startMs": 26500,
+          "endMs": 26600,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26600,
+          "endMs": 26700,
+          "eventCount": 2,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 26800,
+          "endMs": 26900,
+          "eventCount": 1,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26900,
+          "endMs": 27000,
+          "eventCount": 5,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 27000,
+          "endMs": 27100,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 27400,
+          "endMs": 27500,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 27500,
+          "endMs": 27600,
+          "eventCount": 5,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 27600,
+          "endMs": 27700,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 27700,
+          "endMs": 27800,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 27800,
+          "endMs": 27900,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28100,
+          "eventCount": 5,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 28100,
+          "endMs": 28200,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 28200,
+          "endMs": 28300,
+          "eventCount": 2,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 28500,
+          "endMs": 28600,
+          "eventCount": 3,
+          "requestQueuePeak": 40
+        },
+        {
+          "startMs": 28600,
+          "endMs": 28700,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 28900,
+          "endMs": 29000,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29100,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29100,
+          "endMs": 29200,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29200,
+          "endMs": 29300,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29300,
+          "endMs": 29400,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 29500,
+          "endMs": 29600,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29600,
+          "endMs": 29700,
+          "eventCount": 2,
+          "requestQueuePeak": 37
+        },
+        {
+          "startMs": 29700,
+          "endMs": 29800,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30100,
+          "eventCount": 5,
+          "requestQueuePeak": 36
+        },
+        {
+          "startMs": 30100,
+          "endMs": 30200,
+          "eventCount": 2,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 34100,
+          "endMs": 34200,
+          "eventCount": 3,
+          "requestQueuePeak": 25
+        },
+        {
+          "startMs": 34300,
+          "endMs": 34400,
+          "eventCount": 1,
+          "requestQueuePeak": 32
+        },
+        {
+          "startMs": 34400,
+          "endMs": 34500,
+          "eventCount": 6,
+          "requestQueuePeak": 32
+        },
+        {
+          "startMs": 34500,
+          "endMs": 34600,
+          "eventCount": 1,
+          "requestQueuePeak": 29
+        },
+        {
+          "startMs": 34600,
+          "endMs": 34700,
+          "eventCount": 4,
+          "requestQueuePeak": 27
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35100,
+          "eventCount": 2,
+          "requestQueuePeak": 26
+        },
+        {
+          "startMs": 35100,
+          "endMs": 35200,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 35200,
+          "endMs": 35300,
+          "eventCount": 4,
+          "requestQueuePeak": 25
+        },
+        {
+          "startMs": 35300,
+          "endMs": 35400,
+          "eventCount": 2,
+          "requestQueuePeak": 23
+        },
+        {
+          "startMs": 35400,
+          "endMs": 35500,
+          "eventCount": 5,
+          "requestQueuePeak": 23
+        },
+        {
+          "startMs": 35500,
+          "endMs": 35600,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 35600,
+          "endMs": 35700,
+          "eventCount": 2,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 35700,
+          "endMs": 35800,
+          "eventCount": 3,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 36000,
+          "endMs": 36100,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 36100,
+          "endMs": 36200,
+          "eventCount": 1,
+          "requestQueuePeak": 17
+        },
+        {
+          "startMs": 36400,
+          "endMs": 36500,
+          "eventCount": 3,
+          "requestQueuePeak": 17
+        },
+        {
+          "startMs": 36500,
+          "endMs": 36600,
+          "eventCount": 3,
+          "requestQueuePeak": 16
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37100,
+          "eventCount": 3,
+          "requestQueuePeak": 13
+        },
+        {
+          "startMs": 37100,
+          "endMs": 37200,
+          "eventCount": 4,
+          "requestQueuePeak": 12
+        },
+        {
+          "startMs": 37200,
+          "endMs": 37300,
+          "eventCount": 1,
+          "requestQueuePeak": 9
+        },
+        {
+          "startMs": 37300,
+          "endMs": 37400,
+          "eventCount": 1,
+          "requestQueuePeak": 8
+        },
+        {
+          "startMs": 37400,
+          "endMs": 37500,
+          "eventCount": 1,
+          "requestQueuePeak": 8
+        },
+        {
+          "startMs": 37500,
+          "endMs": 37600,
+          "eventCount": 3,
+          "requestQueuePeak": 7
+        },
+        {
+          "startMs": 37800,
+          "endMs": 37900,
+          "eventCount": 1,
+          "requestQueuePeak": 6
+        },
+        {
+          "startMs": 37900,
+          "endMs": 38000,
+          "eventCount": 2,
+          "requestQueuePeak": 5
+        },
+        {
+          "startMs": 38000,
+          "endMs": 38100,
+          "eventCount": 1,
+          "requestQueuePeak": 4
+        },
+        {
+          "startMs": 38100,
+          "endMs": 38200,
+          "eventCount": 1,
+          "requestQueuePeak": 4
+        },
+        {
+          "startMs": 38200,
+          "endMs": 38300,
+          "eventCount": 2,
+          "requestQueuePeak": 1
+        },
+        {
+          "startMs": 38300,
+          "endMs": 38400,
+          "eventCount": 1,
+          "requestQueuePeak": 0
+        },
+        {
+          "startMs": 44100,
+          "endMs": 44200,
+          "eventCount": 3,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 44200,
+          "endMs": 44300,
+          "eventCount": 4,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 44300,
+          "endMs": 44400,
+          "eventCount": 2,
+          "requestQueuePeak": 16
+        },
+        {
+          "startMs": 44400,
+          "endMs": 44500,
+          "eventCount": 3,
+          "requestQueuePeak": 16
+        },
+        {
+          "startMs": 44800,
+          "endMs": 44900,
+          "eventCount": 1,
+          "requestQueuePeak": 14
+        },
+        {
+          "startMs": 44900,
+          "endMs": 45000,
+          "eventCount": 1,
+          "requestQueuePeak": 13
+        },
+        {
+          "startMs": 45300,
+          "endMs": 45400,
+          "eventCount": 1,
+          "requestQueuePeak": 13
+        },
+        {
+          "startMs": 45400,
+          "endMs": 45500,
+          "eventCount": 1,
+          "requestQueuePeak": 12
+        },
+        {
+          "startMs": 45600,
+          "endMs": 45700,
+          "eventCount": 2,
+          "requestQueuePeak": 12
+        },
+        {
+          "startMs": 45700,
+          "endMs": 45800,
+          "eventCount": 3,
+          "requestQueuePeak": 11
+        },
+        {
+          "startMs": 45800,
+          "endMs": 45900,
+          "eventCount": 1,
+          "requestQueuePeak": 9
+        },
+        {
+          "startMs": 46100,
+          "endMs": 46200,
+          "eventCount": 2,
+          "requestQueuePeak": 9
+        },
+        {
+          "startMs": 46200,
+          "endMs": 46300,
+          "eventCount": 3,
+          "requestQueuePeak": 8
+        },
+        {
+          "startMs": 46300,
+          "endMs": 46400,
+          "eventCount": 3,
+          "requestQueuePeak": 6
+        },
+        {
+          "startMs": 46600,
+          "endMs": 46700,
+          "eventCount": 2,
+          "requestQueuePeak": 5
+        },
+        {
+          "startMs": 46700,
+          "endMs": 46800,
+          "eventCount": 5,
+          "requestQueuePeak": 5
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47100,
+          "eventCount": 2,
+          "requestQueuePeak": 1
+        }
+      ]
+    },
+    "resourceCompletionBins250Ms": {
+      "binMs": 250,
+      "originMs": 28139.60000014305,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 250,
+          "eventCount": 24,
+          "transferBytes": 260082,
+          "encodedBodyBytes": 257082
+        },
+        {
+          "startMs": 14250,
+          "endMs": 14500,
+          "eventCount": 2,
+          "transferBytes": 180740,
+          "encodedBodyBytes": 180140
+        },
+        {
+          "startMs": 14500,
+          "endMs": 14750,
+          "eventCount": 1,
+          "transferBytes": 483192,
+          "encodedBodyBytes": 482892
+        },
+        {
+          "startMs": 14750,
+          "endMs": 15000,
+          "eventCount": 3,
+          "transferBytes": 2698320,
+          "encodedBodyBytes": 2697420
+        },
+        {
+          "startMs": 15250,
+          "endMs": 15500,
+          "eventCount": 4,
+          "transferBytes": 2332668,
+          "encodedBodyBytes": 2331468
+        },
+        {
+          "startMs": 15500,
+          "endMs": 15750,
+          "eventCount": 2,
+          "transferBytes": 1240660,
+          "encodedBodyBytes": 1240060
+        },
+        {
+          "startMs": 15750,
+          "endMs": 16000,
+          "eventCount": 2,
+          "transferBytes": 873596,
+          "encodedBodyBytes": 872996
+        },
+        {
+          "startMs": 16250,
+          "endMs": 16500,
+          "eventCount": 2,
+          "transferBytes": 1718032,
+          "encodedBodyBytes": 1717432
+        },
+        {
+          "startMs": 16750,
+          "endMs": 17000,
+          "eventCount": 1,
+          "transferBytes": 872808,
+          "encodedBodyBytes": 872508
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17250,
+          "eventCount": 4,
+          "transferBytes": 4978680,
+          "encodedBodyBytes": 4977480
+        },
+        {
+          "startMs": 17250,
+          "endMs": 17500,
+          "eventCount": 4,
+          "transferBytes": 3055136,
+          "encodedBodyBytes": 3053936
+        },
+        {
+          "startMs": 17500,
+          "endMs": 17750,
+          "eventCount": 1,
+          "transferBytes": 342744,
+          "encodedBodyBytes": 342444
+        },
+        {
+          "startMs": 17750,
+          "endMs": 18000,
+          "eventCount": 1,
+          "transferBytes": 533984,
+          "encodedBodyBytes": 533684
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18250,
+          "eventCount": 4,
+          "transferBytes": 3806516,
+          "encodedBodyBytes": 3805316
+        },
+        {
+          "startMs": 18250,
+          "endMs": 18500,
+          "eventCount": 3,
+          "transferBytes": 1058536,
+          "encodedBodyBytes": 1057636
+        },
+        {
+          "startMs": 18500,
+          "endMs": 18750,
+          "eventCount": 2,
+          "transferBytes": 1244720,
+          "encodedBodyBytes": 1244120
+        },
+        {
+          "startMs": 18750,
+          "endMs": 19000,
+          "eventCount": 1,
+          "transferBytes": 238404,
+          "encodedBodyBytes": 238104
+        },
+        {
+          "startMs": 19250,
+          "endMs": 19500,
+          "eventCount": 2,
+          "transferBytes": 1734636,
+          "encodedBodyBytes": 1734036
+        },
+        {
+          "startMs": 19500,
+          "endMs": 19750,
+          "eventCount": 2,
+          "transferBytes": 2745896,
+          "encodedBodyBytes": 2745296
+        },
+        {
+          "startMs": 19750,
+          "endMs": 20000,
+          "eventCount": 4,
+          "transferBytes": 4497396,
+          "encodedBodyBytes": 4496196
+        },
+        {
+          "startMs": 20000,
+          "endMs": 20250,
+          "eventCount": 19,
+          "transferBytes": 469560,
+          "encodedBodyBytes": 467460
+        },
+        {
+          "startMs": 24000,
+          "endMs": 24250,
+          "eventCount": 1,
+          "transferBytes": 16704,
+          "encodedBodyBytes": 16404
+        },
+        {
+          "startMs": 24250,
+          "endMs": 24500,
+          "eventCount": 3,
+          "transferBytes": 690348,
+          "encodedBodyBytes": 689448
+        },
+        {
+          "startMs": 24500,
+          "endMs": 24750,
+          "eventCount": 3,
+          "transferBytes": 950828,
+          "encodedBodyBytes": 949928
+        },
+        {
+          "startMs": 24750,
+          "endMs": 25000,
+          "eventCount": 1,
+          "transferBytes": 211356,
+          "encodedBodyBytes": 211056
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25250,
+          "eventCount": 2,
+          "transferBytes": 957240,
+          "encodedBodyBytes": 956640
+        },
+        {
+          "startMs": 25250,
+          "endMs": 25500,
+          "eventCount": 2,
+          "transferBytes": 1746464,
+          "encodedBodyBytes": 1745864
+        },
+        {
+          "startMs": 25500,
+          "endMs": 25750,
+          "eventCount": 2,
+          "transferBytes": 2545476,
+          "encodedBodyBytes": 2544876
+        },
+        {
+          "startMs": 25750,
+          "endMs": 26000,
+          "eventCount": 1,
+          "transferBytes": 685992,
+          "encodedBodyBytes": 685692
+        },
+        {
+          "startMs": 26000,
+          "endMs": 26250,
+          "eventCount": 2,
+          "transferBytes": 2315328,
+          "encodedBodyBytes": 2314728
+        },
+        {
+          "startMs": 26250,
+          "endMs": 26500,
+          "eventCount": 3,
+          "transferBytes": 1965700,
+          "encodedBodyBytes": 1964800
+        },
+        {
+          "startMs": 26500,
+          "endMs": 26750,
+          "eventCount": 3,
+          "transferBytes": 3478232,
+          "encodedBodyBytes": 3477332
+        },
+        {
+          "startMs": 26750,
+          "endMs": 27000,
+          "eventCount": 3,
+          "transferBytes": 1865216,
+          "encodedBodyBytes": 1864316
+        },
+        {
+          "startMs": 27250,
+          "endMs": 27500,
+          "eventCount": 1,
+          "transferBytes": 433876,
+          "encodedBodyBytes": 433576
+        },
+        {
+          "startMs": 27500,
+          "endMs": 27750,
+          "eventCount": 3,
+          "transferBytes": 2010408,
+          "encodedBodyBytes": 2009508
+        },
+        {
+          "startMs": 27750,
+          "endMs": 28000,
+          "eventCount": 3,
+          "transferBytes": 2013524,
+          "encodedBodyBytes": 2012624
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28250,
+          "eventCount": 5,
+          "transferBytes": 2880712,
+          "encodedBodyBytes": 2879212
+        },
+        {
+          "startMs": 28500,
+          "endMs": 28750,
+          "eventCount": 5,
+          "transferBytes": 3347940,
+          "encodedBodyBytes": 3346440
+        },
+        {
+          "startMs": 28750,
+          "endMs": 29000,
+          "eventCount": 1,
+          "transferBytes": 378448,
+          "encodedBodyBytes": 378148
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29250,
+          "eventCount": 3,
+          "transferBytes": 2782632,
+          "encodedBodyBytes": 2781732
+        },
+        {
+          "startMs": 29250,
+          "endMs": 29500,
+          "eventCount": 2,
+          "transferBytes": 1074752,
+          "encodedBodyBytes": 1074152
+        },
+        {
+          "startMs": 29500,
+          "endMs": 29750,
+          "eventCount": 2,
+          "transferBytes": 3392952,
+          "encodedBodyBytes": 3392352
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30250,
+          "eventCount": 22,
+          "transferBytes": 3590260,
+          "encodedBodyBytes": 3588460
+        },
+        {
+          "startMs": 34250,
+          "endMs": 34500,
+          "eventCount": 3,
+          "transferBytes": 537564,
+          "encodedBodyBytes": 536664
+        },
+        {
+          "startMs": 34500,
+          "endMs": 34750,
+          "eventCount": 3,
+          "transferBytes": 594704,
+          "encodedBodyBytes": 593804
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35250,
+          "eventCount": 1,
+          "transferBytes": 1207592,
+          "encodedBodyBytes": 1207292
+        },
+        {
+          "startMs": 35250,
+          "endMs": 35500,
+          "eventCount": 5,
+          "transferBytes": 3948452,
+          "encodedBodyBytes": 3946952
+        },
+        {
+          "startMs": 35500,
+          "endMs": 35750,
+          "eventCount": 2,
+          "transferBytes": 673136,
+          "encodedBodyBytes": 672536
+        },
+        {
+          "startMs": 36000,
+          "endMs": 36250,
+          "eventCount": 1,
+          "transferBytes": 19060,
+          "encodedBodyBytes": 18760
+        },
+        {
+          "startMs": 36250,
+          "endMs": 36500,
+          "eventCount": 1,
+          "transferBytes": 405408,
+          "encodedBodyBytes": 405108
+        },
+        {
+          "startMs": 36500,
+          "endMs": 36750,
+          "eventCount": 3,
+          "transferBytes": 3154304,
+          "encodedBodyBytes": 3153404
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37250,
+          "eventCount": 4,
+          "transferBytes": 4212740,
+          "encodedBodyBytes": 4211540
+        },
+        {
+          "startMs": 37250,
+          "endMs": 37500,
+          "eventCount": 2,
+          "transferBytes": 1722340,
+          "encodedBodyBytes": 1721740
+        },
+        {
+          "startMs": 37500,
+          "endMs": 37750,
+          "eventCount": 1,
+          "transferBytes": 451432,
+          "encodedBodyBytes": 451132
+        },
+        {
+          "startMs": 37750,
+          "endMs": 38000,
+          "eventCount": 2,
+          "transferBytes": 1094700,
+          "encodedBodyBytes": 1094100
+        },
+        {
+          "startMs": 38000,
+          "endMs": 38250,
+          "eventCount": 3,
+          "transferBytes": 4108192,
+          "encodedBodyBytes": 4107292
+        },
+        {
+          "startMs": 38250,
+          "endMs": 38500,
+          "eventCount": 1,
+          "transferBytes": 1260224,
+          "encodedBodyBytes": 1259924
+        },
+        {
+          "startMs": 44000,
+          "endMs": 44250,
+          "eventCount": 1,
+          "transferBytes": 71044,
+          "encodedBodyBytes": 70744
+        },
+        {
+          "startMs": 44250,
+          "endMs": 44500,
+          "eventCount": 4,
+          "transferBytes": 281332,
+          "encodedBodyBytes": 280132
+        },
+        {
+          "startMs": 44750,
+          "endMs": 45000,
+          "eventCount": 1,
+          "transferBytes": 422920,
+          "encodedBodyBytes": 422620
+        },
+        {
+          "startMs": 45250,
+          "endMs": 45500,
+          "eventCount": 1,
+          "transferBytes": 1659088,
+          "encodedBodyBytes": 1658788
+        },
+        {
+          "startMs": 45500,
+          "endMs": 45750,
+          "eventCount": 2,
+          "transferBytes": 1847332,
+          "encodedBodyBytes": 1846732
+        },
+        {
+          "startMs": 45750,
+          "endMs": 46000,
+          "eventCount": 1,
+          "transferBytes": 22436,
+          "encodedBodyBytes": 22136
+        },
+        {
+          "startMs": 46000,
+          "endMs": 46250,
+          "eventCount": 2,
+          "transferBytes": 2964260,
+          "encodedBodyBytes": 2963660
+        },
+        {
+          "startMs": 46250,
+          "endMs": 46500,
+          "eventCount": 2,
+          "transferBytes": 732060,
+          "encodedBodyBytes": 731460
+        },
+        {
+          "startMs": 46500,
+          "endMs": 46750,
+          "eventCount": 3,
+          "transferBytes": 2409444,
+          "encodedBodyBytes": 2408544
+        },
+        {
+          "startMs": 46750,
+          "endMs": 47000,
+          "eventCount": 1,
+          "transferBytes": 763184,
+          "encodedBodyBytes": 762884
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47250,
+          "eventCount": 1,
+          "transferBytes": 1316536,
+          "encodedBodyBytes": 1316236
+        }
+      ]
+    },
+    "tileLoadBins250Ms": {
+      "binMs": 250,
+      "originMs": 28207,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 250,
+          "eventCount": 7
+        },
+        {
+          "startMs": 14250,
+          "endMs": 14500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 14500,
+          "endMs": 14750,
+          "eventCount": 1
+        },
+        {
+          "startMs": 14750,
+          "endMs": 15000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 15250,
+          "endMs": 15500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 15500,
+          "endMs": 15750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 15750,
+          "endMs": 16000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 16250,
+          "endMs": 16500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 16750,
+          "endMs": 17000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17250,
+          "eventCount": 4
+        },
+        {
+          "startMs": 17250,
+          "endMs": 17500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 17500,
+          "endMs": 17750,
+          "eventCount": 1
+        },
+        {
+          "startMs": 17750,
+          "endMs": 18000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18250,
+          "eventCount": 4
+        },
+        {
+          "startMs": 18250,
+          "endMs": 18500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 18500,
+          "endMs": 18750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 18750,
+          "endMs": 19000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 19250,
+          "endMs": 19500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 19500,
+          "endMs": 19750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 19750,
+          "endMs": 20000,
+          "eventCount": 5
+        },
+        {
+          "startMs": 24000,
+          "endMs": 24250,
+          "eventCount": 1
+        },
+        {
+          "startMs": 24250,
+          "endMs": 24500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 24500,
+          "endMs": 24750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 24750,
+          "endMs": 25000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25250,
+          "eventCount": 1
+        },
+        {
+          "startMs": 25250,
+          "endMs": 25500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 25500,
+          "endMs": 25750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 25750,
+          "endMs": 26000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 26000,
+          "endMs": 26250,
+          "eventCount": 2
+        },
+        {
+          "startMs": 26250,
+          "endMs": 26500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 26500,
+          "endMs": 26750,
+          "eventCount": 3
+        },
+        {
+          "startMs": 26750,
+          "endMs": 27000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 27250,
+          "endMs": 27500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 27500,
+          "endMs": 27750,
+          "eventCount": 3
+        },
+        {
+          "startMs": 27750,
+          "endMs": 28000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28250,
+          "eventCount": 5
+        },
+        {
+          "startMs": 28500,
+          "endMs": 28750,
+          "eventCount": 5
+        },
+        {
+          "startMs": 28750,
+          "endMs": 29000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29250,
+          "eventCount": 3
+        },
+        {
+          "startMs": 29250,
+          "endMs": 29500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 29500,
+          "endMs": 29750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30250,
+          "eventCount": 4
+        },
+        {
+          "startMs": 34250,
+          "endMs": 34500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 34500,
+          "endMs": 34750,
+          "eventCount": 3
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35250,
+          "eventCount": 1
+        },
+        {
+          "startMs": 35250,
+          "endMs": 35500,
+          "eventCount": 5
+        },
+        {
+          "startMs": 35500,
+          "endMs": 35750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 36000,
+          "endMs": 36250,
+          "eventCount": 1
+        },
+        {
+          "startMs": 36250,
+          "endMs": 36500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 36500,
+          "endMs": 36750,
+          "eventCount": 1
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37250,
+          "eventCount": 4
+        },
+        {
+          "startMs": 37250,
+          "endMs": 37500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 37500,
+          "endMs": 37750,
+          "eventCount": 1
+        },
+        {
+          "startMs": 37750,
+          "endMs": 38000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 38000,
+          "endMs": 38250,
+          "eventCount": 3
+        },
+        {
+          "startMs": 38250,
+          "endMs": 38500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 44000,
+          "endMs": 44250,
+          "eventCount": 2
+        },
+        {
+          "startMs": 44250,
+          "endMs": 44500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 44750,
+          "endMs": 45000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 45250,
+          "endMs": 45500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 45500,
+          "endMs": 45750,
+          "eventCount": 2
+        },
+        {
+          "startMs": 45750,
+          "endMs": 46000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 46000,
+          "endMs": 46250,
+          "eventCount": 2
+        },
+        {
+          "startMs": 46250,
+          "endMs": 46500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 46500,
+          "endMs": 46750,
+          "eventCount": 3
+        },
+        {
+          "startMs": 46750,
+          "endMs": 47000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47250,
+          "eventCount": 1
+        }
+      ]
+    },
+    "loadProgressBins250Ms": {
+      "binMs": 250,
+      "originMs": 28162.400000095367,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 250,
+          "eventCount": 6,
+          "requestQueuePeak": 31
+        },
+        {
+          "startMs": 14000,
+          "endMs": 14250,
+          "eventCount": 2,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 14250,
+          "endMs": 14500,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 14500,
+          "endMs": 14750,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 14750,
+          "endMs": 15000,
+          "eventCount": 8,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 15250,
+          "endMs": 15500,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 15500,
+          "endMs": 15750,
+          "eventCount": 6,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 15750,
+          "endMs": 16000,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 16000,
+          "endMs": 16250,
+          "eventCount": 1,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 16250,
+          "endMs": 16500,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 16750,
+          "endMs": 17000,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17250,
+          "eventCount": 8,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 17250,
+          "endMs": 17500,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17500,
+          "endMs": 17750,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17750,
+          "endMs": 18000,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18250,
+          "eventCount": 10,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18250,
+          "endMs": 18500,
+          "eventCount": 8,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 18500,
+          "endMs": 18750,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18750,
+          "endMs": 19000,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19250,
+          "endMs": 19500,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19500,
+          "endMs": 19750,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19750,
+          "endMs": 20000,
+          "eventCount": 8,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 20000,
+          "endMs": 20250,
+          "eventCount": 4,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 24000,
+          "endMs": 24250,
+          "eventCount": 4,
+          "requestQueuePeak": 27
+        },
+        {
+          "startMs": 24250,
+          "endMs": 24500,
+          "eventCount": 9,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 24500,
+          "endMs": 24750,
+          "eventCount": 7,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 24750,
+          "endMs": 25000,
+          "eventCount": 4,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25250,
+          "eventCount": 5,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 25250,
+          "endMs": 25500,
+          "eventCount": 6,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 25500,
+          "endMs": 25750,
+          "eventCount": 2,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 25750,
+          "endMs": 26000,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26000,
+          "endMs": 26250,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26250,
+          "endMs": 26500,
+          "eventCount": 5,
+          "requestQueuePeak": 40
+        },
+        {
+          "startMs": 26500,
+          "endMs": 26750,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26750,
+          "endMs": 27000,
+          "eventCount": 6,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 27000,
+          "endMs": 27250,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 27250,
+          "endMs": 27500,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 27500,
+          "endMs": 27750,
+          "eventCount": 9,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 27750,
+          "endMs": 28000,
+          "eventCount": 6,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28250,
+          "eventCount": 11,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 28500,
+          "endMs": 28750,
+          "eventCount": 7,
+          "requestQueuePeak": 40
+        },
+        {
+          "startMs": 28750,
+          "endMs": 29000,
+          "eventCount": 2,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29250,
+          "eventCount": 7,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29250,
+          "endMs": 29500,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29500,
+          "endMs": 29750,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30250,
+          "eventCount": 7,
+          "requestQueuePeak": 36
+        },
+        {
+          "startMs": 34000,
+          "endMs": 34250,
+          "eventCount": 3,
+          "requestQueuePeak": 25
+        },
+        {
+          "startMs": 34250,
+          "endMs": 34500,
+          "eventCount": 7,
+          "requestQueuePeak": 32
+        },
+        {
+          "startMs": 34500,
+          "endMs": 34750,
+          "eventCount": 5,
+          "requestQueuePeak": 29
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35250,
+          "eventCount": 4,
+          "requestQueuePeak": 26
+        },
+        {
+          "startMs": 35250,
+          "endMs": 35500,
+          "eventCount": 10,
+          "requestQueuePeak": 25
+        },
+        {
+          "startMs": 35500,
+          "endMs": 35750,
+          "eventCount": 5,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 35750,
+          "endMs": 36000,
+          "eventCount": 1,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 36000,
+          "endMs": 36250,
+          "eventCount": 2,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 36250,
+          "endMs": 36500,
+          "eventCount": 3,
+          "requestQueuePeak": 17
+        },
+        {
+          "startMs": 36500,
+          "endMs": 36750,
+          "eventCount": 3,
+          "requestQueuePeak": 16
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37250,
+          "eventCount": 7,
+          "requestQueuePeak": 13
+        },
+        {
+          "startMs": 37250,
+          "endMs": 37500,
+          "eventCount": 3,
+          "requestQueuePeak": 9
+        },
+        {
+          "startMs": 37500,
+          "endMs": 37750,
+          "eventCount": 3,
+          "requestQueuePeak": 7
+        },
+        {
+          "startMs": 37750,
+          "endMs": 38000,
+          "eventCount": 3,
+          "requestQueuePeak": 6
+        },
+        {
+          "startMs": 38000,
+          "endMs": 38250,
+          "eventCount": 3,
+          "requestQueuePeak": 4
+        },
+        {
+          "startMs": 38250,
+          "endMs": 38500,
+          "eventCount": 2,
+          "requestQueuePeak": 1
+        },
+        {
+          "startMs": 44000,
+          "endMs": 44250,
+          "eventCount": 5,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 44250,
+          "endMs": 44500,
+          "eventCount": 7,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 44750,
+          "endMs": 45000,
+          "eventCount": 2,
+          "requestQueuePeak": 14
+        },
+        {
+          "startMs": 45250,
+          "endMs": 45500,
+          "eventCount": 2,
+          "requestQueuePeak": 13
+        },
+        {
+          "startMs": 45500,
+          "endMs": 45750,
+          "eventCount": 4,
+          "requestQueuePeak": 12
+        },
+        {
+          "startMs": 45750,
+          "endMs": 46000,
+          "eventCount": 2,
+          "requestQueuePeak": 10
+        },
+        {
+          "startMs": 46000,
+          "endMs": 46250,
+          "eventCount": 4,
+          "requestQueuePeak": 9
+        },
+        {
+          "startMs": 46250,
+          "endMs": 46500,
+          "eventCount": 4,
+          "requestQueuePeak": 7
+        },
+        {
+          "startMs": 46500,
+          "endMs": 46750,
+          "eventCount": 5,
+          "requestQueuePeak": 5
+        },
+        {
+          "startMs": 46750,
+          "endMs": 47000,
+          "eventCount": 2,
+          "requestQueuePeak": 2
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47250,
+          "eventCount": 2,
+          "requestQueuePeak": 1
+        }
+      ]
+    },
+    "resourceCompletionBins500Ms": {
+      "binMs": 500,
+      "originMs": 28139.60000014305,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 500,
+          "eventCount": 24,
+          "transferBytes": 260082,
+          "encodedBodyBytes": 257082
+        },
+        {
+          "startMs": 14000,
+          "endMs": 14500,
+          "eventCount": 2,
+          "transferBytes": 180740,
+          "encodedBodyBytes": 180140
+        },
+        {
+          "startMs": 14500,
+          "endMs": 15000,
+          "eventCount": 4,
+          "transferBytes": 3181512,
+          "encodedBodyBytes": 3180312
+        },
+        {
+          "startMs": 15000,
+          "endMs": 15500,
+          "eventCount": 4,
+          "transferBytes": 2332668,
+          "encodedBodyBytes": 2331468
+        },
+        {
+          "startMs": 15500,
+          "endMs": 16000,
+          "eventCount": 4,
+          "transferBytes": 2114256,
+          "encodedBodyBytes": 2113056
+        },
+        {
+          "startMs": 16000,
+          "endMs": 16500,
+          "eventCount": 2,
+          "transferBytes": 1718032,
+          "encodedBodyBytes": 1717432
+        },
+        {
+          "startMs": 16500,
+          "endMs": 17000,
+          "eventCount": 1,
+          "transferBytes": 872808,
+          "encodedBodyBytes": 872508
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17500,
+          "eventCount": 8,
+          "transferBytes": 8033816,
+          "encodedBodyBytes": 8031416
+        },
+        {
+          "startMs": 17500,
+          "endMs": 18000,
+          "eventCount": 2,
+          "transferBytes": 876728,
+          "encodedBodyBytes": 876128
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18500,
+          "eventCount": 7,
+          "transferBytes": 4865052,
+          "encodedBodyBytes": 4862952
+        },
+        {
+          "startMs": 18500,
+          "endMs": 19000,
+          "eventCount": 3,
+          "transferBytes": 1483124,
+          "encodedBodyBytes": 1482224
+        },
+        {
+          "startMs": 19000,
+          "endMs": 19500,
+          "eventCount": 2,
+          "transferBytes": 1734636,
+          "encodedBodyBytes": 1734036
+        },
+        {
+          "startMs": 19500,
+          "endMs": 20000,
+          "eventCount": 6,
+          "transferBytes": 7243292,
+          "encodedBodyBytes": 7241492
+        },
+        {
+          "startMs": 20000,
+          "endMs": 20500,
+          "eventCount": 19,
+          "transferBytes": 469560,
+          "encodedBodyBytes": 467460
+        },
+        {
+          "startMs": 24000,
+          "endMs": 24500,
+          "eventCount": 4,
+          "transferBytes": 707052,
+          "encodedBodyBytes": 705852
+        },
+        {
+          "startMs": 24500,
+          "endMs": 25000,
+          "eventCount": 4,
+          "transferBytes": 1162184,
+          "encodedBodyBytes": 1160984
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25500,
+          "eventCount": 4,
+          "transferBytes": 2703704,
+          "encodedBodyBytes": 2702504
+        },
+        {
+          "startMs": 25500,
+          "endMs": 26000,
+          "eventCount": 3,
+          "transferBytes": 3231468,
+          "encodedBodyBytes": 3230568
+        },
+        {
+          "startMs": 26000,
+          "endMs": 26500,
+          "eventCount": 5,
+          "transferBytes": 4281028,
+          "encodedBodyBytes": 4279528
+        },
+        {
+          "startMs": 26500,
+          "endMs": 27000,
+          "eventCount": 6,
+          "transferBytes": 5343448,
+          "encodedBodyBytes": 5341648
+        },
+        {
+          "startMs": 27000,
+          "endMs": 27500,
+          "eventCount": 1,
+          "transferBytes": 433876,
+          "encodedBodyBytes": 433576
+        },
+        {
+          "startMs": 27500,
+          "endMs": 28000,
+          "eventCount": 6,
+          "transferBytes": 4023932,
+          "encodedBodyBytes": 4022132
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28500,
+          "eventCount": 5,
+          "transferBytes": 2880712,
+          "encodedBodyBytes": 2879212
+        },
+        {
+          "startMs": 28500,
+          "endMs": 29000,
+          "eventCount": 6,
+          "transferBytes": 3726388,
+          "encodedBodyBytes": 3724588
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29500,
+          "eventCount": 5,
+          "transferBytes": 3857384,
+          "encodedBodyBytes": 3855884
+        },
+        {
+          "startMs": 29500,
+          "endMs": 30000,
+          "eventCount": 2,
+          "transferBytes": 3392952,
+          "encodedBodyBytes": 3392352
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30500,
+          "eventCount": 22,
+          "transferBytes": 3590260,
+          "encodedBodyBytes": 3588460
+        },
+        {
+          "startMs": 34000,
+          "endMs": 34500,
+          "eventCount": 3,
+          "transferBytes": 537564,
+          "encodedBodyBytes": 536664
+        },
+        {
+          "startMs": 34500,
+          "endMs": 35000,
+          "eventCount": 3,
+          "transferBytes": 594704,
+          "encodedBodyBytes": 593804
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35500,
+          "eventCount": 6,
+          "transferBytes": 5156044,
+          "encodedBodyBytes": 5154244
+        },
+        {
+          "startMs": 35500,
+          "endMs": 36000,
+          "eventCount": 2,
+          "transferBytes": 673136,
+          "encodedBodyBytes": 672536
+        },
+        {
+          "startMs": 36000,
+          "endMs": 36500,
+          "eventCount": 2,
+          "transferBytes": 424468,
+          "encodedBodyBytes": 423868
+        },
+        {
+          "startMs": 36500,
+          "endMs": 37000,
+          "eventCount": 3,
+          "transferBytes": 3154304,
+          "encodedBodyBytes": 3153404
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37500,
+          "eventCount": 6,
+          "transferBytes": 5935080,
+          "encodedBodyBytes": 5933280
+        },
+        {
+          "startMs": 37500,
+          "endMs": 38000,
+          "eventCount": 3,
+          "transferBytes": 1546132,
+          "encodedBodyBytes": 1545232
+        },
+        {
+          "startMs": 38000,
+          "endMs": 38500,
+          "eventCount": 4,
+          "transferBytes": 5368416,
+          "encodedBodyBytes": 5367216
+        },
+        {
+          "startMs": 44000,
+          "endMs": 44500,
+          "eventCount": 5,
+          "transferBytes": 352376,
+          "encodedBodyBytes": 350876
+        },
+        {
+          "startMs": 44500,
+          "endMs": 45000,
+          "eventCount": 1,
+          "transferBytes": 422920,
+          "encodedBodyBytes": 422620
+        },
+        {
+          "startMs": 45000,
+          "endMs": 45500,
+          "eventCount": 1,
+          "transferBytes": 1659088,
+          "encodedBodyBytes": 1658788
+        },
+        {
+          "startMs": 45500,
+          "endMs": 46000,
+          "eventCount": 3,
+          "transferBytes": 1869768,
+          "encodedBodyBytes": 1868868
+        },
+        {
+          "startMs": 46000,
+          "endMs": 46500,
+          "eventCount": 4,
+          "transferBytes": 3696320,
+          "encodedBodyBytes": 3695120
+        },
+        {
+          "startMs": 46500,
+          "endMs": 47000,
+          "eventCount": 4,
+          "transferBytes": 3172628,
+          "encodedBodyBytes": 3171428
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47500,
+          "eventCount": 1,
+          "transferBytes": 1316536,
+          "encodedBodyBytes": 1316236
+        }
+      ]
+    },
+    "tileLoadBins500Ms": {
+      "binMs": 500,
+      "originMs": 28207,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 500,
+          "eventCount": 7
+        },
+        {
+          "startMs": 14000,
+          "endMs": 14500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 14500,
+          "endMs": 15000,
+          "eventCount": 4
+        },
+        {
+          "startMs": 15000,
+          "endMs": 15500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 15500,
+          "endMs": 16000,
+          "eventCount": 4
+        },
+        {
+          "startMs": 16000,
+          "endMs": 16500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 16500,
+          "endMs": 17000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17500,
+          "eventCount": 8
+        },
+        {
+          "startMs": 17500,
+          "endMs": 18000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18500,
+          "eventCount": 7
+        },
+        {
+          "startMs": 18500,
+          "endMs": 19000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 19000,
+          "endMs": 19500,
+          "eventCount": 2
+        },
+        {
+          "startMs": 19500,
+          "endMs": 20000,
+          "eventCount": 7
+        },
+        {
+          "startMs": 24000,
+          "endMs": 24500,
+          "eventCount": 5
+        },
+        {
+          "startMs": 24500,
+          "endMs": 25000,
+          "eventCount": 4
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 25500,
+          "endMs": 26000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 26000,
+          "endMs": 26500,
+          "eventCount": 5
+        },
+        {
+          "startMs": 26500,
+          "endMs": 27000,
+          "eventCount": 6
+        },
+        {
+          "startMs": 27000,
+          "endMs": 27500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 27500,
+          "endMs": 28000,
+          "eventCount": 6
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28500,
+          "eventCount": 5
+        },
+        {
+          "startMs": 28500,
+          "endMs": 29000,
+          "eventCount": 6
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29500,
+          "eventCount": 5
+        },
+        {
+          "startMs": 29500,
+          "endMs": 30000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 34000,
+          "endMs": 34500,
+          "eventCount": 3
+        },
+        {
+          "startMs": 34500,
+          "endMs": 35000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35500,
+          "eventCount": 6
+        },
+        {
+          "startMs": 35500,
+          "endMs": 36000,
+          "eventCount": 2
+        },
+        {
+          "startMs": 36000,
+          "endMs": 36500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 36500,
+          "endMs": 37000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37500,
+          "eventCount": 6
+        },
+        {
+          "startMs": 37500,
+          "endMs": 38000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 38000,
+          "endMs": 38500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 44000,
+          "endMs": 44500,
+          "eventCount": 5
+        },
+        {
+          "startMs": 44500,
+          "endMs": 45000,
+          "eventCount": 1
+        },
+        {
+          "startMs": 45000,
+          "endMs": 45500,
+          "eventCount": 1
+        },
+        {
+          "startMs": 45500,
+          "endMs": 46000,
+          "eventCount": 3
+        },
+        {
+          "startMs": 46000,
+          "endMs": 46500,
+          "eventCount": 4
+        },
+        {
+          "startMs": 46500,
+          "endMs": 47000,
+          "eventCount": 4
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47500,
+          "eventCount": 1
+        }
+      ]
+    },
+    "loadProgressBins500Ms": {
+      "binMs": 500,
+      "originMs": 28162.400000095367,
+      "bins": [
+        {
+          "startMs": 0,
+          "endMs": 500,
+          "eventCount": 6,
+          "requestQueuePeak": 31
+        },
+        {
+          "startMs": 14000,
+          "endMs": 14500,
+          "eventCount": 8,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 14500,
+          "endMs": 15000,
+          "eventCount": 11,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 15000,
+          "endMs": 15500,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 15500,
+          "endMs": 16000,
+          "eventCount": 12,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 16000,
+          "endMs": 16500,
+          "eventCount": 5,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 16500,
+          "endMs": 17000,
+          "eventCount": 3,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 17000,
+          "endMs": 17500,
+          "eventCount": 14,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 17500,
+          "endMs": 18000,
+          "eventCount": 7,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 18000,
+          "endMs": 18500,
+          "eventCount": 18,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 18500,
+          "endMs": 19000,
+          "eventCount": 9,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19000,
+          "endMs": 19500,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 19500,
+          "endMs": 20000,
+          "eventCount": 12,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 20000,
+          "endMs": 20500,
+          "eventCount": 4,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 24000,
+          "endMs": 24500,
+          "eventCount": 13,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 24500,
+          "endMs": 25000,
+          "eventCount": 11,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 25000,
+          "endMs": 25500,
+          "eventCount": 11,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 25500,
+          "endMs": 26000,
+          "eventCount": 5,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 26000,
+          "endMs": 26500,
+          "eventCount": 11,
+          "requestQueuePeak": 40
+        },
+        {
+          "startMs": 26500,
+          "endMs": 27000,
+          "eventCount": 12,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 27000,
+          "endMs": 27500,
+          "eventCount": 4,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 27500,
+          "endMs": 28000,
+          "eventCount": 15,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 28000,
+          "endMs": 28500,
+          "eventCount": 11,
+          "requestQueuePeak": 39
+        },
+        {
+          "startMs": 28500,
+          "endMs": 29000,
+          "eventCount": 9,
+          "requestQueuePeak": 40
+        },
+        {
+          "startMs": 29000,
+          "endMs": 29500,
+          "eventCount": 10,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 29500,
+          "endMs": 30000,
+          "eventCount": 6,
+          "requestQueuePeak": 38
+        },
+        {
+          "startMs": 30000,
+          "endMs": 30500,
+          "eventCount": 7,
+          "requestQueuePeak": 36
+        },
+        {
+          "startMs": 34000,
+          "endMs": 34500,
+          "eventCount": 10,
+          "requestQueuePeak": 32
+        },
+        {
+          "startMs": 34500,
+          "endMs": 35000,
+          "eventCount": 5,
+          "requestQueuePeak": 29
+        },
+        {
+          "startMs": 35000,
+          "endMs": 35500,
+          "eventCount": 14,
+          "requestQueuePeak": 26
+        },
+        {
+          "startMs": 35500,
+          "endMs": 36000,
+          "eventCount": 6,
+          "requestQueuePeak": 20
+        },
+        {
+          "startMs": 36000,
+          "endMs": 36500,
+          "eventCount": 5,
+          "requestQueuePeak": 18
+        },
+        {
+          "startMs": 36500,
+          "endMs": 37000,
+          "eventCount": 3,
+          "requestQueuePeak": 16
+        },
+        {
+          "startMs": 37000,
+          "endMs": 37500,
+          "eventCount": 10,
+          "requestQueuePeak": 13
+        },
+        {
+          "startMs": 37500,
+          "endMs": 38000,
+          "eventCount": 6,
+          "requestQueuePeak": 7
+        },
+        {
+          "startMs": 38000,
+          "endMs": 38500,
+          "eventCount": 5,
+          "requestQueuePeak": 4
+        },
+        {
+          "startMs": 44000,
+          "endMs": 44500,
+          "eventCount": 12,
+          "requestQueuePeak": 19
+        },
+        {
+          "startMs": 44500,
+          "endMs": 45000,
+          "eventCount": 2,
+          "requestQueuePeak": 14
+        },
+        {
+          "startMs": 45000,
+          "endMs": 45500,
+          "eventCount": 2,
+          "requestQueuePeak": 13
+        },
+        {
+          "startMs": 45500,
+          "endMs": 46000,
+          "eventCount": 6,
+          "requestQueuePeak": 12
+        },
+        {
+          "startMs": 46000,
+          "endMs": 46500,
+          "eventCount": 8,
+          "requestQueuePeak": 9
+        },
+        {
+          "startMs": 46500,
+          "endMs": 47000,
+          "eventCount": 7,
+          "requestQueuePeak": 5
+        },
+        {
+          "startMs": 47000,
+          "endMs": 47500,
+          "eventCount": 2,
+          "requestQueuePeak": 1
+        }
+      ]
+    }
+  },
+  "rows": [
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 2014.9999998569474,
+      "phaseId": "interaction-1",
+      "interacting": true,
+      "frameTimeMeanMs": 16.652892560801217,
+      "frameTimeP95Ms": 16.900000000001455,
+      "frameTimeP99Ms": 16.98000000000029,
+      "predictedFrameTimeP95Ms": 16.900000000001455,
+      "levelFrameTimeP95Ms": 16.900000000001455,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 6,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 7,
+      "visibleTileEvents": 0,
+      "visibleGeometricErrorMean": null,
+      "visibleGeometricErrorMax": null,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 2514.9999998569474,
+      "phaseId": "interaction-1",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.900000000001455,
+      "frameTimeP99Ms": 16.98000000000029,
+      "predictedFrameTimeP95Ms": 16.900000000001455,
+      "levelFrameTimeP95Ms": 16.900000000001455,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 6,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 7,
+      "visibleTileEvents": 0,
+      "visibleGeometricErrorMean": null,
+      "visibleGeometricErrorMax": null,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 3015.099999856946,
+      "phaseId": "interaction-1",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.900000000001455,
+      "frameTimeP99Ms": 16.981000000000275,
+      "predictedFrameTimeP95Ms": 16.900000000001455,
+      "levelFrameTimeP95Ms": 16.900000000001455,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 6,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 7,
+      "visibleTileEvents": 0,
+      "visibleGeometricErrorMean": null,
+      "visibleGeometricErrorMax": null,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 3515.099999856946,
+      "phaseId": "interaction-1",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.900000000001455,
+      "frameTimeP99Ms": 16.981000000000275,
+      "predictedFrameTimeP95Ms": 16.900000000001455,
+      "levelFrameTimeP95Ms": 16.900000000001455,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 6,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 7,
+      "visibleTileEvents": 0,
+      "visibleGeometricErrorMean": null,
+      "visibleGeometricErrorMax": null,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 4015.099999856946,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.805000000002472,
+      "frameTimeP99Ms": 16.900000000001455,
+      "predictedFrameTimeP95Ms": 16.805000000002472,
+      "levelFrameTimeP95Ms": 16.805000000002472,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 6,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 7,
+      "visibleTileEvents": 0,
+      "visibleGeometricErrorMean": null,
+      "visibleGeometricErrorMax": null,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 4531.699999856952,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.900000000001455,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 1,
+      "requestQueue": 38,
+      "requestQueueEnd": 19,
+      "loadProgressEventCount": 16,
+      "loadProgressEventsInterval": 10,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 9,
+      "visibleTileEvents": 29,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 5031.699999856952,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.66750000000005,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.980999999998893,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 25,
+      "loadProgressEventsInterval": 9,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 13,
+      "visibleTileEvents": 126,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 5548.29999985695,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.979999999998835,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 35,
+      "loadProgressEventsInterval": 10,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 19,
+      "visibleTileEvents": 241,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 6048.399999856949,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.80000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 38,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 41,
+      "loadProgressEventsInterval": 6,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 21,
+      "visibleTileEvents": 391,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 6564.999999856947,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.880000000001747,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 46,
+      "loadProgressEventsInterval": 5,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 23,
+      "visibleTileEvents": 481,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 7081.599999856946,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.900000000001455,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 37,
+      "processingTiles": 2,
+      "requestQueue": 39,
+      "requestQueueEnd": 39,
+      "loadProgressEventCount": 55,
+      "loadProgressEventsInterval": 9,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 26,
+      "visibleTileEvents": 528,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 7581.699999856952,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.89999999999418,
+      "frameTimeP99Ms": 17.20000000000291,
+      "predictedFrameTimeP95Ms": 16.89999999999418,
+      "levelFrameTimeP95Ms": 16.89999999999418,
+      "pendingRequests": 18,
+      "processingTiles": 1,
+      "requestQueue": 39,
+      "requestQueueEnd": 19,
+      "loadProgressEventCount": 65,
+      "loadProgressEventsInterval": 10,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 32,
+      "visibleTileEvents": 697,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 8098.29999985695,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.89999999999418,
+      "frameTimeP99Ms": 17.20000000000291,
+      "predictedFrameTimeP95Ms": 16.89999999999418,
+      "levelFrameTimeP95Ms": 16.89999999999418,
+      "pendingRequests": 18,
+      "processingTiles": 1,
+      "requestQueue": 38,
+      "requestQueueEnd": 19,
+      "loadProgressEventCount": 79,
+      "loadProgressEventsInterval": 14,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 37,
+      "visibleTileEvents": 844,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 8614.999999856947,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667768595041288,
+      "frameTimeP95Ms": 16.89999999999418,
+      "frameTimeP99Ms": 17.20000000000291,
+      "predictedFrameTimeP95Ms": 16.89999999999418,
+      "levelFrameTimeP95Ms": 16.89999999999418,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 94,
+      "loadProgressEventsInterval": 15,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 43,
+      "visibleTileEvents": 1033,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 9114.999999856947,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667768595041288,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.20000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 38,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 97,
+      "loadProgressEventsInterval": 3,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 44,
+      "visibleTileEvents": 1099,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 9615.099999856946,
+      "phaseId": "recovery-1",
+      "interacting": false,
+      "frameTimeMeanMs": 16.668333333333308,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.900000000001455,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 38,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 106,
+      "loadProgressEventsInterval": 9,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 48,
+      "visibleTileEvents": 1162,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 10131.599999856946,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.13999999999796,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 13,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 1133,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 10631.699999856952,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.19999999999709,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 420,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 11131.699999856952,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.66750000000005,
+      "frameTimeP95Ms": 16.80500000000284,
+      "frameTimeP99Ms": 17.28099999999591,
+      "predictedFrameTimeP95Ms": 16.80500000000284,
+      "levelFrameTimeP95Ms": 16.80500000000284,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 645,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 11648.29999985695,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667768595041345,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.300000000001454,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 713,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 12148.29999985695,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.900000000001455,
+      "frameTimeP99Ms": 17.300000000001454,
+      "predictedFrameTimeP95Ms": 16.900000000001455,
+      "levelFrameTimeP95Ms": 16.900000000001455,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 690,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 12648.29999985695,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.89999999999418,
+      "frameTimeP99Ms": 17.259999999996214,
+      "predictedFrameTimeP95Ms": 16.89999999999418,
+      "levelFrameTimeP95Ms": 16.89999999999418,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 830,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 13148.29999985695,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.89999999999418,
+      "frameTimeP99Ms": 17.099999999998545,
+      "predictedFrameTimeP95Ms": 16.89999999999418,
+      "levelFrameTimeP95Ms": 16.89999999999418,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 1351,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 13664.899999856949,
+      "phaseId": "interaction-2",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.059999999999125,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 119,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 53,
+      "visibleTileEvents": 1399,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 14164.899999856949,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.80000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 27,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 123,
+      "loadProgressEventsInterval": 4,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 54,
+      "visibleTileEvents": 1255,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 14665.099999856946,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.668333333333308,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.88100000000173,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 1,
+      "requestQueue": 39,
+      "requestQueueEnd": 19,
+      "loadProgressEventCount": 141,
+      "loadProgressEventsInterval": 18,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 60,
+      "visibleTileEvents": 1414,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 15181.599999856946,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.880000000001747,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 38,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 148,
+      "loadProgressEventsInterval": 7,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 63,
+      "visibleTileEvents": 1602,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 15681.599999856946,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.900000000001455,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 156,
+      "loadProgressEventsInterval": 8,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 67,
+      "visibleTileEvents": 1664,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 16198.29999985695,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.88100000000173,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 2,
+      "requestQueue": 38,
+      "requestQueueEnd": 20,
+      "loadProgressEventCount": 167,
+      "loadProgressEventsInterval": 11,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 70,
+      "visibleTileEvents": 1805,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 16714.89999985695,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.880000000001747,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 40,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 176,
+      "loadProgressEventsInterval": 9,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 76,
+      "visibleTileEvents": 1992,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 17214.89999985695,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.900000000001455,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 183,
+      "loadProgressEventsInterval": 7,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 79,
+      "visibleTileEvents": 2047,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 17714.999999856947,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.880000000001747,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 37,
+      "processingTiles": 1,
+      "requestQueue": 39,
+      "requestQueueEnd": 38,
+      "loadProgressEventCount": 199,
+      "loadProgressEventsInterval": 16,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 85,
+      "visibleTileEvents": 2138,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 18231.599999856946,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.88100000000173,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 39,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 212,
+      "loadProgressEventsInterval": 13,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 91,
+      "visibleTileEvents": 2423,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 18748.19999985695,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.80000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 40,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 219,
+      "loadProgressEventsInterval": 7,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 96,
+      "visibleTileEvents": 2580,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 19248.19999985695,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479388,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.80000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 38,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 231,
+      "loadProgressEventsInterval": 12,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 102,
+      "visibleTileEvents": 2643,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 19748.29999985695,
+      "phaseId": "recovery-2",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.80000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 38,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 237,
+      "loadProgressEventsInterval": 6,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 104,
+      "visibleTileEvents": 2787,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 20248.29999985695,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.80000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 36,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 7,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 1793,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 20748.29999985695,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.980999999998893,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 551,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 21248.29999985695,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 764,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 21748.29999985695,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667768595041345,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.15999999999767,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 900,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 22248.39999985695,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.28099999999591,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 955,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 22764.89999985695,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.38000000000029,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 2188,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 23264.999999856947,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.64299999999792,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 3014,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 23781.499999856947,
+      "phaseId": "interaction-3",
+      "interacting": true,
+      "frameTimeMeanMs": 16.665289256198346,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.67999999999738,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 244,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 3020,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 24281.499999856947,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.67999999999738,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 31,
+      "processingTiles": 1,
+      "requestQueue": 32,
+      "requestQueueEnd": 32,
+      "loadProgressEventCount": 248,
+      "loadProgressEventsInterval": 4,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 108,
+      "visibleTileEvents": 2519,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 24781.599999856946,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.542999999999374,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 32,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 259,
+      "loadProgressEventsInterval": 11,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 114,
+      "visibleTileEvents": 2554,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 25281.599999856946,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.220000000001164,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 22,
+      "processingTiles": 1,
+      "requestQueue": 26,
+      "requestQueueEnd": 23,
+      "loadProgressEventCount": 268,
+      "loadProgressEventsInterval": 9,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 117,
+      "visibleTileEvents": 2641,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 25781.599999856946,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.081000000004714,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 18,
+      "processingTiles": 0,
+      "requestQueue": 23,
+      "requestQueueEnd": 18,
+      "loadProgressEventCount": 279,
+      "loadProgressEventsInterval": 11,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 122,
+      "visibleTileEvents": 2798,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 26281.599999856946,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667499999999986,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.081000000004714,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 17,
+      "processingTiles": 0,
+      "requestQueue": 18,
+      "requestQueueEnd": 17,
+      "loadProgressEventCount": 281,
+      "loadProgressEventsInterval": 2,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 123,
+      "visibleTileEvents": 2866,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 26798.19999985695,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479388,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.98000000000029,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 13,
+      "processingTiles": 0,
+      "requestQueue": 17,
+      "requestQueueEnd": 13,
+      "loadProgressEventCount": 287,
+      "loadProgressEventsInterval": 6,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 127,
+      "visibleTileEvents": 3071,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 27314.89999985695,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479328,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.98000000000029,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 8,
+      "processingTiles": 0,
+      "requestQueue": 13,
+      "requestQueueEnd": 8,
+      "loadProgressEventCount": 296,
+      "loadProgressEventsInterval": 9,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 132,
+      "visibleTileEvents": 3179,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 27831.499999856955,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760366,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.879999999995924,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 5,
+      "processingTiles": 0,
+      "requestQueue": 8,
+      "requestQueueEnd": 5,
+      "loadProgressEventCount": 302,
+      "loadProgressEventsInterval": 6,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 135,
+      "visibleTileEvents": 3305,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 28331.69999985695,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.66833333333337,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.900000000000073,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 5,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 6,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 3313,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 28848.099999856946,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.665289256198346,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.89999999999418,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 3503,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 29348.19999985695,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.89999999999418,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 3390,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 29848.19999985695,
+      "phaseId": "recovery-3",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 3390,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 30348.39999985695,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.668333333333308,
+      "frameTimeP95Ms": 16.89999999999418,
+      "frameTimeP99Ms": 17.161999999997644,
+      "predictedFrameTimeP95Ms": 16.89999999999418,
+      "levelFrameTimeP95Ms": 16.89999999999418,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 1561,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 30864.89999985695,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.667768595041345,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.15999999999767,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 821,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 31364.89999985695,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.15999999999767,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 1050,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 31864.89999985695,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.06000000000349,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 1050,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 32364.89999985695,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.66750000000005,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.043000000005268,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 1225,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 32881.39999985695,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.665289256198346,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.06000000000349,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 2781,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 33381.499999856955,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666115702479388,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.0600000000064,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 3857,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 33881.499999856955,
+      "phaseId": "interaction-4",
+      "interacting": true,
+      "frameTimeMeanMs": 16.666115702479388,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.90000000000582,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 308,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 140,
+      "visibleTileEvents": 3408,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 34381.599999856946,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.90000000000582,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 14,
+      "processingTiles": 0,
+      "requestQueue": 19,
+      "requestQueueEnd": 14,
+      "loadProgressEventCount": 320,
+      "loadProgressEventsInterval": 12,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 145,
+      "visibleTileEvents": 3065,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 34898.19999985695,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.667768595041345,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.220000000004074,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 13,
+      "processingTiles": 0,
+      "requestQueue": 14,
+      "requestQueueEnd": 13,
+      "loadProgressEventCount": 322,
+      "loadProgressEventsInterval": 2,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 146,
+      "visibleTileEvents": 3293,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 35398.19999985695,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666942148760306,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.24000000000233,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 12,
+      "processingTiles": 0,
+      "requestQueue": 13,
+      "requestQueueEnd": 12,
+      "loadProgressEventCount": 324,
+      "loadProgressEventsInterval": 2,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 147,
+      "visibleTileEvents": 3216,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 35914.79999985694,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.665289256198346,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.24000000000233,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 9,
+      "processingTiles": 0,
+      "requestQueue": 12,
+      "requestQueueEnd": 9,
+      "loadProgressEventCount": 330,
+      "loadProgressEventsInterval": 6,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 150,
+      "visibleTileEvents": 3399,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 36414.79999985694,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.666115702479267,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.30000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 5,
+      "processingTiles": 0,
+      "requestQueue": 9,
+      "requestQueueEnd": 5,
+      "loadProgressEventCount": 338,
+      "loadProgressEventsInterval": 8,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 154,
+      "visibleTileEvents": 3391,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 36914.89999985695,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.805833333333307,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.30000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 1,
+      "requestQueue": 5,
+      "requestQueueEnd": 1,
+      "loadProgressEventCount": 346,
+      "loadProgressEventsInterval": 8,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 158,
+      "visibleTileEvents": 3400,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 37414.999999856955,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.808403361344634,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.30000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 1,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 347,
+      "loadProgressEventsInterval": 1,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 159,
+      "visibleTileEvents": 3599,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 37931.599999856946,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.808403361344514,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.30000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 347,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 159,
+      "visibleTileEvents": 3720,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 38448.19999985695,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.80500000000005,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 17.04299999999348,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 347,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 159,
+      "visibleTileEvents": 3720,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 38948.29999985694,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.668333333333308,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.80000000000291,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 347,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 159,
+      "visibleTileEvents": 3600,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 39448.499999856955,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.670000000000073,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.962000000000554,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 347,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 159,
+      "visibleTileEvents": 3600,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    },
+    {
+      "schemaVersion": 2,
+      "runId": "pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi",
+      "elapsedMs": 39964.89999985695,
+      "phaseId": "recovery-4",
+      "interacting": false,
+      "frameTimeMeanMs": 16.66750000000005,
+      "frameTimeP95Ms": 16.80000000000291,
+      "frameTimeP99Ms": 16.98100000000166,
+      "predictedFrameTimeP95Ms": 16.80000000000291,
+      "levelFrameTimeP95Ms": 16.80000000000291,
+      "pendingRequests": 0,
+      "processingTiles": 0,
+      "requestQueue": 0,
+      "requestQueueEnd": 0,
+      "loadProgressEventCount": 347,
+      "loadProgressEventsInterval": 0,
+      "requestPressureHigh": false,
+      "tilesLoadedTotal": 159,
+      "visibleTileEvents": 3720,
+      "visibleGeometricErrorMean": 0,
+      "visibleGeometricErrorMax": 0,
+      "sse": 4,
+      "controllerState": "STABLE",
+      "action": "HOLD",
+      "reason": "fixed-baseline",
+      "drawingBufferWidth": 960,
+      "drawingBufferHeight": 540
+    }
+  ]
+}

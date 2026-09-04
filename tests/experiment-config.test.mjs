@@ -8,6 +8,8 @@ import {
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
   buildD2S3PilotQueue,
+  buildAndroidIdentifiabilityDiagnosticQueue,
+  buildServerTopologyDiagnosticQueue,
   buildMainExperimentQueue,
   buildPiCalibrationQueue,
   buildScenarioTimeline,
@@ -53,6 +55,9 @@ test("manifest records protocol v2 provenance, device and network fields", () =>
     browserVersion: "Chrome 140",
     gpuRenderer: "Test GPU",
     studyPhase: "pilot",
+    serverTopology: "local",
+    pageOrigin: "http://localhost:8088",
+    pageHost: "localhost:8088",
   });
 
   assert.equal(manifest.schemaVersion, 2);
@@ -72,6 +77,9 @@ test("manifest records protocol v2 provenance, device and network fields", () =>
   assert.equal(manifest.browserVersion, "Chrome 140");
   assert.equal(manifest.gpuRenderer, "Test GPU");
   assert.equal(manifest.studyPhase, "pilot");
+  assert.equal(manifest.serverTopology, "local");
+  assert.equal(manifest.pageOrigin, "http://localhost:8088");
+  assert.equal(manifest.pageHost, "localhost:8088");
   assert.equal(manifest.pilotPurpose, "none");
   assert.equal(manifest.datasetVersion, DATASETS.dragon.version);
   assert.equal(manifest.sourceLicense, DATASETS.dragon.license);
@@ -147,6 +155,43 @@ test("D2/S3 pilot queue schedules Rotterdam pressureBurst paired blocks outside 
       [...FROZEN_PROTOCOL.methods].sort(),
     );
   }
+});
+
+test("Android identifiability diagnostic uses fixed SSE 4 outside formal methods", () => {
+  const queue = buildAndroidIdentifiabilityDiagnosticQueue();
+  assert.equal(queue.length, 2);
+  assert.deepEqual(
+    queue.map((run) => run.dataset).sort(),
+    ["bagAmsterdam", "bagRotterdam"],
+  );
+  assert.ok(queue.every((run) => run.scenario === "pressureBurst"));
+  assert.ok(queue.every((run) => run.method === "fixedDiagnostic"));
+  assert.ok(queue.every((run) => run.methodParameters.fixedSse === 4));
+  assert.ok(queue.every((run) => run.fixedSse === 4));
+  assert.ok(queue.every((run) => run.networkProfile === "lan"));
+  assert.ok(queue.every((run) => run.studyPhase === "diagnostic"));
+  assert.ok(queue.every((run) => run.diagnosticPurpose === "android-workload-identifiability"));
+  assert.ok(queue.every((run) => run.excludeFromFormalAggregation === true));
+  assert.ok(!FROZEN_PROTOCOL.methods.includes("fixedDiagnostic"));
+});
+
+test("server-topology diagnostic uses fixed SSE 4 outside pilot and formal methods", () => {
+  const queue = buildServerTopologyDiagnosticQueue({
+    seed: 20260823,
+    serverTopology: "remote",
+  });
+  assert.equal(queue.length, 1);
+  assert.equal(queue[0].dataset, "bagAmsterdam");
+  assert.equal(queue[0].scenario, "pressureBurst");
+  assert.equal(queue[0].method, "fixedDiagnostic");
+  assert.equal(queue[0].methodParameters.fixedSse, 4);
+  assert.equal(queue[0].fixedSse, 4);
+  assert.equal(queue[0].networkProfile, "lan");
+  assert.equal(queue[0].studyPhase, "diagnostic");
+  assert.equal(queue[0].diagnosticPurpose, "server-topology-identifiability");
+  assert.equal(queue[0].excludeFromFormalAggregation, true);
+  assert.equal(queue[0].serverTopology, "remote");
+  assert.ok(!FROZEN_PROTOCOL.methods.includes("fixedDiagnostic"));
 });
 
 test("D1/S2 pressure probe schedules one auditable six-method pilot block", () => {

@@ -5,12 +5,12 @@
 | Field | Meaning |
 | --- | --- |
 | `schemaVersion` | Result schema version. |
-| `protocolVersion` | Frozen protocol identifier, currently `2.3.5`. |
+| `protocolVersion` | Frozen protocol identifier, currently `2.3.6`. |
 | `runId` | Unique, filesystem-safe run identifier. |
 | `createdAt` | ISO timestamp at manifest creation. |
-| `method` | Baseline, proposed method, or ablation identifier. |
+| `method` | Baseline, proposed method, ablation identifier, or diagnostic-only identifier. `fixedDiagnostic` is not part of the formal six-method set. |
 | `dataset` | Calibration/diagnostic or formal dataset identifier; protocol-v2 confirmation uses `bagAmsterdam` and `bagRotterdam`. |
-| `scenario` | `steady` or `burst`. |
+| `scenario` | `steady`, `burst`, or v2.3.6 `pressureBurst`. |
 | `repeat` | Independent repetition number within a paired block. |
 | `retryAttempt` | Zero for the scheduled attempt, one or two for automatic invalid-run replacements. |
 | `seed` | Method-order and path seed. |
@@ -27,8 +27,13 @@
 | `datasetVersion`, `sourceSha256`, `sourceLicense` | Frozen data identity and publication-rights fields. |
 | `deviceId` | Researcher-assigned physical device identifier used for statistical strata. |
 | `networkProfile` | `lan`, `delay40`, or `delay80`; delay profiles are diagnostic-only. |
-| `studyPhase` | `tuning`, `pilot`, `confirmatory`, or `adHoc`; only `confirmatory` rows enter formal statistical tests. Legacy records are retained as audit evidence. |
+| `studyPhase` | `tuning`, `pilot`, `diagnostic`, `confirmatory`, or `adHoc`; only `confirmatory` rows enter formal statistical tests. Legacy records are retained as audit evidence. |
 | `pilotPurpose` | `request-peak-probe`, `full-pilot`, `none`, or `legacy`; identifies the non-confirmatory pilot intent. |
+| `diagnosticPurpose` | Diagnostic-only purpose label, such as `android-workload-identifiability`; `none` otherwise. |
+| `fixedSse` | Fixed SSE value for diagnostic-only fixed-SSE runs, such as Android fixed4; empty otherwise. |
+| `excludeFromFormalAggregation` | Boolean flag marking records that must be excluded from pilot, confirmatory, and six-method aggregation. Diagnostic fixed4 records set this to true. |
+| `serverTopology` | Diagnostic server-delivery label, currently `remote`, `local`, or `unspecified`; used for PC-B server-topology identifiability checks only. |
+| `pageOrigin`, `pageHost` | Benchmark page origin/host captured at runtime to audit whether a diagnostic run came from a LAN server or a local server. |
 | `browserVersion`, `gpuRenderer` | Captured browser and WebGL renderer identity. |
 | `methodParameters` | Frozen method-specific parameters, including PI gains during calibration. |
 | `userAgent` | Browser and operating-system identifier. |
@@ -83,13 +88,24 @@
 | `missedPreemptiveOpportunityCount` | Analysis-derived number of preemptive-opportunity windows that were not labeled as `predicted-tail-plus-request-pressure`. |
 | `tailDowngradeUnderPressureCount` | Analysis-derived number of tail-violation downgrades that occurred while request pressure was high. |
 | `rawFrameTimeP95Ms`, `rawFrameTimeP99Ms` | Percentiles over measured rAF frame intervals. |
+| `rawFrameTimeMaxMs` | Maximum measured rAF frame interval; diagnostic characterization only unless explicitly promoted in a later protocol. |
+| `frameTimeOver20Rate` | Diagnostic proportion of individual frame intervals over 20 ms, useful for Android missed-frame characterization but not the formal protocol target. |
 | `frameBudgetViolationRate` | Proportion of individual frame intervals over budget; secondary only. |
+| `frameTimeHistogram` | Diagnostic frame-time histogram with bins around 20 ms, the 33.33 ms budget, 50 ms, and 66.67 ms. |
 | `timeWeightedMeanSse` | Runtime quality-control proxy; lower is more detailed. |
 | `requestQueuePeak`, `requestQueueAuc` | Peak and time integral of the control-interval request maxima. |
 | `loadProgressEventCount` | Total public `loadProgress` event count across the run. |
 | `switchCount`, `reversalCount`, `switchesPerMinute` | Controller stability metrics. |
 | `firstStableDisplayMs` | Time from post-load initialization to one second of an empty queue after content load. |
 | `resourceCount`, `transferBytes`, `encodedBodyBytes` | Resource Timing API totals for the unique run route. |
+| `resourceCompletionPeak100Ms`, `resourceCompletionPeak250Ms`, `resourceCompletionPeak500Ms` | Diagnostic-only peak count of benchmark asset completions in 100, 250, and 500 ms bins. Used to compare delivery burstiness between remote and local server topology. |
+| `resourceCompletionTransferBytesPeak100Ms`, `resourceCompletionTransferBytesPeak250Ms`, `resourceCompletionTransferBytesPeak500Ms` | Diagnostic-only peak transferred bytes completed in 100, 250, and 500 ms bins. |
+| `tileLoadPeak100Ms`, `tileLoadPeak250Ms`, `tileLoadPeak500Ms` | Diagnostic-only peak public `tileLoad` event count in 100, 250, and 500 ms bins. |
+| `loadProgressEventPeak100Ms`, `loadProgressEventPeak250Ms`, `loadProgressEventPeak500Ms` | Diagnostic-only peak public `loadProgress` event count in 100, 250, and 500 ms bins. |
+| `loadProgressQueuePeak100Ms`, `loadProgressQueuePeak250Ms`, `loadProgressQueuePeak500Ms` | Diagnostic-only peak public request queue observed inside 100, 250, and 500 ms load-progress bins. |
+| `resourceCompletionBins100Ms`, `resourceCompletionBins250Ms`, `resourceCompletionBins500Ms` | JSON diagnostic bin summaries for benchmark asset completion timing and bytes. |
+| `tileLoadBins100Ms`, `tileLoadBins250Ms`, `tileLoadBins500Ms` | JSON diagnostic bin summaries for public `tileLoad` event timing. |
+| `loadProgressBins100Ms`, `loadProgressBins250Ms`, `loadProgressBins500Ms` | JSON diagnostic bin summaries for public `loadProgress` event timing and request-queue peaks. |
 | `stateWindowCounts` | Number of control windows in each controller state. |
 | `predictionMaeMs`, `persistenceMaeMs` | One-second forecast MAE and current-P95 persistence baseline MAE. |
 | `violationPrecision`, `violationRecall`, `violationF1` | Forecasted tail-violation classification diagnostics. |

@@ -6,6 +6,8 @@ import {
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
   buildD2S3PilotQueue,
+  buildAndroidIdentifiabilityDiagnosticQueue,
+  buildServerTopologyDiagnosticQueue,
   buildMainExperimentQueue,
   buildPiCalibrationQueue,
   createRunManifest,
@@ -25,6 +27,7 @@ import {
 import {
   FrameTimeWindow,
   percentile,
+  summarizeFrameTimeDistribution,
   summarizeForecast,
   summarizeRun,
   validateRunEvidence,
@@ -32,7 +35,11 @@ import {
 import { buildControllerSample } from "./controller-sample.mjs";
 import { downloadText, rowsToCsv, sanitizeForJson } from "./result-export.mjs";
 import { getScenarioFrame } from "./scenario-driver.mjs";
-import { TilesetTelemetry, summarizeResourceEntries } from "./tileset-telemetry.mjs";
+import {
+  TilesetTelemetry,
+  summarizeResourceEntries,
+  summarizeStreamingTemporalStructure,
+} from "./tileset-telemetry.mjs";
 
 const Cesium = globalThis.Cesium;
 if (!Cesium) throw new Error("Cesium failed to load");
@@ -40,7 +47,7 @@ if (!Cesium) throw new Error("Cesium failed to load");
 const elements = Object.fromEntries(
   [
     "runForm", "method", "dataset", "scenario", "networkProfile", "deviceId", "repeat", "seed",
-    "runSingle", "stopRun", "runMainBatch", "runAblationBatch", "runD1S2Pilot", "runD2S3Pilot", "runD1S2PressureProbe", "runPiCalibration", "downloadJson",
+    "runSingle", "stopRun", "runMainBatch", "runAblationBatch", "runD1S2Pilot", "runD2S3Pilot", "runAndroidIdentifiabilityDiagnostic", "runServerTopologyDiagnostic", "runD1S2PressureProbe", "runPiCalibration", "downloadJson",
     "downloadCsv", "runState", "runProgress", "progressBar", "resultsBody", "hud",
     "bufferSize", "metricP95", "metricPredicted", "metricSse", "metricQueue",
     "metricState", "metricAction", "viewportFrame",
@@ -63,6 +70,7 @@ const state = {
 };
 
 for (const [id, method] of Object.entries(EXPERIMENT_METHODS)) {
+  if (method.diagnosticOnly) continue;
   const option = document.createElement("option");
   option.value = id;
   option.textContent = method.label;
@@ -160,6 +168,8 @@ function setRunning(running) {
   elements.runAblationBatch.disabled = running;
   elements.runD1S2Pilot.disabled = running;
   elements.runD2S3Pilot.disabled = running;
+  elements.runAndroidIdentifiabilityDiagnostic.disabled = running;
+  elements.runServerTopologyDiagnostic.disabled = running;
   elements.runD1S2PressureProbe.disabled = running;
   elements.runPiCalibration.disabled = running;
   elements.stopRun.disabled = !running;
@@ -168,6 +178,12 @@ function setRunning(running) {
   elements.scenario.disabled = running;
   elements.networkProfile.disabled = running;
   elements.deviceId.disabled = running;
+}
+
+function inferServerTopology() {
+  const host = location.hostname.toLowerCase();
+  if (["localhost", "127.0.0.1", "::1"].includes(host)) return "local";
+  return "remote";
 }
 
 function makeRunId(condition) {
@@ -340,6 +356,12 @@ function summaryRow(result) {
     networkProfile: result.manifest.networkProfile,
     studyPhase: result.manifest.studyPhase,
     pilotPurpose: result.manifest.pilotPurpose,
+    diagnosticPurpose: result.manifest.diagnosticPurpose,
+    fixedSse: result.manifest.fixedSse,
+    excludeFromFormalAggregation: result.manifest.excludeFromFormalAggregation,
+    serverTopology: result.manifest.serverTopology,
+    pageOrigin: result.manifest.pageOrigin,
+    pageHost: result.manifest.pageHost,
     valid: result.valid,
     invalidReasons: result.invalidReasons.join("|"),
     ...result.summary,
@@ -444,6 +466,7 @@ async function runCondition(condition) {
     ...condition,
     networkProfile: condition.networkProfile ?? elements.networkProfile.value,
     deviceId: condition.deviceId ?? (elements.deviceId.value.trim() || "unregistered"),
+    serverTopology: condition.serverTopology ?? inferServerTopology(),
   };
   const runId = makeRunId(condition);
   const smokeWarmupMs = 500;
@@ -456,6 +479,12 @@ async function runCondition(condition) {
       runId,
       deviceId: condition.deviceId,
       networkProfile: condition.networkProfile,
+      diagnosticPurpose: condition.diagnosticPurpose,
+      fixedSse: condition.fixedSse,
+      excludeFromFormalAggregation: condition.excludeFromFormalAggregation,
+      serverTopology: condition.serverTopology,
+      pageOrigin: location.origin,
+      pageHost: location.host,
       browserVersion: navigator.userAgentData?.brands
         ?.map((brand) => `${brand.brand} ${brand.version}`)
         .join(", ") ?? navigator.userAgent,
@@ -590,10 +619,14 @@ async function runCondition(condition) {
     });
 
     if (state.resizeDuringRun) invalidReasons.push("drawing-buffer-resized");
-    const resources = summarizeResourceEntries(
-      performance.getEntriesByType("resource"),
-      loaded.assetPrefix,
-    );
+    const resourceEntries = performance.getEntriesByType("resource");
+    const resources = summarizeResourceEntries(resourceEntries, loaded.assetPrefix);
+    const streamingTemporalStructure = summarizeStreamingTemporalStructure({
+      resourceEntries,
+      pathPrefix: loaded.assetPrefix,
+      tileLoadEvents: telemetry.tileLoadEvents,
+      loadProgressEvents: telemetry.loadProgressEvents,
+    });
     invalidReasons.push(
       ...validateRunEvidence({
         rowCount: rows.length,
@@ -613,11 +646,9 @@ async function runCondition(condition) {
       }),
       rawFrameTimeP95Ms: percentile(measurementFrames, 0.95),
       rawFrameTimeP99Ms: percentile(measurementFrames, 0.99),
-      frameBudgetViolationRate:
-        measurementFrames.length > 0
-          ? measurementFrames.filter((value) => value > FROZEN_PROTOCOL.frameBudgetMs).length /
-            measurementFrames.length
-          : null,
+      ...summarizeFrameTimeDistribution(measurementFrames, {
+        frameBudgetMs: FROZEN_PROTOCOL.frameBudgetMs,
+      }),
       preRunReadinessReady: readiness?.ready ?? false,
       preRunReadinessWaitMs: readiness?.waitMs ?? null,
       preRunReadinessP95Ms: readiness?.p95Ms ?? null,
@@ -631,6 +662,8 @@ async function runCondition(condition) {
       tileFailureCount: telemetry.tileFailures.length,
       stateWindowCounts: summarizeStates(rows),
       ...resources,
+      ...streamingTemporalStructure.metrics,
+      ...streamingTemporalStructure.summaries,
     };
     const result = sanitizeForJson({
       manifest,
@@ -769,6 +802,25 @@ elements.runD2S3Pilot.addEventListener("click", () => {
     { requireReady: true, requirePiFrozen: true },
   );
 });
+elements.runAndroidIdentifiabilityDiagnostic.addEventListener("click", () => {
+  void runQueue(
+    buildAndroidIdentifiabilityDiagnosticQueue({
+      repeats: smokeMode ? 1 : 1,
+      seed: Number(elements.seed.value),
+    }),
+    { requireReady: true },
+  );
+});
+elements.runServerTopologyDiagnostic.addEventListener("click", () => {
+  void runQueue(
+    buildServerTopologyDiagnosticQueue({
+      repeats: smokeMode ? 1 : 1,
+      seed: Number(elements.seed.value),
+      serverTopology: inferServerTopology(),
+    }),
+    { requireReady: true },
+  );
+});
 elements.runD1S2PressureProbe.addEventListener("click", () => {
   void runQueue(
     buildD1S2PressureProbeQueue({ seed: Number(elements.seed.value) }),
@@ -810,6 +862,8 @@ window.__lodBenchmark = {
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
   buildD2S3PilotQueue,
+  buildAndroidIdentifiabilityDiagnosticQueue,
+  buildServerTopologyDiagnosticQueue,
   buildPiCalibrationQueue,
   viewer,
 };

@@ -15,6 +15,33 @@ export function percentile(values, probability) {
   return sorted[lower] + (sorted[upper] - sorted[lower]) * fraction;
 }
 
+export function summarizeFrameTimeDistribution(values, options = {}) {
+  const sorted = finiteValues(values);
+  const frameBudgetMs = options.frameBudgetMs ?? 1000 / 30;
+  const diagnosticBudgetBinMs = Math.round(frameBudgetMs * 100) / 100;
+  const bins = [
+    { binStartMs: 0, binEndMs: 20 },
+    { binStartMs: 20, binEndMs: diagnosticBudgetBinMs },
+    { binStartMs: diagnosticBudgetBinMs, binEndMs: 50 },
+    { binStartMs: 50, binEndMs: 66.67 },
+    { binStartMs: 66.67, binEndMs: null },
+  ];
+  const histogram = bins.map((bin) => ({
+    ...bin,
+    count: sorted.filter((value) =>
+      value >= bin.binStartMs && (bin.binEndMs === null || value < bin.binEndMs)
+    ).length,
+  }));
+  return {
+    rawFrameTimeMaxMs: sorted.length > 0 ? Math.max(...sorted) : null,
+    frameTimeOver20Rate:
+      sorted.length > 0 ? sorted.filter((value) => value > 20).length / sorted.length : null,
+    frameBudgetViolationRate:
+      sorted.length > 0 ? sorted.filter((value) => value > frameBudgetMs).length / sorted.length : null,
+    frameTimeHistogram: histogram,
+  };
+}
+
 export function assertFiniteTelemetry(row) {
   const requiredFinite = ["frameTimeP95Ms", "sse"];
   for (const key of requiredFinite) {

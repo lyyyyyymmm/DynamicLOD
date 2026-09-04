@@ -256,6 +256,160 @@ class StatisticalHelpersTest(unittest.TestCase):
             self.assertIn("Valid confirmatory runs: 0", status)
             self.assertIn("Complete six-method paired blocks: 0", status)
 
+    def test_android_identifiability_diagnostic_exports_distribution_metrics(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            input_dir = root / "input"
+            output_dir = root / "output"
+            input_dir.mkdir()
+            payload = {
+                "manifest": {
+                    "runId": "android-fixed4-d1",
+                    "method": "fixedDiagnostic",
+                    "dataset": "bagAmsterdam",
+                    "scenario": "pressureBurst",
+                    "repeat": 1,
+                    "seed": 20260823,
+                    "userAgent": "Android Chrome",
+                    "deviceId": "android-a",
+                    "studyPhase": "diagnostic",
+                    "diagnosticPurpose": "android-workload-identifiability",
+                    "fixedSse": 4,
+                    "excludeFromFormalAggregation": True,
+                    "networkProfile": "lan",
+                },
+                "valid": True,
+                "invalidReasons": [],
+                "summary": {
+                    "violationRate": 0.0,
+                    "frameTimeP95Ms": 16.7,
+                    "frameTimeP99Ms": 33.3,
+                    "rawFrameTimeP95Ms": 16.7,
+                    "rawFrameTimeP99Ms": 33.3,
+                    "rawFrameTimeMaxMs": 50.0,
+                    "frameTimeOver20Rate": 0.10,
+                    "frameBudgetViolationRate": 0.02,
+                    "requestQueuePeak": 42,
+                    "requestQueueAuc": 12345.0,
+                    "tilesLoadedTotal": 120,
+                    "transferBytes": 80000000,
+                    "loadProgressEventCount": 200,
+                    "frameTimeHistogram": [
+                        {"binStartMs": 0, "binEndMs": 20, "count": 90},
+                        {"binStartMs": 20, "binEndMs": 33.33, "count": 8},
+                        {"binStartMs": 33.33, "binEndMs": 50, "count": 2},
+                    ],
+                },
+            }
+            (input_dir / "android-fixed4-d1.json").write_text(
+                json.dumps(payload), encoding="utf-8"
+            )
+
+            self.assertEqual(run_analysis(input_dir, output_dir), 0)
+            with (output_dir / "android_identifiability_diagnostics.csv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle))
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0]["method"], "fixedDiagnostic")
+            self.assertEqual(rows[0]["studyPhase"], "diagnostic")
+            self.assertEqual(rows[0]["diagnosticPurpose"], "android-workload-identifiability")
+            self.assertEqual(rows[0]["fixedSse"], "4")
+            self.assertEqual(rows[0]["excludeFromFormalAggregation"], "True")
+            self.assertEqual(float(rows[0]["frameTimeOver20Rate"]), 0.10)
+            self.assertEqual(float(rows[0]["rawFrameTimeMaxMs"]), 50.0)
+            self.assertIn("binStartMs", rows[0]["frameTimeHistogram"])
+            status = (output_dir / "STATUS.md").read_text(encoding="utf-8")
+            self.assertIn("Valid diagnostic runs: 1", status)
+            self.assertIn("Valid pilot runs: 0", status)
+            self.assertIn("Valid confirmatory runs: 0", status)
+
+    def test_server_topology_diagnostic_exports_temporal_delivery_metrics(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            input_dir = root / "input"
+            output_dir = root / "output"
+            input_dir.mkdir()
+            payload = {
+                "manifest": {
+                    "runId": "pc-b-local-fixed4-d1",
+                    "method": "fixedDiagnostic",
+                    "dataset": "bagAmsterdam",
+                    "scenario": "pressureBurst",
+                    "repeat": 1,
+                    "seed": 20260823,
+                    "userAgent": "Chrome",
+                    "deviceId": "pc-b",
+                    "studyPhase": "diagnostic",
+                    "diagnosticPurpose": "server-topology-identifiability",
+                    "fixedSse": 4,
+                    "excludeFromFormalAggregation": True,
+                    "networkProfile": "lan",
+                    "serverTopology": "local",
+                    "pageOrigin": "http://localhost:8088",
+                    "pageHost": "localhost:8088",
+                },
+                "valid": True,
+                "invalidReasons": [],
+                "summary": {
+                    "violationRate": 0.0,
+                    "frameTimeP95Ms": 16.8,
+                    "frameTimeP99Ms": 33.2,
+                    "rawFrameTimeP95Ms": 16.8,
+                    "rawFrameTimeP99Ms": 33.2,
+                    "rawFrameTimeMaxMs": 40.0,
+                    "frameTimeOver20Rate": 0.05,
+                    "frameBudgetViolationRate": 0.01,
+                    "requestQueuePeak": 42,
+                    "requestQueueAuc": 12345.0,
+                    "tilesLoadedTotal": 120,
+                    "transferBytes": 80000000,
+                    "encodedBodyBytes": 79000000,
+                    "loadProgressEventCount": 200,
+                    "resourceCompletionPeak100Ms": 3,
+                    "resourceCompletionPeak250Ms": 8,
+                    "resourceCompletionPeak500Ms": 15,
+                    "tileLoadPeak100Ms": 2,
+                    "tileLoadPeak250Ms": 5,
+                    "tileLoadPeak500Ms": 12,
+                    "loadProgressEventPeak100Ms": 4,
+                    "loadProgressQueuePeak100Ms": 42,
+                    "frameTimeHistogram": [{"binStartMs": 0, "binEndMs": 20, "count": 90}],
+                    "resourceCompletionBins100Ms": {
+                        "binMs": 100,
+                        "bins": [{"startMs": 0, "endMs": 100, "eventCount": 3}],
+                    },
+                    "tileLoadBins100Ms": {
+                        "binMs": 100,
+                        "bins": [{"startMs": 0, "endMs": 100, "eventCount": 2}],
+                    },
+                    "loadProgressBins100Ms": {
+                        "binMs": 100,
+                        "bins": [
+                            {"startMs": 0, "endMs": 100, "eventCount": 4, "requestQueuePeak": 42}
+                        ],
+                    },
+                },
+            }
+            (input_dir / "pc-b-local-fixed4-d1.json").write_text(
+                json.dumps(payload), encoding="utf-8"
+            )
+
+            self.assertEqual(run_analysis(input_dir, output_dir), 0)
+            with (output_dir / "server_topology_diagnostics.csv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle))
+            self.assertEqual(len(rows), 1)
+            self.assertEqual(rows[0]["diagnosticPurpose"], "server-topology-identifiability")
+            self.assertEqual(rows[0]["serverTopology"], "local")
+            self.assertEqual(rows[0]["pageOrigin"], "http://localhost:8088")
+            self.assertEqual(rows[0]["fixedSse"], "4")
+            self.assertEqual(rows[0]["excludeFromFormalAggregation"], "True")
+            self.assertEqual(float(rows[0]["resourceCompletionPeak100Ms"]), 3)
+            self.assertEqual(float(rows[0]["tileLoadPeak100Ms"]), 2)
+            self.assertIn("eventCount", rows[0]["resourceCompletionBins100Ms"])
+
     def test_checkpoint_takes_precedence_over_aggregate_export_with_same_run_id(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

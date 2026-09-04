@@ -184,6 +184,7 @@ export class DiscretePiController {
 export function createMethodController(method, overrides = {}) {
   if (method === "fixed8") return new FixedController(8);
   if (method === "fixed16" || method === "cesiumDynamic") return new FixedController(16);
+  if (method === "fixedDiagnostic") return new FixedController(Number(overrides.fixedSse ?? 4));
   if (method === "reactive") return new ReactiveController(overrides);
   if (method === "pi") return new DiscretePiController(overrides);
   return new LodController({
@@ -194,7 +195,7 @@ export function createMethodController(method, overrides = {}) {
 
 export function tilesetOptionsForMethod(method) {
   return {
-    maximumScreenSpaceError: method === "fixed8" ? 8 : 16,
+    maximumScreenSpaceError: method === "fixed8" ? 8 : method === "fixedDiagnostic" ? 4 : 16,
     dynamicScreenSpaceError: method === "cesiumDynamic",
   };
 }

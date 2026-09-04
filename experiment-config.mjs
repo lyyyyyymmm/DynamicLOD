@@ -3,6 +3,12 @@ import { DEFAULT_LOD_POLICY } from "./lod-controller.mjs";
 export const EXPERIMENT_METHODS = Object.freeze({
   fixed8: Object.freeze({ label: "Fixed SSE 8", kind: "fixed", initialSse: 8 }),
   fixed16: Object.freeze({ label: "Fixed SSE 16", kind: "fixed", initialSse: 16 }),
+  fixedDiagnostic: Object.freeze({
+    label: "Diagnostic fixed SSE 4",
+    kind: "fixed",
+    initialSse: 4,
+    diagnosticOnly: true,
+  }),
   cesiumDynamic: Object.freeze({
     label: "Cesium Dynamic SSE",
     kind: "cesium",
@@ -227,6 +233,12 @@ export function createRunManifest(options) {
     networkProfile,
     studyPhase: String(options.studyPhase ?? "adHoc"),
     pilotPurpose: String(options.pilotPurpose ?? "none"),
+    diagnosticPurpose: String(options.diagnosticPurpose ?? "none"),
+    fixedSse: Number.isFinite(Number(options.fixedSse)) ? Number(options.fixedSse) : null,
+    excludeFromFormalAggregation: Boolean(options.excludeFromFormalAggregation),
+    serverTopology: String(options.serverTopology ?? "unspecified"),
+    pageOrigin: String(options.pageOrigin ?? "unknown"),
+    pageHost: String(options.pageHost ?? "unknown"),
     browserVersion: String(options.browserVersion ?? "unknown"),
     gpuRenderer: String(options.gpuRenderer ?? "unknown"),
     methodParameters: options.methodParameters ?? null,
@@ -338,6 +350,43 @@ export function buildD2S3PilotQueue(options = {}) {
     networkProfile: "lan",
     studyPhase: "pilot",
     pilotPurpose: "full-pilot-v2.3.6-d2-pressure-burst",
+  }));
+}
+
+export function buildAndroidIdentifiabilityDiagnosticQueue(options = {}) {
+  return createQueue({
+    datasets: ["bagAmsterdam", "bagRotterdam"],
+    scenarios: ["pressureBurst"],
+    methods: ["fixedDiagnostic"],
+    repeats: options.repeats ?? 1,
+    seed: options.seed ?? 20260823,
+  }).map((run) => ({
+    ...run,
+    networkProfile: "lan",
+    studyPhase: "diagnostic",
+    diagnosticPurpose: "android-workload-identifiability",
+    fixedSse: 4,
+    excludeFromFormalAggregation: true,
+    methodParameters: { fixedSse: 4 },
+  }));
+}
+
+export function buildServerTopologyDiagnosticQueue(options = {}) {
+  return createQueue({
+    datasets: ["bagAmsterdam"],
+    scenarios: ["pressureBurst"],
+    methods: ["fixedDiagnostic"],
+    repeats: options.repeats ?? 1,
+    seed: options.seed ?? 20260823,
+  }).map((run) => ({
+    ...run,
+    networkProfile: "lan",
+    studyPhase: "diagnostic",
+    diagnosticPurpose: "server-topology-identifiability",
+    fixedSse: 4,
+    excludeFromFormalAggregation: true,
+    methodParameters: { fixedSse: 4 },
+    ...(options.serverTopology ? { serverTopology: options.serverTopology } : {}),
   }));
 }
 

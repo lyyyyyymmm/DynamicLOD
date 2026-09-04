@@ -1,8 +1,8 @@
 # Device Registry
 
-Protocol: `2.0.0`
-Recorded: 2026-08-25; Android-A pilot-condition reconfirmation added 2026-09-01
-Status: preparation; neither device has entered confirmatory collection.
+Protocol: current benchmark route `v2.3.6`
+Recorded: 2026-08-25; Android-A pilot-condition reconfirmation added 2026-09-01; PC-B registered 2026-09-02
+Status: preparation; no device has entered confirmatory collection.
 
 ## PC-A
 
@@ -24,6 +24,36 @@ WebGL renderer is `ANGLE (NVIDIA GeForce MX450, Direct3D11)` with driver
 `31.0.15.2656`. Keep the Best performance power profile and AC power connection fixed
 for every PC-A calibration, pilot, and confirmatory run. Record the Wi-Fi SSID in the
 run notes.
+
+## PC-B
+
+| Field | Recorded value |
+| --- | --- |
+| Device ID | `pc-b` |
+| CPU | Intel(R) Core(TM) Ultra 7 258V @ 2.20 GHz |
+| GPU | Intel(R) Arc(TM) 140V GPU (16 GB) |
+| RAM | 32.0 GB (31.6 GB usable), 8533 MT/s |
+| Operating system | Windows 11 Home Chinese edition, 25H2 |
+| Browser | Chrome 150.0.7871.115 (official build, 64-bit) |
+| Display refresh rate | 60 Hz |
+| Network | Wi-Fi |
+| Wi-Fi SSID for collection | TP318 |
+| Power mode | Best performance |
+| AC / battery state for collection | Plugged in |
+| Benchmark drawing buffer | `960 x 540` |
+
+PC-B was registered on 2026-09-02 as the second desktop candidate for the current
+desktop efficacy route. Run-day conditions recorded on 2026-09-02: plugged in, Wi-Fi
+SSID `TP318`, Best performance power mode, Chrome 150.0.7871.115, and benchmark
+drawing buffer `960 x 540`.
+
+`chrome://gpu` evidence recorded from the supplied screenshot on 2026-09-02: Canvas,
+Compositing, Rasterization, WebGL, and WebGPU are hardware accelerated; OpenGL is
+enabled; Multiple Raster Threads are enabled. The report was exported at
+`2026-09-02T06:19:47.933Z` and lists GPU0 as
+`Intel(R) Arc(TM) 140V GPU (16GB)` with `DRIVER_VERSION=32.0.101.8860` and `*ACTIVE*`.
+Keep the same power mode, browser foreground state, Wi-Fi SSID, and `960 x 540` target
+across PC-B runs.
 
 ## Android-A
 

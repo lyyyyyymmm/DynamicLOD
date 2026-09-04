@@ -259,6 +259,12 @@ def result_to_row(result: dict) -> dict:
         "networkProfile": manifest.get("networkProfile", "lan"),
         "studyPhase": manifest.get("studyPhase", "legacy"),
         "pilotPurpose": manifest.get("pilotPurpose", "legacy"),
+        "diagnosticPurpose": manifest.get("diagnosticPurpose", "none"),
+        "fixedSse": manifest.get("fixedSse", math.nan),
+        "excludeFromFormalAggregation": bool(manifest.get("excludeFromFormalAggregation", False)),
+        "serverTopology": manifest.get("serverTopology", "unspecified"),
+        "pageOrigin": manifest.get("pageOrigin", "unknown"),
+        "pageHost": manifest.get("pageHost", "unknown"),
         "piKp": (manifest.get("methodParameters") or {}).get("kp", math.nan),
         "piKi": (manifest.get("methodParameters") or {}).get("ki", math.nan),
         "valid": bool(result.get("valid", False)),
@@ -403,6 +409,7 @@ def run_analysis(input_dir: Path, output_dir: Path) -> int:
     frame.to_csv(output_dir / "all_runs.csv", index=False)
     valid = frame[frame["valid"] == True].copy()  # noqa: E712
     confirmatory = valid[valid["studyPhase"] == "confirmatory"].copy()
+    diagnostic = valid[valid["studyPhase"] == "diagnostic"].copy()
     metric = "violationRate"
     if valid.empty or metric not in valid:
         (output_dir / "STATUS.md").write_text(
@@ -417,6 +424,83 @@ def run_analysis(input_dir: Path, output_dir: Path) -> int:
         .reset_index()
     )
     grouped.to_csv(output_dir / "descriptive_violation_rate.csv", index=False)
+
+    android_diagnostic_columns = [
+        "runId",
+        "deviceId",
+        "dataset",
+        "scenario",
+        "repeat",
+        "method",
+        "studyPhase",
+        "diagnosticPurpose",
+        "fixedSse",
+        "excludeFromFormalAggregation",
+        "violationRate",
+        "frameTimeP95Ms",
+        "frameTimeP99Ms",
+        "rawFrameTimeP95Ms",
+        "rawFrameTimeP99Ms",
+        "rawFrameTimeMaxMs",
+        "frameTimeOver20Rate",
+        "frameBudgetViolationRate",
+        "requestQueuePeak",
+        "requestQueueAuc",
+        "tilesLoadedTotal",
+        "transferBytes",
+        "loadProgressEventCount",
+        "frameTimeHistogram",
+    ]
+    android_diagnostic_frame = diagnostic[
+        diagnostic["diagnosticPurpose"].fillna("").eq("android-workload-identifiability")
+    ].copy() if "diagnosticPurpose" in diagnostic.columns else diagnostic.iloc[0:0].copy()
+    for column in android_diagnostic_columns:
+        if column not in android_diagnostic_frame.columns:
+            android_diagnostic_frame[column] = math.nan
+    android_diagnostic_frame[android_diagnostic_columns].to_csv(
+        output_dir / "android_identifiability_diagnostics.csv", index=False
+    )
+
+    server_topology_diagnostic_columns = android_diagnostic_columns[:-1] + [
+        "serverTopology",
+        "pageOrigin",
+        "pageHost",
+        "encodedBodyBytes",
+        "resourceCompletionPeak100Ms",
+        "resourceCompletionPeak250Ms",
+        "resourceCompletionPeak500Ms",
+        "resourceCompletionTransferBytesPeak100Ms",
+        "resourceCompletionTransferBytesPeak250Ms",
+        "resourceCompletionTransferBytesPeak500Ms",
+        "tileLoadPeak100Ms",
+        "tileLoadPeak250Ms",
+        "tileLoadPeak500Ms",
+        "loadProgressEventPeak100Ms",
+        "loadProgressEventPeak250Ms",
+        "loadProgressEventPeak500Ms",
+        "loadProgressQueuePeak100Ms",
+        "loadProgressQueuePeak250Ms",
+        "loadProgressQueuePeak500Ms",
+        "frameTimeHistogram",
+        "resourceCompletionBins100Ms",
+        "resourceCompletionBins250Ms",
+        "resourceCompletionBins500Ms",
+        "tileLoadBins100Ms",
+        "tileLoadBins250Ms",
+        "tileLoadBins500Ms",
+        "loadProgressBins100Ms",
+        "loadProgressBins250Ms",
+        "loadProgressBins500Ms",
+    ]
+    server_topology_diagnostic_frame = diagnostic[
+        diagnostic["diagnosticPurpose"].fillna("").eq("server-topology-identifiability")
+    ].copy() if "diagnosticPurpose" in diagnostic.columns else diagnostic.iloc[0:0].copy()
+    for column in server_topology_diagnostic_columns:
+        if column not in server_topology_diagnostic_frame.columns:
+            server_topology_diagnostic_frame[column] = math.nan
+    server_topology_diagnostic_frame[server_topology_diagnostic_columns].to_csv(
+        output_dir / "server_topology_diagnostics.csv", index=False
+    )
 
     forecast_columns = [
         "predictionMaeMs",
@@ -518,12 +602,13 @@ def run_analysis(input_dir: Path, output_dir: Path) -> int:
         f"- Valid runs (all phases): {len(valid)}",
         f"- Valid confirmatory runs: {len(confirmatory)}",
         f"- Valid pilot runs: {len(valid[valid['studyPhase'] == 'pilot'])}",
+        f"- Valid diagnostic runs: {len(diagnostic)}",
         f"- Valid tuning runs: {len(valid[valid['studyPhase'] == 'tuning'])}",
         f"- Invalid runs: {len(frame) - len(valid)}",
         f"- Complete six-method paired blocks: {complete_block_count}",
         "",
         "Formal statistics use confirmatory runs only; pilot, tuning, and legacy records remain audit evidence.",
-        "Formal manuscript claims must remain unset until both PC and Android blocks are complete.",
+        "Formal efficacy claims must remain unset until a confirmatory release and device scope are explicitly frozen.",
     ]
     (output_dir / "STATUS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return 0

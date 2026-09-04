@@ -4,6 +4,8 @@ import assert from "node:assert/strict";
 import {
   TilesetTelemetry,
   summarizeResourceEntries,
+  summarizeResourceCompletionBins,
+  summarizeStreamingTemporalStructure,
 } from "../tileset-telemetry.mjs";
 
 test("tileset telemetry records public load and visibility events", () => {
@@ -20,6 +22,8 @@ test("tileset telemetry records public load and visibility events", () => {
   assert.equal(snapshot.visibleTileEvents, 2);
   assert.equal(snapshot.visibleGeometricErrorMean, 12);
   assert.equal(snapshot.visibleGeometricErrorMax, 16);
+  assert.deepEqual(telemetry.tileLoadEvents, [{ timestampMs: 120, geometricError: 16 }]);
+  assert.equal(telemetry.loadProgressEvents[0].requestQueue, 7);
 });
 
 test("tileset telemetry preserves a transient load-progress peak until the next control snapshot", () => {
@@ -32,6 +36,75 @@ test("tileset telemetry preserves a transient load-progress peak until the next 
   assert.equal(snapshot.requestQueueEnd, 0);
   assert.equal(snapshot.loadProgressEventsInterval, 2);
   assert.equal(telemetry.snapshotInterval(1000).requestQueue, 0);
+});
+
+test("resource completion bins expose temporal arrival peaks", () => {
+  const summary = summarizeResourceCompletionBins(
+    [
+      {
+        name: "http://x/bench-assets/r/d/a.b3dm",
+        startTime: 0,
+        responseEnd: 110,
+        transferSize: 100,
+        encodedBodySize: 80,
+      },
+      {
+        name: "http://x/bench-assets/r/d/b.b3dm",
+        startTime: 0,
+        responseEnd: 170,
+        transferSize: 200,
+        encodedBodySize: 150,
+      },
+      {
+        name: "http://x/Build/Cesium.js",
+        startTime: 0,
+        responseEnd: 120,
+        transferSize: 999,
+        encodedBodySize: 999,
+      },
+    ],
+    "/bench-assets/r/",
+    100,
+  );
+  assert.equal(summary.binMs, 100);
+  assert.equal(summary.bins.length, 1);
+  assert.equal(summary.bins[0].eventCount, 2);
+  assert.equal(summary.bins[0].transferBytes, 300);
+});
+
+test("streaming temporal structure reports resource, tile and load-progress peaks", () => {
+  const summary = summarizeStreamingTemporalStructure({
+    resourceEntries: [
+      {
+        name: "http://x/bench-assets/r/d/a.b3dm",
+        startTime: 0,
+        responseEnd: 110,
+        transferSize: 100,
+        encodedBodySize: 80,
+      },
+      {
+        name: "http://x/bench-assets/r/d/b.b3dm",
+        startTime: 0,
+        responseEnd: 170,
+        transferSize: 200,
+        encodedBodySize: 150,
+      },
+    ],
+    pathPrefix: "/bench-assets/r/",
+    tileLoadEvents: [{ timestampMs: 10 }, { timestampMs: 40 }, { timestampMs: 160 }],
+    loadProgressEvents: [
+      { timestampMs: 20, requestQueue: 3 },
+      { timestampMs: 50, requestQueue: 8 },
+      { timestampMs: 180, requestQueue: 4 },
+    ],
+    binSizesMs: [100],
+  });
+  assert.equal(summary.metrics.resourceCompletionPeak100Ms, 2);
+  assert.equal(summary.metrics.resourceCompletionTransferBytesPeak100Ms, 300);
+  assert.equal(summary.metrics.tileLoadPeak100Ms, 2);
+  assert.equal(summary.metrics.loadProgressEventPeak100Ms, 2);
+  assert.equal(summary.metrics.loadProgressQueuePeak100Ms, 8);
+  assert.equal(summary.summaries.tileLoadBins100Ms.bins.length, 2);
 });
 
 test("first stable display requires loaded content and one second of empty queue", () => {

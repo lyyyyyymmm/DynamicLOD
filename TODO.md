@@ -1,6 +1,6 @@
 # TODO
 
-Last reviewed: 2026-09-01
+Last reviewed: 2026-09-04
 
 ## In Progress
 
@@ -14,7 +14,21 @@ Last reviewed: 2026-09-01
 - [x] Inspect the reported Android-A D2/S3 pilot and identify it as a second D1/S3 `bagAmsterdam` run, not D2 evidence.
 - [x] Add an unambiguous Android-A D2/S3 `bagRotterdam + pressureBurst` pilot path before collecting D2.
 - [x] Run and analyze true Android-A D2/S3 with the new `Run D2/S3 pressureBurst pilot` button.
-- [ ] Decide how to handle the Android-A low-tail-pressure result before confirmatory release.
+- [x] Accept the Android-A identifiability-diagnostic gate while preserving D1/S3 and D2/S3 as valid low-pressure pilot evidence.
+- [x] Add a diagnostic-only fixed-SSE-4 Android path outside the formal six methods, pilot queues, confirmatory queues, and six-method aggregation.
+- [x] Run and analyze the Android-A fixed-SSE-4 identifiability diagnostic.
+- [x] Decide the current route: narrow Android claims to cross-device executability and low-pressure boundary behavior under v2.3.6/S3; keep S4 only as a future protocol option if Android efficacy becomes paper-critical.
+- [x] Resolve the desktop efficacy device scope by registering PC-B as the second desktop candidate.
+- [x] Reconfirm PC-B run-day power/network/GPU/drawing-buffer conditions.
+- [x] Inspect the accidental PC-B D1/S3 full pilot and later D1/S3 pressure-probe rerun.
+- [x] Add a diagnostic-only PC-B remote-server versus local-server fixed-SSE-4 server-topology path outside formal aggregation.
+- [x] Run and analyze the PC-B D1/S3 server-topology fixed4 diagnostic once from the remote PC-A server URL and once from the PC-B local server URL.
+- [x] Decide desktop route after the PC-B server-topology diagnostic: local-server delivery produced more tail pressure and burstier tile/resource arrivals, so treat remote delivery as a PC-B S3 confounder.
+- [x] Run and analyze one PC-B local-server D1/S3 six-method `pressureBurst` pressure probe with `deviceId=pc-b` before any confirmatory release or S4 design.
+- [x] Run and analyze the PC-B local-server D1/S3 four-repeat `pressureBurst` full pilot before any confirmatory release or S4 design.
+- [x] Record D-030: PC-B local-server full pilot passes the desktop S3 route/repeatability gate; S4 is not needed for the current desktop route.
+- [ ] Prepare the D-031 confirmatory-release decision before any formal collection. Freeze the intended desktop matrix, method order, repeats, seeds, browser/device conditions, local-server requirement, and statistical-analysis inputs.
+- [ ] Update and verify the confirmatory run entry point before using `Run main batch`; the current historical main queue still schedules `steady` / `burst`, not the newly gated S3 `pressureBurst` route.
 
 ## Decision Gates
 
@@ -26,17 +40,26 @@ Last reviewed: 2026-09-01
 - [x] Reject v2.3.5 parameter freeze after the PC-A full pilot because high-pressure taxonomy was sparse across Proposed repeats.
 - [x] Require the v2.3.6 PC-A `pressureBurst` pressure probe to show meaningful request-pressure evidence before starting the v2.3.6 full pilot.
 - [x] Require the v2.3.6 PC-A full pilot to pass repeatability before Android or confirmatory collection.
+- [x] Interpret the Android-A fixed-SSE-4 diagnostic: S3 is unsuitable for Android-A efficacy comparison because fixed `SSE=4` still produced zero over-budget frames under substantial request/content pressure.
+- [x] Interpret the PC-B local-server D1/S3 four-repeat full pilot: D-030 accepts it as passing the desktop S3 route/repeatability gate, while keeping confirmatory collection blocked pending D-031.
 
 ## Before Confirmatory Collection
 
 - [x] Design, implement, and automatically verify the deliberately versioned v2.3.6 `pressureBurst` workload revision.
 - [x] Freeze v2.3.6 for Android-A pilot after D-025 records the PC-A full-pilot gate as accepted.
-- [ ] Resolve Android-A scenario difficulty before confirmatory collection: D1/S3, its rerun, and true D2/S3 all show request pressure but zero tail-frame violations across valid methods.
+- [x] Resolve Android-A S3 claim scope before confirmatory collection: D1/S3, its rerun, true D2/S3, and fixed-SSE-4 diagnostics all show request/content pressure but no meaningful Android tail-frame pressure.
 - [x] Complete the required visual-quality calibration and preserve reference images/SSIM artifacts.
-- [ ] Register PC-B if it will be part of the cross-PC evidence; otherwise revise the formal device scope before collection.
+- [x] Register PC-B as the second desktop candidate for the current desktop efficacy route.
+- [x] Confirm PC-B plugged-in state, Wi-Fi SSID `TP318`, Chrome GPU renderer / hardware acceleration, and actual `960 x 540` benchmark drawing buffer.
+- [x] Retain the accidental PC-B D1/S3 full pilot as valid pilot/audit evidence: 24 valid `pc-b + bagAmsterdam + pressureBurst` rows in four complete six-method blocks, all with zero tail-frame violations.
+- [x] Retain the later D1/S3 pressure-probe rerun as misregistered audit evidence: the six methods are valid and complete, but raw manifests record `deviceId=unregistered`, so these rows must not be used as formal PC-B provenance.
+- [x] Complete the PC-B remote/local fixed4 topology diagnostic and record the outcome in D-028: remote delivery is a material PC-B S3 confounder.
+- [x] Interpret the PC-B local-server six-method D1/S3 pressure probe before entering confirmatory or designing S4.
+- [x] Complete and interpret the PC-B local-server D1/S3 full pilot repeatability gate before entering confirmatory or designing S4.
+- [ ] Record a confirmatory-release decision after D-030, then update the run queue/UI so the formal button cannot silently collect the historical S1/S2 matrix when the intended release route is S3 `pressureBurst`.
 - [x] Reconfirm Android-A conditions immediately before the v2.3.6 Android-A pilot setup.
 - [ ] Reconfirm Android-A conditions again immediately before any later confirmatory block.
-- [ ] Freeze method order, repeats, seeds, browser conditions, and statistical-analysis inputs in the protocol.
+- [ ] Freeze method order, repeats, seeds, browser conditions, server topology, and statistical-analysis inputs in the protocol.
 
 ## Completed
 
@@ -97,6 +120,9 @@ Last reviewed: 2026-09-01
 - [x] Inspect the reported Android-A D2/S3 pilot after `lod:analyze`: no `bagRotterdam + pressureBurst` Android-A records were produced; the new batch is 24 additional valid D1/S3 `bagAmsterdam` records and remains audit evidence only.
 - [x] Add a dedicated D2/S3 pilot queue and UI button: `Run D2/S3 pressureBurst pilot` now schedules `bagRotterdam + pressureBurst`, six methods, four repeats, `networkProfile=lan`, and pilot purpose `full-pilot-v2.3.6-d2-pressure-burst`.
 - [x] Run and analyze the true Android-A v2.3.6 D2/S3 pilot: 24 valid `bagRotterdam + pressureBurst` records in four complete paired blocks, no invalid attempts, request-pressure exposure in Proposed/PI/Reactive, and zero tail-frame violations across all valid methods.
+- [x] Add a diagnostic-only Android fixed-SSE-4 path: `Run Android fixed4 diagnostic` runs `fixedDiagnostic` on D1/S3 and D2/S3 with `studyPhase=diagnostic`, `diagnosticPurpose=android-workload-identifiability`, `fixedSse=4`, and formal aggregation exclusion metadata.
+- [x] Run and analyze the Android-A fixed4 diagnostic: D1/S3 and D2/S3 were both valid, reached queue peaks of 39 with 78.9 MB and 91.7 MB transferred, but remained at P95/P99 about 16.7 ms with zero over-budget frames.
+- [x] Record D-027: treat v2.3.6/S3 as unsuitable for Android-A efficacy comparison and narrow Android claims for the current manuscript route.
 
 ## Update Rule
 

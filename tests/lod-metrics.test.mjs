@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   assertFiniteTelemetry,
   percentile,
+  summarizeFrameTimeDistribution,
   summarizeForecast,
   summarizeRun,
   validateRunEvidence,
@@ -30,6 +31,24 @@ test("run summary uses windows as observations and reports weighted SSE", () => 
   assert.equal(summary.timeWeightedMeanSse, 16);
   assert.equal(summary.requestQueuePeak, 3);
   assert.equal(summary.requestQueueAuc, 2000);
+});
+
+test("frame-time distribution reports diagnostic missed-frame ratios and histogram bins", () => {
+  const summary = summarizeFrameTimeDistribution(
+    [16.7, 16.8, 21, 33.34, 49.9, Number.NaN],
+    { frameBudgetMs: 1000 / 30 },
+  );
+
+  assert.equal(summary.rawFrameTimeMaxMs, 49.9);
+  assert.equal(summary.frameTimeOver20Rate, 0.6);
+  assert.equal(summary.frameBudgetViolationRate, 0.4);
+  assert.deepEqual(summary.frameTimeHistogram, [
+    { binStartMs: 0, binEndMs: 20, count: 2 },
+    { binStartMs: 20, binEndMs: 33.33, count: 1 },
+    { binStartMs: 33.33, binEndMs: 50, count: 2 },
+    { binStartMs: 50, binEndMs: 66.67, count: 0 },
+    { binStartMs: 66.67, binEndMs: null, count: 0 },
+  ]);
 });
 
 test("telemetry validation rejects NaN instead of silently exporting it", () => {

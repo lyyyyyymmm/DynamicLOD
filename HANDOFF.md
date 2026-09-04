@@ -11,7 +11,7 @@ Develop an application-oriented graphics/WebGIS paper around:
 
 Core research question: whether a lightweight online scheduler can combine short-term tail-frame prediction, public Cesium 3D Tiles request feedback, interaction state, and stability control to reduce `P95 > 33.33 ms` violation rate while retaining visual quality on PC and Android.
 
-The current protocol is **v2.3.6**. Current status: **D-025 freezes v2.3.6 for Android-A pilot after the PC-A D1/S3 `pressureBurst` pressure probe and four-repeat full pilot passed the practical workload/repeatability gate. Android-A pilot setup conditions were recorded on 2026-09-01, Android-A D1/S3 and true D2/S3 pilots have been collected and analyzed, and both produced valid paired pilot blocks with request-pressure exposure but zero tail-frame violations across all valid methods.** Do not start confirmatory collection yet.
+The current protocol is **v2.3.6**. Current status: **D-030 accepts the PC-B local-server D1/S3 four-repeat full pilot as valid pilot evidence and as passing the desktop S3 route/repeatability gate. This permits confirmatory-release preparation, not formal collection. Do not click the existing `Run main batch` entry yet because the historical main queue still schedules the older `steady` / `burst` matrix rather than the newly gated S3 `pressureBurst` route. D-028 completed the diagnostic-only PC-B remote-server versus local-server fixed-SSE-4 A/B check and diagnosed remote LAN delivery as a material PC-B S3 confounder. D-027 still classifies v2.3.6/S3 `pressureBurst` as unsuitable for Android-A tail-control efficacy because the Android diagnostic-only fixed-SSE-4 run produced zero over-budget frames despite substantial request/content pressure. Android-A is narrowed to cross-device executability, telemetry validity, and low-pressure boundary behavior for the current manuscript route. PC-B is registered and its run-day power/network/GPU/drawing-buffer provenance is recorded. A PC-B accidental D1/S3 full pilot is valid but low-pressure across all methods; the later D1/S3 pressure-probe rerun is complete but misregistered as `deviceId=unregistered`; both were remote-server/audit evidence, not a basis for confirmatory release.** Do not start confirmatory collection yet.
 
 ## What Has Been Implemented
 
@@ -32,6 +32,8 @@ The current protocol is **v2.3.6**. Current status: **D-025 freezes v2.3.6 for A
 - Warmup isolation: 10-second fixed `SSE=16` warmup is not fed into the adaptive controller or measured rolling P95.
 - v2.3.5 full-window gate: measured-phase controller sampling waits until the first full 2,000 ms rolling frame-time window is available.
 - v2.3.6 pressure-workload revision: adds separate `pressureBurst` / S3 scenario for the next PC-A pilot gate while preserving controller thresholds, datasets, baselines, readiness policy, and statistical plan.
+- Android-A identifiability diagnostic: `Run Android fixed4 diagnostic` runs `fixedDiagnostic` at `SSE=4` on D1/S3 and D2/S3 with `studyPhase=diagnostic`, `diagnosticPurpose=android-workload-identifiability`, and `excludeFromFormalAggregation=true`. It is not a seventh formal method and is not part of pilot or confirmatory aggregation.
+- PC-B server-topology diagnostic: `Run server-topology fixed4 diagnostic` runs `fixedDiagnostic` at `SSE=4` on D1/S3 only with `studyPhase=diagnostic`, `diagnosticPurpose=server-topology-identifiability`, `fixedSse=4`, and `excludeFromFormalAggregation=true`. Open the same page from the PC-A LAN server for `serverTopology=remote`, then from PC-B `localhost:8088` for `serverTopology=local`. Analysis writes `results/analysis/server_topology_diagnostics.csv` with frame distribution, request pressure, tile/resource totals, and 100/250/500 ms delivery-bin summaries.
 - Natural-language rollout backup:
   - Source rollout: `C:\Users\78630\.codex\sessions\2026\08\23\rollout-2026-08-23T16-38-48-01a02dc5-b9bf-72d3-bba4-02727dbe08b4.jsonl`
   - Markdown backup: `learnMapmost/session_backups/rollout-2026-08-23T16-38-48-01a02dc5-b9bf-72d3-bba4-02727dbe08b4.md`
@@ -107,6 +109,13 @@ Latest important raw results:
 - D-023 rejects freezing v2.3.5 after quality calibration because the full pilot still produced sparse high-pressure taxonomy across Proposed repeats.
 - D-024 releases v2.3.6 `pressureBurst` as the next PC-A pilot workload and keeps Android/confirmatory collection blocked until the new pilot gate passes.
 - D-025 freezes v2.3.6 for Android-A pilot only; confirmatory collection remains blocked.
+- D-026 keeps Android-A D1/S3 and D2/S3 as valid low-pressure pilot evidence and adds a diagnostic-only fixed-SSE-4 identifiability gate.
+- D-027 interprets the fixed4 diagnostic as Android-A S3 floor-effect evidence and narrows the current v2.3.6 Android claim to executability / low-pressure boundary behavior.
+- D-028 adds and interprets the PC-B remote/local server-topology fixed4 diagnostic. The local-server diagnostic produced stronger tail pressure and burstier tile/resource arrivals, so remote LAN delivery is a material PC-B S3 confounder. Next step is a PC-B local-server D1/S3 six-method pressure probe, not confirmatory collection or S4 design.
+- D-029 accepts the PC-B local-server D1/S3 six-method pressure probe as valid pilot evidence and sets the next gate to a PC-B local-server D1/S3 four-repeat full pilot. Confirmatory collection and S4 remain blocked.
+- D-030 accepts the PC-B local-server D1/S3 four-repeat full pilot as valid pilot evidence and as passing the desktop S3 route/repeatability gate. Confirmatory collection is still blocked pending D-031, which must freeze and verify the intended formal matrix/run entry point.
+- PC-B device registration was recorded on 2026-09-02: Intel Core Ultra 7 258V @ 2.20 GHz, Intel Arc 140V GPU (16 GB), 32.0 GB RAM (31.6 GB usable, 8533 MT/s), Windows 11 Home Chinese edition 25H2, Chrome 150.0.7871.115 (64-bit), 60 Hz display refresh, Wi-Fi, and Best performance power mode. Run-day provenance records plugged-in power, Wi-Fi SSID `TP318`, Chrome GPU hardware acceleration evidence, active Intel Arc 140V GPU evidence with driver `32.0.101.8860`, and actual benchmark drawing buffer `960 x 540`.
+- PC-B D1/S3 evidence was recorded on 2026-09-02. The accidental `Run D1/S3 pressureBurst pilot` produced 24 valid `pc-b + bagAmsterdam + pressureBurst` pilot rows in four complete six-method blocks, but every method had zero tail-frame violations and P95 stayed about `16.8-16.9 ms`. The later six-method D1/S3 pressure-probe rerun is complete and valid but its raw manifests record `deviceId=unregistered`; keep it as audit evidence and treat the manifest as source of truth over the filename.
 - Android-A v2.3.6 pilot setup conditions recorded on 2026-09-01: landscape orientation, 50% battery while charging, cooled / thermally stabilized state with exact temperature `[待填]`, 5 GHz Wi-Fi, Chrome 151.0.7922.173, hardware acceleration enabled, and `960 x 540` drawing-buffer target. Keep the charging/power state fixed for the pilot and do not mix it with the older unplugged readiness condition.
 - The fixed `Run D1/S3 pressureBurst pilot` UI button uses `bagAmsterdam`; it does not collect D2/S3. A reported Android-A D2/S3 run on 2026-09-01 was verified as a second D1/S3 `bagAmsterdam` run. The later true D2/S3 run used the new `Run D2/S3 pressureBurst pilot` button and produced `bagRotterdam` records.
 - Do not change controller thresholds, SSE ladder, camera paths, datasets, baselines, readiness policy, or statistical plan unless a new protocol version is deliberately created and documented.
@@ -127,25 +136,182 @@ Latest important raw results:
 
 Most recent v2.3.6 automatic verification:
 
-- `npm.cmd test` -> 83 tests passed after adding the D2/S3 pilot queue regression test and D2/S3 button visibility check.
-- `npm.cmd run test:lod:py` -> 17 Python tests passed.
-- `npm.cmd run lod:analyze` -> completed after the v2.3.6 implementation; latest `STATUS.md` regenerated.
+- `npm.cmd test` -> 88 tests passed after adding the PC-B server-topology diagnostic path.
+- `npm.cmd run test:lod:py` -> 19 Python tests passed after adding `server_topology_diagnostics.csv` export coverage.
+- `npm.cmd run lod:analyze` -> completed after the diagnostic implementation and after the E2E smoke run; latest `STATUS.md`, `all_runs.csv`, `android_identifiability_diagnostics.csv`, and `server_topology_diagnostics.csv` regenerated.
 - `npm.cmd run lod:verify-data` -> `bagAmsterdam: READY`, `bagRotterdam: READY`.
 - `npm.cmd run lod:validate-ui` -> desktop and Android-landscape validation passed, both with `960 x 540` drawing buffer and nonblank render.
-- `npm.cmd run test:lod:e2e -- --reporter=line` on isolated port 8095 in the approved PowerShell environment -> 2 Playwright tests passed, including the new D2/S3 button visibility assertion.
+- `npm.cmd run test:lod:e2e -- --reporter=line` -> 2 Playwright tests passed after rerunning outside the sandbox; the first sandboxed attempt failed at browser launch with Windows `spawn EPERM`, not a test assertion.
 - `/api/health` from any already-running stale server may still report an older protocol until that server is restarted; current source manifests and E2E smoke records use protocol `2.3.6`.
 - `npm.cmd run lod:capture-quality` -> generated 108 canonical quality screenshots after repairing the dynamic-canvas screenshot path.
 - `npm.cmd run lod:quality` -> generated 108 SSIM rows in `results/quality/quality_ssim.csv`.
 
-Latest analysis status after the true v2.3.6 Android-A D2/S3 pressureBurst pilot:
+Latest analysis status after the PC-B local-server D1/S3 four-repeat full pilot:
 
-- Result files: 413
-- Valid runs, all phases: 363
+- Result files: 480
+- Valid runs, all phases: 430
 - Valid confirmatory runs: 0
-- Valid pilot runs: 276
+- Valid pilot runs: 336
+- Valid diagnostic runs: 4
 - Valid tuning runs: 0
 - Invalid runs: 50
 - Complete six-method paired blocks: 0
+
+The latest E2E-created `unregistered-publicStress` smoke audit records remain non-formal. The Android-A fixed4 diagnostic records are valid diagnostic rows in `results/analysis/android_identifiability_diagnostics.csv`, not pilot or confirmatory rows. `results/analysis/server_topology_diagnostics.csv` contains the two valid PC-B remote/local diagnostic rows and is excluded from formal aggregation.
+
+## Latest PC-B Local-Server D1/S3 Full Pilot Gate
+
+The user reported completing the PC-B local-server `Run D1/S3 pressureBurst pilot`
+and `lod:analyze`. Inspection of `results/analysis/all_runs.csv` shows 24 valid
+rows with:
+
+- `deviceId=pc-b`;
+- `dataset=bagAmsterdam`;
+- `scenario=pressureBurst`;
+- `protocolVersion=2.3.6`;
+- `studyPhase=pilot`;
+- `pilotPurpose=full-pilot-v2.3.6-pressure-burst`;
+- `serverTopology=local`;
+- `pageOrigin=http://localhost:8088`;
+- no invalid reasons.
+
+The four repeats each contain the complete frozen six-method set:
+`cesiumDynamic`, `fixed16`, `fixed8`, `pi`, `proposed`, and `reactive`.
+
+Key method evidence:
+
+- `cesiumDynamic`: four valid repeats, violation `0.0` in every repeat, P95/P99 about `16.90/16.90 ms`, queue peak `1`, 9 tiles, about 0.8 MB.
+- `fixed16`: four valid repeats, violation `0.0`, P95/P99 about `16.90/16.90 ms`, queue peak up to `13`, 30 tiles, about 14.7 MB.
+- `fixed8`: four valid repeats, violation `0.0`, P95 about `16.90 ms`, P99 about `16.90-17.15 ms`, raw max up to `50.0 ms`, nonzero raw over-budget-frame rates, queue peaks `58/59/62/59`, 134-137 tiles, about 87.7-90.0 MB.
+- `pi`: four valid repeats, violation rates `0.0533/0.0526/0.0526/0.0`, P95 about `21.77/21.02/21.02/21.00 ms`, P99 about `33.37/33.37/33.37/33.30 ms`, raw max up to `50.10 ms`, queue peaks `61/62/63/65`, 170-173 tiles, about 115.6-116.5 MB.
+- `proposed`: four valid repeats, violation `0.0`, P95/P99 about `16.81-16.90/16.90-17.00 ms`, raw max `33.40 ms`, queue peak `42` in every repeat, 153-155 tiles, about 102.4-103.2 MB, pressure-safe holds `9/10/10/10`, and no pressure-tail overlap, preemptive opportunities, exact `predicted-tail-plus-request-pressure` actions, missed opportunities, or tail downgrades under pressure.
+- `reactive`: four valid repeats, violation `0.0`, P95/P99 about `16.82-16.90/16.90-16.98 ms`, raw max up to `50.0 ms`, nonzero raw over-budget-frame rates, queue peaks `49/50/50/50`, 170-173 tiles, about 115.6-116.5 MB.
+
+Interpretation: D-030 accepts this full pilot as passing the PC-B local-server
+desktop S3 route/repeatability gate. S3 is not a universal floor-effect workload
+on PC-B local delivery: PI shows repeatable measurable P95-window pressure and
+Fixed8/Reactive show raw frame spikes under substantial request/content pressure,
+while the system is not fully saturated. This supports preparing a desktop
+confirmatory release, but it is not a method-effect claim. Proposed did not show
+pressure-tail overlap or exact preemptive request-pressure actions on PC-B; those
+mechanism claims still depend on PC-A pilot/probe evidence and future
+confirmatory/ablation evidence.
+
+Next step: prepare D-031. Freeze the formal desktop matrix, method order,
+repeats, seeds, browser/device conditions, local-server requirement, and analysis
+inputs. Update and verify the `Run main batch` queue before any formal collection,
+because the current historical main queue still targets `steady` / `burst`, not
+the intended S3 `pressureBurst` route.
+
+## Latest PC-B D1/S3 PressureBurst Pilot / Probe Evidence
+
+The user first intended to run the PC-B `D1/S3 pressureBurst probe` but accidentally
+pressed `Run D1/S3 pressureBurst pilot`. This produced 24 valid records with:
+
+- `deviceId=pc-b`;
+- `dataset=bagAmsterdam`;
+- `scenario=pressureBurst`;
+- `protocolVersion=2.3.6`;
+- `studyPhase=pilot`;
+- `pilotPurpose=full-pilot-v2.3.6-pressure-burst`.
+
+All four repeats contain the complete frozen six-method set and no invalid attempts.
+Valid-method median results:
+
+- `cesiumDynamic`: violation `0.0`, P95 about `16.86 ms`, queue peak `1`, tiles `9`, transfer bytes `829,762`.
+- `fixed16`: violation `0.0`, P95 about `16.87 ms`, queue peak `12`, tiles `30`, transfer bytes `15,454,198`.
+- `fixed8`: violation `0.0`, P95 about `16.82 ms`, queue peak `39.5`, tiles `133`, transfer bytes `92,030,598`.
+- `pi`: violation `0.0`, P95 about `16.81 ms`, queue peak `41`, tiles `161.5`, transfer bytes `112,024,126`.
+- `proposed`: violation `0.0`, P95 about `16.81 ms`, queue peak `39`, tiles `116`, transfer bytes `79,712,476`.
+- `reactive`: violation `0.0`, P95 about `16.80 ms`, queue peak `40`, tiles `159`, transfer bytes `110,257,730`.
+
+Proposed repeat-level evidence:
+
+- repeat 1: `pc-b-bagAmsterdam-pressureBurst-proposed-r1-mtjpw7e8`, violation `0.0`, P95 `16.90 ms`, queue peak `39`, tiles `128`, transfer bytes `88,537,062`, pressure-safe holds `31`.
+- repeat 2: `pc-b-bagAmsterdam-pressureBurst-proposed-r2-mtjq0ym6`, violation `0.0`, P95 `16.83 ms`, queue peak `39`, tiles `52`, transfer bytes `28,474,762`, pressure-safe holds `33`.
+- repeat 3: `pc-b-bagAmsterdam-pressureBurst-proposed-r3-mtjqe279`, violation `0.0`, P95 `16.80 ms`, queue peak `39`, tiles `115`, transfer bytes `78,700,478`, pressure-safe holds `38`.
+- repeat 4: `pc-b-bagAmsterdam-pressureBurst-proposed-r4-mtjqgfh2`, violation `0.0`, P95 `16.80 ms`, queue peak `40`, tiles `117`, transfer bytes `80,724,474`, pressure-safe holds `36`.
+
+All valid Proposed repeats had `pressureTailOverlapCount=0`,
+`pressurePreemptiveOpportunityCount=0`, `pressurePreemptiveActionCount=0`,
+`missedPreemptiveOpportunityCount=0`, and `tailDowngradeUnderPressureCount=0`.
+
+The user then reran the D1/S3 pressure probe and `lod:analyze`. The later six-method
+probe is complete and valid, but the raw manifests record `deviceId=unregistered`
+even though the filenames begin with `pc-b`. Treat raw manifest metadata as source of
+truth: these rows are audit evidence only and must not be used as formal PC-B
+provenance. The misregistered probe still corroborates low S3 pressure in that session:
+Proposed had violation `0.0`, P95 about `16.90 ms`, request queue peak `38`, `98` tiles,
+`65,254,806` bytes, and `37` pressure-safe holds.
+
+Interpretation: this earlier remote-server PC-B evidence lacked tail-control
+identifiability because the frame-time tail stayed near one 60 Hz frame for every
+method despite meaningful content and queue pressure. Do not use it as evidence
+against S3 under local delivery. The later server-topology diagnostic, local-server
+probe, and local-server full pilot supersede this as the route decision evidence.
+
+## PC-B Server-Topology Fixed4 Diagnostic Path
+
+Physical A/B data are complete. The button was:
+
+- `Run server-topology fixed4 diagnostic`
+
+It schedules exactly one diagnostic-only run:
+
+- `deviceId`: use `pc-b` in the page input;
+- dataset: `bagAmsterdam`;
+- scenario: `pressureBurst`;
+- method: `fixedDiagnostic`;
+- `fixedSse=4`;
+- `networkProfile=lan`;
+- `studyPhase=diagnostic`;
+- `diagnosticPurpose=server-topology-identifiability`;
+- `excludeFromFormalAggregation=true`.
+
+Completed A/B records:
+
+1. Remote condition: `pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtk2udpi`, `pageOrigin=http://192.168.0.112:8088`, `serverTopology=remote`, valid, P95/P99 `16.90/16.90 ms`, raw max `33.30 ms`, window violation `0/76`, frame-over-budget rate `0.0`, queue peak `40`, 159 tiles, 110.6 MB, resource/tile-load peaks 18/7 per 100 ms and 24/8 per 500 ms.
+2. Local condition: `pc-b-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtlgfjw1`, `pageOrigin=http://localhost:8088`, `serverTopology=local`, valid, P95/P99 `21.03/33.40 ms`, raw max `50.10 ms`, window violation `4/76`, frame-over-budget rate `0.00378`, queue peak `61`, 174 tiles, 124.7 MB, resource/tile-load peaks 29/47 per 100 ms and 77/74 per 500 ms.
+
+Interpretation gate:
+
+Outcome: the diagnostic matches the "local produces more tail pressure or burstier arrivals" gate. Treat remote LAN delivery as a material PC-B S3 confounder. Do not use the earlier remote-server PC-B pilot/probe to conclude that S3 is inherently too light on PC-B. The later local-server probe and full pilot have now been completed; D-030 accepts the desktop S3 route gate while keeping formal collection blocked pending D-031.
+
+## Latest PC-B Local-Server D1/S3 Pressure Probe
+
+The user reported completing the PC-B local-server `Run D1/S3 pressureBurst probe`
+and `lod:analyze`. Inspection of `results/analysis/all_runs.csv` and the six raw
+JSON files showed:
+
+- six valid `pc-b + bagAmsterdam + pressureBurst` pilot records;
+- `pilotPurpose=request-peak-probe-v2.3.6-pressure-burst`;
+- `serverTopology=local`;
+- `pageOrigin=http://localhost:8088`;
+- no invalid reasons;
+- zero valid confirmatory runs overall.
+
+Method results:
+
+- `cesiumDynamic`: violation `0.0`, P95/P99 about `16.90/16.90 ms`, queue peak `1`, 9 tiles, 0.83 MB.
+- `fixed16`: violation `0.0`, P95/P99 about `16.90/16.90 ms`, queue peak `13`, 30 tiles, 15.45 MB.
+- `fixed8`: violation `0.0`, P95/P99 about `16.90/17.05 ms`, raw max `33.40 ms`, queue peak `60`, 134 tiles, 94.06 MB.
+- `pi`: violation `0.0526` with 4/76 over-budget windows, P95/P99 about `21.02/33.37 ms`, raw max `50.10 ms`, queue peak `61`, 170 tiles, 121.23 MB.
+- `proposed`: violation `0.0`, P95/P99 about `16.90/16.90 ms`, raw max `33.50 ms`, queue peak `42`, 153 tiles, 107.33 MB, 58 load-progress events, 9 pressure-safe-hold windows, and zero pressure-tail overlap / preemptive opportunity / exact request-pressure action.
+- `reactive`: violation `0.0`, P95/P99 about `16.90/16.90 ms`, raw max `33.40 ms`, queue peak `49`, 170 tiles, 121.23 MB.
+
+Interpretation: the PC-B local-server probe is valid pilot evidence and shows that
+S3 has a usable local-server workload signal on PC-B. This probe set the D-029
+full-pilot gate, which was later completed and accepted by D-030. Do not treat the
+probe itself as a method-effect claim.
+
+## Latest Android-A Fixed4 Identifiability Diagnostic
+
+The user reported completing `Run Android fixed4 diagnostic`, then `android_identifiability_diagnostics.csv` was updated. Inspection of `results/analysis/STATUS.md`, the diagnostic CSV, and raw JSON files showed:
+
+- `android-a-bagAmsterdam-pressureBurst-fixedDiagnostic-r1-mtiqf2tx`: valid diagnostic record, `dataset=bagAmsterdam`, `scenario=pressureBurst`, `method=fixedDiagnostic`, `studyPhase=diagnostic`, `diagnosticPurpose=android-workload-identifiability`, `fixedSse=4`, `excludeFromFormalAggregation=true`, `960 x 540` render target, readiness passed, no tile failures. P95 `16.7 ms`, P99 `16.7 ms`, raw max `33.1 ms`, `frameTimeOver20Rate=0.000415`, `frameBudgetViolationRate=0.0`, `requestQueuePeak=39`, `requestQueueAuc=246,976.6`, `tilesLoadedTotal=116`, `transferBytes=78,922,006`, `loadProgressEventCount=206`.
+- `android-a-bagRotterdam-pressureBurst-fixedDiagnostic-r1-mtiqg9ix`: valid diagnostic record, `dataset=bagRotterdam`, `scenario=pressureBurst`, `method=fixedDiagnostic`, `studyPhase=diagnostic`, `diagnosticPurpose=android-workload-identifiability`, `fixedSse=4`, `excludeFromFormalAggregation=true`, `960 x 540` render target, readiness passed, no tile failures. P95 `16.7 ms`, P99 `16.7 ms`, raw max `18.2 ms`, `frameTimeOver20Rate=0.0`, `frameBudgetViolationRate=0.0`, `requestQueuePeak=39`, `requestQueueAuc=233,590.4`, `tilesLoadedTotal=108`, `transferBytes=91,659,806`, `loadProgressEventCount=214`.
+
+Interpretation: v2.3.6/S3 has a clear Android-A floor effect. The workload loads meaningful content and produces request pressure, but even fixed `SSE=4` does not create measurable tail-frame pressure on Android-A. Do not add S3 Android repeats or run Android-A S3 confirmatory efficacy blocks. Current route: report Android-A as cross-device executability, telemetry validity, and low-pressure boundary behavior; if Android efficacy becomes paper-critical later, define a new platform-independent S4 workload under a new protocol version before running Proposed.
 
 The latest total includes retained audit/test records such as `unregistered-publicStress-pressureBurst-proposed-r1-mtidrply.json` and `unregistered-publicStress-pressureBurst-proposed-r1-mtie1u20.json`; these are not confirmatory evidence.
 
@@ -405,12 +571,17 @@ D-023 records the accepted post-pilot decision: do not freeze v2.3.5 for Android
 
 D-024 records the implemented revision: v2.3.6 adds `pressureBurst` as a separate S3 workload for the next PC-A pressure probe and full pilot. `pressureBurst` keeps four 10-second cycles but changes each cycle to a 4-second closer approach and a 6-second stationary near-view hold. It does not change controller thresholds, datasets, baselines, SSE ladder, readiness policy, request-pressure thresholds, frame budget, rolling window, control interval, or statistical plan. Automatic verification passed, the first PC-A pressure probe produced meaningful request-pressure exposure, and the four-repeat PC-A full pilot appears to pass repeatability.
 
-D-025 records the accepted freeze decision: v2.3.6 is frozen for Android-A pilot. The PC-A pilot evidence remains pilot evidence only; confirmatory collection still requires Android-A pilot evidence, formal device-scope resolution, and a separate confirmatory-release decision.
+D-025 records the accepted freeze decision: v2.3.6 is frozen for Android-A pilot. The PC-A pilot evidence remains pilot evidence only. Later Android-A evidence exposed a floor effect under S3 and narrowed Android to executability / low-pressure boundary behavior. PC-B remote-server evidence was initially low-pressure, but the server-topology diagnostic and later local-server probe/full pilot show that local-server S3 is viable enough for the desktop route. Confirmatory collection still requires D-031 and a verified formal run queue.
+
+D-026 records the accepted Android-A identifiability-diagnostic decision: keep the completed Android-A D1/S3 and D2/S3 pilots as valid low-pressure pilot evidence, but do not claim Android tail-control efficacy from them. The fixed4 diagnostic uses `fixedDiagnostic` with `fixedSse=4`, writes `studyPhase=diagnostic`, `diagnosticPurpose=android-workload-identifiability`, and `excludeFromFormalAggregation=true`, and is excluded from the formal methods and aggregation.
+
+D-027 records the diagnostic interpretation and claim-boundary decision: v2.3.6/S3 is unsuitable for Android-A efficacy comparison; Android-A remains executability and low-pressure boundary evidence under the current manuscript route; S4 is only a future option if Android efficacy becomes paper-critical.
 
 ## Known Bugs / Issues
 
 - No confirmatory evidence exists yet. Do not write positive manuscript result claims.
 - Android-A D1/S3 pilot, a later D1/S3 rerun, and the true D2/S3 pilot under frozen v2.3.6 have been collected and analyzed; all passed execution checks but produced zero tail-frame violations across all valid methods.
+- The Android fixed4 identifiability diagnostic is complete and supports a floor-effect interpretation for v2.3.6/S3 on Android-A.
 - The earlier reported Android-A D2/S3 attempt was another D1/S3 run because the fixed D1/S3 pilot button uses `bagAmsterdam`; the later true D2/S3 run used the new `Run D2/S3 pressureBurst pilot` button and produced `bagRotterdam` records.
 - PC-A full pilot under v2.3.5 is complete, but D-023 rejects parameter freeze because only one of four Proposed repeats contained high-pressure taxonomy rows.
 - v2.3.6 physical PC-A `pressureBurst` pressure probe and full pilot are complete, and D-025 freezes v2.3.6 for Android-A pilot.
@@ -419,18 +590,19 @@ D-025 records the accepted freeze decision: v2.3.6 is frozen for Android-A pilot
 - Prior v2.3.2 full pilot showed transient method-independent frame-time elevation, motivating readiness gating.
 - `analysis_status.json` is not currently produced; the analysis script writes `STATUS.md` and CSV outputs. Treat missing `analysis_status.json` as non-blocking unless code has been intentionally changed to produce it.
 - Invalid attempts such as `window-blur`, `document-hidden`, and `pre-run-frame-instability` can appear; they should remain in the audit trail.
-- PC-B is not registered.
+- PC-B is registered and its run-day power/network/GPU/drawing-buffer provenance is recorded. Its accidental D1/S3 full pilot is valid pilot evidence but low-pressure across all methods; its later D1/S3 pressure-probe rerun is complete but misregistered as `deviceId=unregistered`.
 - Helsinki dataset is not ready.
 - Taipei 101 and Dayanta are not publication-ready formal datasets due to rights/provenance.
 
 ## Remaining Tasks In Priority Order
 
-1. Decide how to handle Android-A low-tail-pressure before confirmatory release: narrow Android claims, release a deliberately versioned heavier Android workload, or treat Android as execution/generalization evidence rather than tail-pressure effect evidence.
-2. If another Android pilot is run, keep the 2026-09-01 condition fields fixed or record a new condition record before collection.
-3. Register PC-B or revise formal device scope if PC-B is not available.
-4. Do not start confirmatory collection until Android-A workload difficulty and formal device scope are resolved. Do not pool pilot runs with confirmatory statistics.
-5. Continue updating `PROJECT_STATE.md`, `TODO.md`, `CHANGELOG.md`, `DECISIONS.md`, `RUNBOOK.md`, and this `HANDOFF.md`.
-6. Run `npm.cmd run lod:backup` after meaningful conversation progress to preserve the natural-language transcript.
+1. Prepare D-031: freeze the desktop confirmatory route, method order, repeats, seeds, browser/device conditions, local-server requirement, and analysis inputs.
+2. Update and verify the formal run entry point before using `Run main batch`; the current historical main queue still targets `steady` / `burst`, not S3 `pressureBurst`.
+3. Do not run Android-A S3 confirmatory efficacy blocks. Android-A v2.3.6/S3 is low-pressure boundary evidence only.
+4. If Android or cross-device efficacy becomes paper-critical, create a new protocol version with a platform-independent S4 sustained high-pressure workload and admission criterion before running Proposed.
+5. Do not pool pilot or diagnostic runs with confirmatory statistics.
+6. Continue updating `PROJECT_STATE.md`, `TODO.md`, `CHANGELOG.md`, `DECISIONS.md`, `RUNBOOK.md`, and this `HANDOFF.md`.
+7. Run `npm.cmd run lod:backup` after meaningful conversation progress to preserve the natural-language transcript.
 
 ## Avoid Changing
 
@@ -441,6 +613,7 @@ D-025 records the accepted freeze decision: v2.3.6 is frozen for Android-A pilot
 - Do not use Cesium private `_statistics`.
 - Do not delete or overwrite invalid JSON runs.
 - Do not reclassify pilot/tuning/legacy runs as confirmatory.
+- Do not treat `fixedDiagnostic` as a formal seventh method or include it in pilot/confirmatory aggregation.
 - Do not include `taipei101` or `dayanta` in formal results.
 - Do not claim SCI-ready results before confirmatory statistics and visual quality calibration are complete.
 - Do not depend on Git commands in the current `Apps` directory; it is not a Git repository.
@@ -474,5 +647,6 @@ Health check:
 ## Best Next Prompt
 
 ```
-Continue the Web 3D Tiles tail-frame LOD benchmark from learnMapmost/HANDOFF.md. The current protocol is v2.3.6. D-025 freezes v2.3.6 for Android-A pilot after the PC-A D1/S3 `pressureBurst` pressure probe and four-repeat full pilot passed the practical workload/repeatability gate. Android-A pilot setup conditions were recorded on 2026-09-01. Android-A D1/S3, its accidental D1/S3 rerun, and true D2/S3 have been collected and analyzed; all produced complete valid paired pilot blocks with request-pressure exposure but zero tail-frame violations across all valid methods. The true D2/S3 run used `bagRotterdam` and `pilotPurpose=full-pilot-v2.3.6-d2-pressure-burst`. Next, decide how to handle Android-A low-tail-pressure before confirmatory release, and do not start confirmatory collection or convert pilot data into formal manuscript result claims.
+Continue the Web 3D Tiles tail-frame LOD benchmark from learnMapmost/HANDOFF.md. The current protocol is v2.3.6. D-025 freezes v2.3.6 for Android-A pilot after the PC-A D1/S3 `pressureBurst` pressure probe and four-repeat full pilot passed the practical workload/repeatability gate. Android-A pilot setup conditions were recorded on 2026-09-01. Android-A D1/S3, its accidental D1/S3 rerun, true D2/S3, and fixed-SSE-4 diagnostic have been collected and analyzed; they support executability / low-pressure boundary behavior only, not Android S3 efficacy. D-027 already narrowed Android-A claims; do not run Android-A S3 confirmatory efficacy blocks.
+D-028 diagnosed remote LAN server delivery as a material PC-B S3 confounder. D-029 accepted the PC-B local-server D1/S3 six-method pressure probe. D-030 accepts the completed PC-B local-server D1/S3 four-repeat full pilot as passing the desktop S3 route/repeatability gate, while keeping all pilot data non-confirmatory. Next prepare D-031: freeze the desktop confirmatory matrix, method order, repeats, seeds, browser/device conditions, local-server requirement, and analysis inputs; update and verify the formal run queue before using `Run main batch`, because the current historical main queue still targets `steady` / `burst` rather than S3 `pressureBurst`.
 ```
