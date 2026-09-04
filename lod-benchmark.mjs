@@ -1,8 +1,10 @@
 import {
   DATASETS,
+  D031_CONFIRMATORY_RELEASE,
   EXPERIMENT_METHODS,
   FROZEN_PROTOCOL,
   buildAblationQueue,
+  buildDesktopS3ConfirmatoryQueue,
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
   buildD2S3PilotQueue,
@@ -11,6 +13,7 @@ import {
   buildMainExperimentQueue,
   buildPiCalibrationQueue,
   createRunManifest,
+  validateDesktopS3ConfirmatoryQueue,
 } from "./experiment-config.mjs";
 import {
   PI_BASELINE_POLICY,
@@ -47,7 +50,7 @@ if (!Cesium) throw new Error("Cesium failed to load");
 const elements = Object.fromEntries(
   [
     "runForm", "method", "dataset", "scenario", "networkProfile", "deviceId", "repeat", "seed",
-    "runSingle", "stopRun", "runMainBatch", "runAblationBatch", "runD1S2Pilot", "runD2S3Pilot", "runAndroidIdentifiabilityDiagnostic", "runServerTopologyDiagnostic", "runD1S2PressureProbe", "runPiCalibration", "downloadJson",
+    "runSingle", "stopRun", "runMainBatch", "runDesktopS3Confirmatory", "runAblationBatch", "runD1S2Pilot", "runD2S3Pilot", "runAndroidIdentifiabilityDiagnostic", "runServerTopologyDiagnostic", "runD1S2PressureProbe", "runPiCalibration", "downloadJson",
     "downloadCsv", "runState", "runProgress", "progressBar", "resultsBody", "hud",
     "bufferSize", "metricP95", "metricPredicted", "metricSse", "metricQueue",
     "metricState", "metricAction", "viewportFrame",
@@ -164,7 +167,8 @@ function formatMs(value) {
 function setRunning(running) {
   state.running = running;
   elements.runSingle.disabled = running;
-  elements.runMainBatch.disabled = running;
+  elements.runMainBatch.disabled = true;
+  elements.runDesktopS3Confirmatory.disabled = running;
   elements.runAblationBatch.disabled = running;
   elements.runD1S2Pilot.disabled = running;
   elements.runD2S3Pilot.disabled = running;
@@ -480,6 +484,9 @@ async function runCondition(condition) {
       deviceId: condition.deviceId,
       networkProfile: condition.networkProfile,
       diagnosticPurpose: condition.diagnosticPurpose,
+      confirmatoryRelease: condition.confirmatoryRelease,
+      confirmatoryRole: condition.confirmatoryRole,
+      ablationPurpose: condition.ablationPurpose,
       fixedSse: condition.fixedSse,
       excludeFromFormalAggregation: condition.excludeFromFormalAggregation,
       serverTopology: condition.serverTopology,
@@ -731,6 +738,7 @@ async function runQueue(queue, options = {}) {
   elements.progressBar.max = Math.max(1, pending.length);
   elements.progressBar.value = 0;
   try {
+    if (options.preflight) options.preflight(pending);
     if (options.requireReady) await assertDatasetsReady(pending);
     if (options.requirePiFrozen && PI_BASELINE_POLICY.parameterStatus !== "frozen") {
       throw new Error("PI baseline parameters are not frozen; complete PI calibration first");
@@ -768,12 +776,30 @@ elements.runForm.addEventListener("submit", (event) => {
   void runQueue([conditionFromForm()]);
 });
 elements.runMainBatch.addEventListener("click", () => {
-  const queue = buildMainExperimentQueue({
-    repeats: smokeMode ? 1 : FROZEN_PROTOCOL.defaultRepeats,
-    primaryRepeats: smokeMode ? 1 : FROZEN_PROTOCOL.primaryRepeats,
-    seed: Number(elements.seed.value),
+  elements.runState.textContent = "Blocked";
+  elements.hud.textContent = "Legacy S1/S2 main batch is not approved for current D-031 confirmatory collection.";
+});
+elements.runDesktopS3Confirmatory.addEventListener("click", () => {
+  const deviceId = elements.deviceId.value.trim() || "unregistered";
+  const serverTopology = inferServerTopology();
+  const queue = buildDesktopS3ConfirmatoryQueue({
+    seed: D031_CONFIRMATORY_RELEASE.seed,
+  }).map((condition) => ({
+    ...condition,
+    deviceId,
+    serverTopology,
+  }));
+  void runQueue(queue, {
+    requireReady: true,
+    requirePiFrozen: true,
+    preflight: (pending) => validateDesktopS3ConfirmatoryQueue(pending, {
+      protocolVersion: FROZEN_PROTOCOL.protocolVersion,
+      deviceId,
+      serverTopology,
+      pageOrigin: location.origin,
+      pageHost: location.host,
+    }),
   });
-  void runQueue(queue, { requireReady: true, requirePiFrozen: true });
 });
 elements.runAblationBatch.addEventListener("click", () => {
   void runQueue(
@@ -862,9 +888,11 @@ window.__lodBenchmark = {
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
   buildD2S3PilotQueue,
+  buildDesktopS3ConfirmatoryQueue,
   buildAndroidIdentifiabilityDiagnosticQueue,
   buildServerTopologyDiagnosticQueue,
   buildPiCalibrationQueue,
+  validateDesktopS3ConfirmatoryQueue,
   viewer,
 };
 

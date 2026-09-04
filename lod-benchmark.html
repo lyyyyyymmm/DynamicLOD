@@ -69,8 +69,16 @@
             <button id="stopRun" type="button" disabled>Stop</button>
           </div>
           <div class="buttonRow secondary">
-            <button id="runMainBatch" type="button">Run main batch</button>
-            <button id="runAblationBatch" type="button">Run ablations</button>
+            <button
+              id="runMainBatch"
+              type="button"
+              disabled
+              title="Historical S1/S2 queue; not approved for current D-031 confirmatory collection"
+            >Legacy main batch — do not use</button>
+            <button id="runDesktopS3Confirmatory" type="button">Run frozen desktop S3 confirmatory</button>
+          </div>
+          <div class="buttonRow secondary">
+            <button id="runAblationBatch" type="button">Run frozen D1/S3 ablations</button>
           </div>
           <div class="buttonRow secondary">
             <button id="runD1S2Pilot" type="button">Run D1/S3 pressureBurst pilot</button>

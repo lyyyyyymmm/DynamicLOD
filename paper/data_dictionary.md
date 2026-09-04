@@ -27,9 +27,12 @@
 | `datasetVersion`, `sourceSha256`, `sourceLicense` | Frozen data identity and publication-rights fields. |
 | `deviceId` | Researcher-assigned physical device identifier used for statistical strata. |
 | `networkProfile` | `lan`, `delay40`, or `delay80`; delay profiles are diagnostic-only. |
-| `studyPhase` | `tuning`, `pilot`, `diagnostic`, `confirmatory`, or `adHoc`; only `confirmatory` rows enter formal statistical tests. Legacy records are retained as audit evidence. |
+| `studyPhase` | `tuning`, `pilot`, `diagnostic`, `confirmatory`, `confirmatory-ablation`, or `adHoc`; only D-031-approved `confirmatory` rows enter main formal statistical tests. Legacy records are retained as audit evidence. |
 | `pilotPurpose` | `request-peak-probe`, `full-pilot`, `none`, or `legacy`; identifies the non-confirmatory pilot intent. |
 | `diagnosticPurpose` | Diagnostic-only purpose label, such as `android-workload-identifiability`; `none` otherwise. |
+| `confirmatoryRelease` | Formal release identity. Current main efficacy rows must be `D-031`; legacy S1/S2 queues are marked `legacy-s1s2-unreleased`. |
+| `confirmatoryRole` | D-031 stratum role, such as `primary-efficacy`, `external-validation`, `mechanism-ablation`, or `none`. |
+| `ablationPurpose` | Ablation-only purpose label, currently `d031-d1-s3-mechanism` for frozen D1/S3 mechanism ablations; `none` otherwise. |
 | `fixedSse` | Fixed SSE value for diagnostic-only fixed-SSE runs, such as Android fixed4; empty otherwise. |
 | `excludeFromFormalAggregation` | Boolean flag marking records that must be excluded from pilot, confirmatory, and six-method aggregation. Diagnostic fixed4 records set this to true. |
 | `serverTopology` | Diagnostic server-delivery label, currently `remote`, `local`, or `unspecified`; used for PC-B server-topology identifiability checks only. |

@@ -56,13 +56,24 @@ While a physical Android phone is unavailable, complete only these tasks:
 12. The PC-B server-topology fixed4 diagnostic is complete. The local-server condition produced stronger tail pressure and much burstier resource/tile arrivals than the remote LAN server condition, so treat remote LAN delivery as a material PC-B S3 confounder.
 13. The PC-B local-server D1/S3 six-method pressure probe is complete and valid. It supports continuing the local-server desktop pilot route but not confirmatory collection by itself.
 14. The PC-B local-server D1/S3 four-repeat full pilot is complete and valid. D-030 accepts it as passing the desktop S3 route/repeatability gate.
-15. Do not click `Run main batch` yet. The current historical main queue still schedules the older `steady` / `burst` matrix, not the newly gated S3 `pressureBurst` route. Next prepare D-031, freeze the desktop confirmatory matrix and operation conditions, update the formal run entry point if needed, and verify the queue before any formal collection.
+15. D-031 is now the approved desktop confirmatory release. The historical `Run main batch` button is disabled and marked legacy/do-not-use because it represents the older S1/S2 audit matrix. Use only `Run frozen desktop S3 confirmatory` for formal desktop collection.
 
 Desktop Android emulation is UI validation only. It is never Android experimental evidence.
 
 ## 5. Confirmatory Collection
 
-For the current v2.3.6 efficacy route, use at least two distinct PCs. PC-B is registered as the second desktop candidate, and its 2026-09-02 run-day provenance records plugged-in power, Wi-Fi SSID `TP318`, Chrome GPU hardware acceleration / active Arc 140V evidence, and actual `960 x 540` drawing buffer. Android-A S3 evidence is retained only for executability and low-pressure boundary behavior unless a later S4 protocol is released.
+For the current v2.3.6 efficacy route, use exactly the frozen D-031 desktop scope:
+
+- devices: `pc-a` and `pc-b`;
+- server topology: local benchmark server on the same desktop under test;
+- allowed origins: `http://localhost:8088/...` or `http://127.0.0.1:8088/...`;
+- dataset/scenario matrix per device: D1 `bagAmsterdam + pressureBurst` x12 paired repeats and D2 `bagRotterdam + pressureBurst` x8 paired repeats;
+- methods: `fixed8`, `fixed16`, `cesiumDynamic`, `reactive`, `pi`, `proposed`;
+- seed: `20260823`;
+- network profile: `lan`;
+- study phase: `confirmatory`.
+
+This is 120 runs per desktop and 240 planned desktop confirmatory runs. PC-B is registered as the second desktop candidate, and its 2026-09-02 run-day provenance records plugged-in power, Wi-Fi SSID `TP318`, Chrome GPU hardware acceleration / active Arc 140V evidence, and actual `960 x 540` drawing buffer. Android-A S3 evidence is retained only for executability and low-pressure boundary behavior unless a later S4 protocol is released.
 
 PC-B has already produced a valid accidental D1/S3 full pilot: 24 valid `pc-b +
 bagAmsterdam + pressureBurst` records in four complete six-method blocks. The result
@@ -73,18 +84,21 @@ raw manifests; keep it as audit evidence only and treat the manifest as the sour
 truth over the filename.
 
 The later PC-B local-server pressure probe and four-repeat full pilot are complete.
-D-030 accepts the local-server full pilot as passing the desktop S3 route gate, but
-this still does not release formal collection. Before collecting formal evidence,
-record D-031 and verify that the formal run button schedules the intended desktop
-S3 `pressureBurst` matrix with local-server provenance. The earlier diagnostic-only
+D-030 accepts the local-server full pilot as passing the desktop S3 route gate, and
+D-031 releases the formal desktop S3 confirmatory entry point. Before collecting on
+each desktop, verify the page is local (`localhost` or `127.0.0.1`), the displayed
+buffer is `960 x 540`, the device ID is exactly `pc-a` or `pc-b`, Chrome hardware
+acceleration is on, and the device is in its recorded power/network condition. The
+formal button fails closed for wrong device IDs, remote origins, wrong protocol,
+wrong queue, wrong dataset/scenario/method/network profile, and diagnostic or
+legacy records. The earlier diagnostic-only
 remote/local fixed4 A/B records have
 `diagnosticPurpose=server-topology-identifiability` and
 `excludeFromFormalAggregation=true`; `fixedDiagnostic` is not a seventh method and
 is not part of pilot or confirmatory aggregation.
 
-- Historical, not-yet-released main queue: 216 main attempts before automatic replacements: D1/S1 48, D1/S2 72, D2/S1 48, D2/S2 48.
-- Historical, not-yet-released ablation queue: 32 additional D1/S2 ablation attempts.
-- D-031 must freeze whether the new formal matrix uses S3 `pressureBurst`, how D2/external validation is represented, and whether ablations move from S2 to S3.
+- Historical legacy main queue: 216 main attempts before automatic replacements: D1/S1 48, D1/S2 72, D2/S1 48, D2/S2 48. It remains in code only as audit trail and is not a current collection entry.
+- Frozen D-031 ablation queue: 32 D1/S3 `confirmatory-ablation` attempts on PC-A using `noPrediction`, `noRequest`, `noInteraction`, and `noStability`; analyze separately from main efficacy.
 
 All formal efficacy conditions use `networkProfile=lan`. Method order is shuffled inside each paired block. Keep the browser foregrounded and do not resize or rotate. Invalid attempts stay in the audit trail and are retried at most twice. If a future Android S4 protocol is released, use landscape orientation, close background apps, record thermal state, and cool the device between long blocks.
 
@@ -97,7 +111,7 @@ npm run lod:capture-quality
 npm run lod:quality
 ```
 
-The mandatory output is six-view SSIM against SSE 4. The capture path uses a page-level canvas clip so the continuously rendered Cesium canvas does not block on Playwright element stability. LPIPS is supplementary:
+The existing static SSE-ladder output is six-view SSIM against SSE 4. The capture path uses a page-level canvas clip so the continuously rendered Cesium canvas does not block on Playwright element stability. D-031 also freezes the method-level quality evidence rule: sample predeclared canonical views/timestamps from D1/D2 confirmatory blocks where feasible, use same-view SSE 4 as the reference, apply the 0.02 SSIM non-inferiority margin, retain time-weighted SSE and visible geometric-error summaries, and do not choose screenshots after seeing outcomes. Until that method-level capture is fully implemented and analyzed, the visual non-inferiority claim remains unmeasured. LPIPS is supplementary:
 
 ```powershell
 python -m pip install -r learnMapmost/analysis/requirements-lpips.txt
@@ -112,6 +126,6 @@ Record the Python environment and model version if LPIPS is reported. The v2.3.5
 npm run lod:analyze
 ```
 
-The script accepts incomplete data but does not manufacture complete blocks. Inspect `analysis_status.json`, device-stratified descriptive tables, Friedman output, Wilcoxon-Holm comparisons, effect sizes, confidence intervals, PI selection, and forecast diagnostics before updating either manuscript.
+The script accepts incomplete data but does not manufacture complete blocks. It writes `results/analysis/STATUS.md`, not `analysis_status.json`. For D-031 formal efficacy, aggregation is restricted to valid rows with `confirmatoryRelease=D-031`, `studyPhase=confirmatory`, `deviceId` in `pc-a/pc-b`, D1/D2, S3 `pressureBurst`, six formal methods, `networkProfile=lan`, `serverTopology=local`, and local `pageOrigin/pageHost`. Pilot, diagnostic, Android, remote-server, legacy S1/S2, ablation, and smoke/audit records are excluded from main formal inference. Inspect device-stratified descriptive tables, Friedman output, Wilcoxon-Holm comparisons, effect sizes, confidence intervals, PI selection, and forecast diagnostics before updating either manuscript.
 
 No positive result sentence is permitted until its row in `paper/claim_registry.md` has sufficient evidence. If the minimum D1/S2 gate fails, report the failure and revise the research claim only in a new protocol, never by silently retuning the confirmatory run.

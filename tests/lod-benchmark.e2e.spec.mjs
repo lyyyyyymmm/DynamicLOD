@@ -12,12 +12,38 @@ test("benchmark page renders Cesium and completes a finite smoke run", async ({ 
   await expect(page.getByRole("heading", { name: "Tail Frame-Time LOD Benchmark" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Run D1/S3 pressureBurst pilot" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Run D2/S3 pressureBurst pilot" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Run frozen desktop S3 confirmatory" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Legacy main batch — do not use" })).toBeDisabled();
   await expect(page.getByRole("button", { name: "Run Android fixed4 diagnostic" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Run server-topology fixed4 diagnostic" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Run D1/S3 pressureBurst probe" })).toBeVisible();
   await expect(page.locator("#scenario")).toContainText("S3 Pressure burst");
   await expect(page.locator("#cesiumContainer canvas")).toBeVisible();
   await expect(page.locator("#bufferSize")).toHaveText("960 × 540", { timeout: 20000 });
+
+  const confirmatoryPlan = await page.evaluate(() => {
+    const queue = window.__lodBenchmark.buildDesktopS3ConfirmatoryQueue();
+    return {
+      validForLocalPcA: window.__lodBenchmark.validateDesktopS3ConfirmatoryQueue(queue, {
+        protocolVersion: "2.3.6",
+        deviceId: "pc-a",
+        serverTopology: "local",
+        pageOrigin: location.origin,
+        pageHost: location.host,
+      }),
+      total: queue.length,
+      scenarios: [...new Set(queue.map((run) => run.scenario))],
+      studyPhases: [...new Set(queue.map((run) => run.studyPhase))],
+      releases: [...new Set(queue.map((run) => run.confirmatoryRelease))],
+    };
+  });
+  expect(confirmatoryPlan).toEqual({
+    validForLocalPcA: true,
+    total: 120,
+    scenarios: ["pressureBurst"],
+    studyPhases: ["confirmatory"],
+    releases: ["D-031"],
+  });
 
   await page.selectOption("#dataset", "publicStress");
   await page.selectOption("#method", "proposed");

@@ -3,8 +3,10 @@ import assert from "node:assert/strict";
 
 import {
   DATASETS,
+  D031_CONFIRMATORY_RELEASE,
   FROZEN_PROTOCOL,
   buildAblationQueue,
+  buildDesktopS3ConfirmatoryQueue,
   buildD1S2PressureProbeQueue,
   buildD1S2PilotQueue,
   buildD2S3PilotQueue,
@@ -14,7 +16,9 @@ import {
   buildPiCalibrationQueue,
   buildScenarioTimeline,
   createRunManifest,
+  isLocalPageOrigin,
   seededShuffle,
+  validateDesktopS3ConfirmatoryQueue,
 } from "../experiment-config.mjs";
 
 test("burst scenario contains four interaction and four recovery phases", () => {
@@ -110,18 +114,94 @@ test("protocol waits up to one minute for first content before warmup", () => {
   assert.equal(FROZEN_PROTOCOL.drawingBufferTolerancePx, 1);
 });
 
-test("main queue schedules 216 confirmatory runs per device", () => {
+test("legacy main queue remains historical S1/S2 and is not the D-031 entry", () => {
   const queue = buildMainExperimentQueue();
   assert.equal(queue.length, 216);
   assert.equal(queue.filter((run) => run.dataset === "bagAmsterdam" && run.scenario === "burst").length, 72);
+  assert.ok(queue.some((run) => run.scenario === "steady"));
+  assert.ok(queue.some((run) => run.scenario === "burst"));
+  assert.ok(queue.every((run) => run.legacyConfirmatory === true));
+  assert.ok(queue.every((run) => run.confirmatoryRelease !== D031_CONFIRMATORY_RELEASE.decisionId));
   assert.ok(queue.every((run) => ["bagAmsterdam", "bagRotterdam"].includes(run.dataset)));
 });
 
-test("ablation queue contains four variants on D1 burst", () => {
+test("desktop S3 confirmatory queue freezes the D-031 matrix and method order", () => {
+  const queue = buildDesktopS3ConfirmatoryQueue();
+  const repeatKeys = [...new Set(queue.map((run) => `${run.dataset}:${run.repeat}:${run.seed}`))];
+
+  assert.equal(queue.length, 120);
+  assert.equal(queue.filter((run) => run.dataset === "bagAmsterdam").length, 72);
+  assert.equal(queue.filter((run) => run.dataset === "bagRotterdam").length, 48);
+  assert.equal(repeatKeys.length, 20);
+  assert.ok(queue.every((run) => run.scenario === "pressureBurst"));
+  assert.ok(queue.every((run) => run.networkProfile === "lan"));
+  assert.ok(queue.every((run) => run.studyPhase === "confirmatory"));
+  assert.ok(queue.every((run) => run.confirmatoryRelease === "D-031"));
+  assert.ok(queue.every((run) => FROZEN_PROTOCOL.methods.includes(run.method)));
+  assert.ok(queue.every((run) => !run.excludeFromFormalAggregation));
+
+  assert.deepEqual(
+    queue.filter((run) => run.dataset === "bagAmsterdam" && run.repeat === 1).map((run) => run.method),
+    seededShuffle(FROZEN_PROTOCOL.methods, 20260823),
+  );
+  assert.deepEqual(
+    queue.filter((run) => run.dataset === "bagRotterdam" && run.repeat === 1).map((run) => run.method),
+    seededShuffle(FROZEN_PROTOCOL.methods, 20260835),
+  );
+  assert.deepEqual(buildDesktopS3ConfirmatoryQueue(), queue);
+});
+
+test("desktop S3 confirmatory queue validator fails closed for non-release conditions", () => {
+  const queue = buildDesktopS3ConfirmatoryQueue();
+  const context = {
+    protocolVersion: "2.3.6",
+    deviceId: "pc-a",
+    serverTopology: "local",
+    pageOrigin: "http://localhost:8088",
+    pageHost: "localhost:8088",
+  };
+
+  assert.doesNotThrow(() => validateDesktopS3ConfirmatoryQueue(queue, context));
+  assert.equal(isLocalPageOrigin("not-a-url", "[::1]:8088"), true);
+  assert.throws(
+    () => validateDesktopS3ConfirmatoryQueue(queue, { ...context, deviceId: "android-a" }),
+    /approved desktop device/,
+  );
+  assert.throws(
+    () => validateDesktopS3ConfirmatoryQueue(queue, { ...context, serverTopology: "remote" }),
+    /local server topology/,
+  );
+  assert.throws(
+    () => validateDesktopS3ConfirmatoryQueue(queue, { ...context, pageOrigin: "http://192.168.1.20:8088" }),
+    /local page origin/,
+  );
+  assert.throws(
+    () => validateDesktopS3ConfirmatoryQueue([{ ...queue[0], scenario: "burst" }, ...queue.slice(1)], context),
+    /pressureBurst/,
+  );
+  assert.throws(
+    () => validateDesktopS3ConfirmatoryQueue([{ ...queue[0], method: "fixedDiagnostic" }, ...queue.slice(1)], context),
+    /six formal methods/,
+  );
+  assert.throws(
+    () => validateDesktopS3ConfirmatoryQueue([{ ...queue[0], networkProfile: "delay40" }, ...queue.slice(1)], context),
+    /lan/,
+  );
+  assert.throws(
+    () => validateDesktopS3ConfirmatoryQueue(queue, { ...context, protocolVersion: "2.3.7" }),
+    /protocolVersion=2\.3\.6/,
+  );
+});
+
+test("ablation queue contains four D-031 variants on D1 pressureBurst outside main inference", () => {
   const queue = buildAblationQueue();
   assert.equal(queue.length, 32);
   assert.ok(queue.every((run) => run.dataset === "bagAmsterdam"));
-  assert.ok(queue.every((run) => run.scenario === "burst"));
+  assert.ok(queue.every((run) => run.scenario === "pressureBurst"));
+  assert.ok(queue.every((run) => run.networkProfile === "lan"));
+  assert.ok(queue.every((run) => run.studyPhase === "confirmatory-ablation"));
+  assert.ok(queue.every((run) => run.confirmatoryRelease === "D-031"));
+  assert.ok(queue.every((run) => run.deviceId === "pc-a"));
   assert.ok(queue.every((run) => run.method.startsWith("no")));
 });
 

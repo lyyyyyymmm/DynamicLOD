@@ -3,15 +3,12 @@
 Protocol version: `2.3.6`
 Freeze date for Android-A pilot: 2026-08-31
 
-Protocol v2.3.6 is a frozen Android-A pilot protocol after the
-v2.3.5 PC-A full pilot showed that high request-pressure taxonomy was not
-repeatable across Proposed repeats. It adds `pressureBurst` as a separate S3
-candidate workload; the PC-A pressure probe and full pilot passed their
-pre-confirmatory workload/repeatability gates. The
-controller thresholds, datasets, SSE ladder, request-pressure logic, readiness
-gate, analysis taxonomy, and statistical plan remain unchanged from v2.3.5. All
-v2.x probe and pilot records remain audit evidence until the confirmatory matrix
-is separately frozen and started.
+Protocol v2.3.6 is now frozen for the D-031 desktop S3 confirmatory route. It
+adds `pressureBurst` as a separate S3 workload; the PC-A and PC-B local-server
+pilot gates passed before release. D-031 does not change the controller,
+datasets, SSE ladder, request-pressure logic, readiness gate, analysis taxonomy,
+or statistical plan. All v2.x probe and pilot records remain audit evidence and
+are excluded from formal efficacy inference.
 
 D-026 adds an Android-A workload-identifiability diagnostic after the v2.3.6
 Android-A D1/S3 and D2/S3 pilots both produced valid low-pressure evidence. This
@@ -44,12 +41,10 @@ PC-B still requires a local-server four-repeat D1/S3 full pilot before a desktop
 route/freeze decision.
 
 D-030 accepts the completed PC-B local-server D1/S3 four-repeat full pilot as
-passing the desktop S3 route/repeatability gate. The desktop route can now move
-to confirmatory-release preparation, but formal collection is still closed until
-D-031 freezes the intended matrix and verifies the run entry point. The current
-historical main-batch queue must not be used blindly because it still targets
-the older `steady` / `burst` matrix rather than the newly gated S3
-`pressureBurst` route.
+passing the desktop S3 route/repeatability gate. D-031 releases the frozen
+desktop S3 confirmatory entry point. The historical main-batch queue remains in
+code as a legacy S1/S2 audit trail, but the normal UI disables it. Formal
+collection uses only the `Run frozen desktop S3 confirmatory` entry.
 
 ## Research Question
 
@@ -102,7 +97,7 @@ Ablations remove prediction, request pressure, interaction awareness, or stabili
 - After readiness passes, wait for the first tile for at most 60 seconds. This loading gate is outside warm-up and measurement; a timeout invalidates the attempt. The drawing-buffer target is `960 x 540`; a one-pixel browser rounding tolerance is allowed and the actual size is retained per telemetry row.
 - S1: 10-second fixed-SSE warm-up followed by a 40-second uniform orbit.
 - S2: the same warm-up followed by four cycles of a 6-second cross-direction monotonic approach from range multiplier 3.6 to 0.9 and a 4-second stationary near-view recovery.
-- S3 `pressureBurst`: the same warm-up followed by four cycles of a 4-second cross-direction monotonic approach from range multiplier 3.2 to 0.7 and a 6-second stationary near-view hold. This is the frozen v2.3.6 Android-A pilot workload and the accepted desktop-route candidate after D-030, but it is not confirmatory evidence until D-031 releases the formal matrix and run entry point.
+- S3 `pressureBurst`: the same warm-up followed by four cycles of a 4-second cross-direction monotonic approach from range multiplier 3.2 to 0.7 and a 6-second stationary near-view hold. This is the frozen D-031 desktop confirmatory workload.
 
 Before a v2.3.6 full pilot, run one D1/S3 six-method `request-peak-probe` block.
 The probe is pilot-only and records interval queue peaks plus `loadProgress` event counts.
@@ -149,9 +144,9 @@ verification.
 
 All confirmatory runs use the `lan` profile. Artificial delay profiles are diagnostic-only and are rejected for D1/D2 by the server.
 
-The historical main matrix in the current implementation contains 216 runs per physical device: D1/S1 has 8 paired repeats, D1/S2 has 12, D2/S1 has 8, and D2/S2 has 8; every block contains six methods in seed-shuffled order. This entry point predates the D-030 S3 route decision and is not approved for new formal collection. D-031 must either explicitly freeze this older matrix or update the run queue/UI to the intended S3 `pressureBurst` desktop matrix before `Run main batch` is used. The ablation matrix likewise requires D-031 release if the primary route changes to S3. PI calibration adds 64 pilot runs on the designated tuning PC and is never pooled with confirmation data.
+The D-031 desktop confirmatory matrix contains 120 runs per physical desktop device: D1/S3 `bagAmsterdam + pressureBurst` has 12 paired repeats and D2/S3 `bagRotterdam + pressureBurst` has 8 paired repeats; every block contains the six formal methods in deterministic seed-shuffled order from base seed `20260823`. With `pc-a` and `pc-b`, the planned desktop confirmatory total is 240 runs. D1 is the primary efficacy stratum; D2 is external validation. Both desktops must run from a local benchmark server (`localhost` or `127.0.0.1`), with `networkProfile=lan`, `studyPhase=confirmatory`, and `confirmatoryRelease=D-031`. The historical main matrix remains in code as a 216-run S1/S2 legacy audit queue and is not an approved collection entry. The D-031 ablation matrix is separate: 32 PC-A D1/S3 `confirmatory-ablation` runs over `noPrediction`, `noRequest`, `noInteraction`, and `noStability`, excluded from main Friedman/Wilcoxon aggregation. PI calibration adds 64 pilot runs on the designated tuning PC and is never pooled with confirmation data.
 
-The current SCI target design uses at least two distinct desktop PCs for efficacy and one physical Android phone for executability / low-pressure boundary characterization, all with hardware-accelerated Chrome, a fixed `960 x 540` drawing buffer, no terrain or imagery, and the same server assets. PC-B was registered on 2026-09-02 with Intel Core Ultra 7 258V CPU, Intel Arc 140V GPU, 32 GB RAM, Windows 11 Home Chinese edition 25H2, Chrome 150.0.7871.115, 60 Hz display refresh, Wi-Fi, and Best performance power mode. Its run-day provenance records plugged-in power, Wi-Fi SSID `TP318`, Chrome GPU hardware acceleration with active Intel Arc 140V evidence, and actual `960 x 540` benchmark drawing buffer. Device IDs represent physical devices, not browser viewport presets. A subsequent PC-B D1/S3 pilot remained near one 60 Hz frame with zero over-budget frames across all methods despite substantial request/content pressure. Because that PC-B evidence used a remote LAN server path, D-028 required a remote/local server-topology fixed4 diagnostic. The completed diagnostic showed that local-server delivery produced stronger tail pressure and much burstier resource/tile arrivals. D-029 then accepted a PC-B local-server six-method pressure probe as valid pilot evidence, and D-030 accepts the PC-B local-server four-repeat full pilot as passing the desktop S3 route gate. Formal desktop efficacy collection remains closed until D-031 freezes and verifies the confirmatory matrix and local-server operation.
+The current SCI target design uses two distinct desktop PCs for efficacy and one physical Android phone for executability / low-pressure boundary characterization, all with hardware-accelerated Chrome, a fixed `960 x 540` drawing buffer, no terrain or imagery, and the same server assets. PC-B was registered on 2026-09-02 with Intel Core Ultra 7 258V CPU, Intel Arc 140V GPU, 32 GB RAM, Windows 11 Home Chinese edition 25H2, Chrome 150.0.7871.115, 60 Hz display refresh, Wi-Fi, and Best performance power mode. Its run-day provenance records plugged-in power, Wi-Fi SSID `TP318`, Chrome GPU hardware acceleration with active Intel Arc 140V evidence, and actual `960 x 540` benchmark drawing buffer. Device IDs represent physical devices, not browser viewport presets. A subsequent PC-B D1/S3 pilot remained near one 60 Hz frame with zero over-budget frames across all methods despite substantial request/content pressure. Because that PC-B evidence used a remote LAN server path, D-028 required a remote/local server-topology fixed4 diagnostic. The completed diagnostic showed that local-server delivery produced stronger tail pressure and much burstier resource/tile arrivals. D-029 then accepted a PC-B local-server six-method pressure probe as valid pilot evidence, and D-030 accepts the PC-B local-server four-repeat full pilot as passing the desktop S3 route gate. D-031 freezes and verifies the confirmatory matrix and local-server operation; physical collection has not yet started.
 
 ## Validity Rules
 
@@ -161,13 +156,13 @@ A run is invalid if the pre-run readiness gate times out, first content does not
 
 The primary metric is P95-window violation rate. Secondary metrics are frame P95/P99, over-budget-frame proportion, control-interval request-queue peak and AUC, `loadProgress` event count, resource count and bytes, time-weighted SSE, visible geometric error, first stable display, recovery time, switches per minute, reversals, and controller-state residence.
 
-Forecast reporting includes one-second-horizon MAE, persistence-baseline MAE, violation precision/recall/F1, and warning lead time. Visual calibration uses six canonical views at every SSE level against SSE 4, reporting SSIM and, when the optional frozen LPIPS environment is installed, LPIPS. LPIPS is supplementary and cannot replace the prespecified SSIM non-inferiority decision.
+Forecast reporting includes one-second-horizon MAE, persistence-baseline MAE, violation precision/recall/F1, and warning lead time. The existing static visual calibration uses six canonical views at every SSE level against SSE 4, reporting SSIM and, when the optional frozen LPIPS environment is installed, LPIPS. D-031 freezes method-level quality evidence as a separate formal plan: sample predeclared canonical views or timestamps from D1/D2 confirmatory blocks where feasible; compare each method against the same-view SSE 4 reference; apply the prespecified SSIM non-inferiority margin of 0.02; retain time-weighted SSE and visible geometric-error summaries; and do not choose screenshots after seeing confirmatory outcomes. LPIPS is supplementary and cannot replace the prespecified SSIM non-inferiority decision. Until method-level capture is fully implemented and analyzed, formal visual non-inferiority remains unmeasured.
 
 ## Statistical Analysis
 
 Friedman tests use complete six-method blocks and are reported separately by physical device, dataset, and scenario. Planned two-sided paired Wilcoxon tests compare proposed against PI, reactive, and Cesium dynamic SSE within the same strata, followed by global Holm correction. Reports include Hodges-Lehmann paired differences, matched-pairs rank-biserial effects, and 10,000-resample paired bootstrap 95% confidence intervals with seed `20260823`. No pooled cross-device p value is used to satisfy the gate.
 
-The minimum submission gate will be evaluated on the D-031 frozen desktop efficacy matrix: at least a 20% median relative violation-rate reduction versus reactive on every efficacy device in the primary pressure stratum; Holm-adjusted `p < 0.05` in the prespecified stratified comparisons; SSIM non-inferiority within 0.02; no higher switching frequency; forecast MAE below persistence MAE; and the same effect direction on the frozen external-validation dataset/stratum. Failure of any gate is reported rather than repaired by post hoc parameter changes.
+The minimum submission gate will be evaluated on the D-031 frozen desktop efficacy matrix: at least a 20% median relative violation-rate reduction versus reactive on every efficacy device in the D1/S3 primary pressure stratum; Holm-adjusted `p < 0.05` in the prespecified stratified comparisons; SSIM non-inferiority within 0.02; no higher switching frequency; forecast MAE below persistence MAE; and the same effect direction on the D2/S3 frozen external-validation stratum. Failure of any gate is reported rather than repaired by post hoc parameter changes.
 
 Android-A v2.3.6 D1/S3 and D2/S3 pressureBurst pilots are retained as valid low-pressure pilot evidence. The completed fixed-SSE-4 diagnostic remained near one 60 Hz frame with zero over-budget frames despite substantial request/content pressure, so S3 is unsuitable for Android efficacy comparison. The current manuscript route narrows Android claims to executability and low-pressure boundary behavior. If Android efficacy becomes necessary later, the project must define a new platform-independent S4 workload under a new protocol version before running Proposed.
 
@@ -178,6 +173,6 @@ Therefore remote LAN server delivery is a material confounder for PC-B S3
 identifiability. This diagnostic remains an exploratory validity check only and does
 not enter formal statistical tests. The follow-up local-server six-method pressure
 probe and four-repeat full pilot were valid and showed pilot-level pressure
-observability/repeatability, so D-030 accepts the desktop S3 route gate. A separate
-D-031 confirmatory-release decision is still required before any formal PC-B or
-cross-desktop S3 collection.
+observability/repeatability, so D-030 accepts the desktop S3 route gate. D-031 now
+releases the frozen desktop S3 confirmatory route; any post-release substantive
+change requires a new protocol version before affected conditions are collected.

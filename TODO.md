@@ -27,8 +27,9 @@ Last reviewed: 2026-09-04
 - [x] Run and analyze one PC-B local-server D1/S3 six-method `pressureBurst` pressure probe with `deviceId=pc-b` before any confirmatory release or S4 design.
 - [x] Run and analyze the PC-B local-server D1/S3 four-repeat `pressureBurst` full pilot before any confirmatory release or S4 design.
 - [x] Record D-030: PC-B local-server full pilot passes the desktop S3 route/repeatability gate; S4 is not needed for the current desktop route.
-- [ ] Prepare the D-031 confirmatory-release decision before any formal collection. Freeze the intended desktop matrix, method order, repeats, seeds, browser/device conditions, local-server requirement, and statistical-analysis inputs.
-- [ ] Update and verify the confirmatory run entry point before using `Run main batch`; the current historical main queue still schedules `steady` / `burst`, not the newly gated S3 `pressureBurst` route.
+- [x] Prepare the D-031 confirmatory-release decision before any formal collection. Freeze the intended desktop matrix, method order, repeats, seeds, browser/device conditions, local-server requirement, and statistical-analysis inputs.
+- [x] Update and verify the confirmatory run entry point: `Run frozen desktop S3 confirmatory` is the approved entry; the historical `Run main batch` path is disabled and marked legacy/do-not-use.
+- [ ] Before the first physical confirmatory block on each desktop, reconfirm local-server page origin, exact `deviceId`, power/network/GPU/browser conditions, and `960 x 540` drawing buffer.
 
 ## Decision Gates
 
@@ -56,10 +57,9 @@ Last reviewed: 2026-09-04
 - [x] Complete the PC-B remote/local fixed4 topology diagnostic and record the outcome in D-028: remote delivery is a material PC-B S3 confounder.
 - [x] Interpret the PC-B local-server six-method D1/S3 pressure probe before entering confirmatory or designing S4.
 - [x] Complete and interpret the PC-B local-server D1/S3 full pilot repeatability gate before entering confirmatory or designing S4.
-- [ ] Record a confirmatory-release decision after D-030, then update the run queue/UI so the formal button cannot silently collect the historical S1/S2 matrix when the intended release route is S3 `pressureBurst`.
+- [x] Record D-031 and update the run queue/UI so the approved formal button collects the frozen desktop S3 `pressureBurst` matrix instead of the historical S1/S2 matrix.
 - [x] Reconfirm Android-A conditions immediately before the v2.3.6 Android-A pilot setup.
-- [ ] Reconfirm Android-A conditions again immediately before any later confirmatory block.
-- [ ] Freeze method order, repeats, seeds, browser conditions, server topology, and statistical-analysis inputs in the protocol.
+- [x] Freeze method order, repeats, seeds, browser conditions, server topology, and statistical-analysis inputs in the protocol.
 
 ## Completed
 

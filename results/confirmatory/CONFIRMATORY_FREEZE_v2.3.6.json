@@ -1,0 +1,991 @@
+{
+  "artifactSchemaVersion": 1,
+  "createdAt": "2026-09-04T06:32:27.352Z",
+  "freezeDecision": "D-031",
+  "protocolVersion": "2.3.6",
+  "efficacyDevices": [
+    "pc-a",
+    "pc-b"
+  ],
+  "excludedEfficacyDevices": [
+    "android-a"
+  ],
+  "androidScope": [
+    "cross-device executability",
+    "telemetry validity",
+    "frame-time floor / low-pressure boundary evidence"
+  ],
+  "serverTopology": "local",
+  "allowedPageOrigins": [
+    "http://localhost:8088",
+    "http://127.0.0.1:8088"
+  ],
+  "datasets": [
+    {
+      "dataset": "bagAmsterdam",
+      "label": "3DBAG Amsterdam frozen subset",
+      "version": "v20250903",
+      "license": "CC-BY-4.0",
+      "sourceSha256": "5632a6307cced8bd32451c9a561a77b46d9dcf3cd6ca607079ae5e75ea679a7a",
+      "repeats": 12,
+      "role": "primary-efficacy"
+    },
+    {
+      "dataset": "bagRotterdam",
+      "label": "3DBAG Rotterdam frozen subset",
+      "version": "v20250903",
+      "license": "CC-BY-4.0",
+      "sourceSha256": "d06be54d9f1009ef4d83ab71c1d6bd0f32a36c87ec28b6155f9160ebf219e787",
+      "repeats": 8,
+      "role": "external-validation"
+    }
+  ],
+  "scenario": "pressureBurst",
+  "methods": [
+    "fixed8",
+    "fixed16",
+    "cesiumDynamic",
+    "reactive",
+    "pi",
+    "proposed"
+  ],
+  "seed": 20260823,
+  "networkProfile": "lan",
+  "studyPhase": "confirmatory",
+  "statisticalUnit": "one browser run",
+  "statisticalAnalysisInputs": {
+    "strata": [
+      "deviceId",
+      "dataset",
+      "scenario"
+    ],
+    "completePairedMethods": [
+      "fixed8",
+      "fixed16",
+      "cesiumDynamic",
+      "reactive",
+      "pi",
+      "proposed"
+    ],
+    "plannedComparisons": [
+      "proposed - pi",
+      "proposed - reactive",
+      "proposed - cesiumDynamic"
+    ],
+    "friedmanBy": [
+      "deviceId",
+      "dataset",
+      "scenario"
+    ],
+    "holmCorrection": "global across planned paired comparisons",
+    "pairedBootstrapResamples": 10000,
+    "bootstrapSeed": 20260823,
+    "noPooledCrossDevicePValueForGate": true
+  },
+  "renderWidth": 960,
+  "renderHeight": 540,
+  "frameBudgetMs": 33.333333333333336,
+  "warmupMs": 10000,
+  "measurementMs": 40000,
+  "windowMs": 2000,
+  "controlIntervalMs": 500,
+  "predictionHorizonMs": 1000,
+  "readiness": {
+    "initialContentTimeoutMs": 60000,
+    "readinessWindowMs": 2000,
+    "readinessRequiredStableWindows": 2,
+    "readinessP95ThresholdMs": 25,
+    "readinessTimeoutMs": 60000,
+    "drawingBufferTolerancePx": 1
+  },
+  "controllerPolicy": {
+    "sseLadder": [
+      4,
+      6,
+      8,
+      12,
+      16,
+      24,
+      32,
+      48,
+      64
+    ],
+    "frameBudgetMs": 33.333333333333336,
+    "windowMs": 2000,
+    "controlIntervalMs": 500,
+    "predictionHorizonMs": 1000,
+    "requestPersistenceMs": 1500,
+    "requestImpulseThreshold": 24,
+    "requestReleaseMs": 1000,
+    "interactionHoldMs": 1500,
+    "recoveryStableTicks": 4,
+    "downgradeCooldownMs": 500,
+    "upgradeCooldownMs": 1500,
+    "preemptiveRatio": 0.9,
+    "recoveryRatio": 0.8,
+    "criticalRatio": 1.2
+  },
+  "piBaseline": {
+    "parameterStatus": "frozen",
+    "kp": 0.4,
+    "ki": 0.05
+  },
+  "ablation": {
+    "deviceId": "pc-a",
+    "dataset": "bagAmsterdam",
+    "scenario": "pressureBurst",
+    "repeats": 8,
+    "studyPhase": "confirmatory-ablation",
+    "methods": [
+      "noPrediction",
+      "noRequest",
+      "noInteraction",
+      "noStability"
+    ]
+  },
+  "perDeviceRunCount": 120,
+  "totalRunCount": 240,
+  "queuePlanSha256": "8894288c1254341ccb14014f29b9d27c75a626cab7115488c8872868e96f7ad0",
+  "queuePlan": [
+    {
+      "globalBlockIndex": 1,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 1,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 1,
+      "blockSeed": 20260823,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "reactive",
+        "fixed16",
+        "proposed",
+        "pi",
+        "fixed8",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 2,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 2,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 2,
+      "blockSeed": 20260824,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "proposed",
+        "fixed8",
+        "reactive",
+        "pi",
+        "fixed16",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 3,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 3,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 3,
+      "blockSeed": 20260825,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "reactive",
+        "pi",
+        "fixed8",
+        "cesiumDynamic",
+        "fixed16",
+        "proposed"
+      ]
+    },
+    {
+      "globalBlockIndex": 4,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 4,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 4,
+      "blockSeed": 20260826,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "fixed16",
+        "proposed",
+        "fixed8",
+        "cesiumDynamic",
+        "pi",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 5,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 5,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 5,
+      "blockSeed": 20260827,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "cesiumDynamic",
+        "reactive",
+        "fixed16",
+        "pi",
+        "fixed8",
+        "proposed"
+      ]
+    },
+    {
+      "globalBlockIndex": 6,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 6,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 6,
+      "blockSeed": 20260828,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "pi",
+        "fixed16",
+        "proposed",
+        "fixed8",
+        "reactive",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 7,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 7,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 7,
+      "blockSeed": 20260829,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "fixed16",
+        "fixed8",
+        "cesiumDynamic",
+        "reactive",
+        "pi",
+        "proposed"
+      ]
+    },
+    {
+      "globalBlockIndex": 8,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 8,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 8,
+      "blockSeed": 20260830,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "fixed8",
+        "proposed",
+        "pi",
+        "cesiumDynamic",
+        "fixed16",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 9,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 9,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 9,
+      "blockSeed": 20260831,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "proposed",
+        "cesiumDynamic",
+        "fixed16",
+        "reactive",
+        "fixed8",
+        "pi"
+      ]
+    },
+    {
+      "globalBlockIndex": 10,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 10,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 10,
+      "blockSeed": 20260832,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "pi",
+        "fixed16",
+        "fixed8",
+        "cesiumDynamic",
+        "proposed",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 11,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 11,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 11,
+      "blockSeed": 20260833,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "cesiumDynamic",
+        "pi",
+        "fixed16",
+        "proposed",
+        "reactive",
+        "fixed8"
+      ]
+    },
+    {
+      "globalBlockIndex": 12,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 12,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 12,
+      "blockSeed": 20260834,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "pi",
+        "fixed16",
+        "proposed",
+        "fixed8",
+        "cesiumDynamic",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 13,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 13,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 1,
+      "blockSeed": 20260835,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "reactive",
+        "pi",
+        "proposed",
+        "cesiumDynamic",
+        "fixed16",
+        "fixed8"
+      ]
+    },
+    {
+      "globalBlockIndex": 14,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 14,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 2,
+      "blockSeed": 20260836,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "fixed8",
+        "proposed",
+        "reactive",
+        "pi",
+        "fixed16",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 15,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 15,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 3,
+      "blockSeed": 20260837,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "proposed",
+        "reactive",
+        "fixed8",
+        "pi",
+        "cesiumDynamic",
+        "fixed16"
+      ]
+    },
+    {
+      "globalBlockIndex": 16,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 16,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 4,
+      "blockSeed": 20260838,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "fixed16",
+        "reactive",
+        "pi",
+        "proposed",
+        "cesiumDynamic",
+        "fixed8"
+      ]
+    },
+    {
+      "globalBlockIndex": 17,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 17,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 5,
+      "blockSeed": 20260839,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "pi",
+        "fixed8",
+        "proposed",
+        "fixed16",
+        "reactive",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 18,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 18,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 6,
+      "blockSeed": 20260840,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "pi",
+        "proposed",
+        "fixed8",
+        "reactive",
+        "cesiumDynamic",
+        "fixed16"
+      ]
+    },
+    {
+      "globalBlockIndex": 19,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 19,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 7,
+      "blockSeed": 20260841,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "proposed",
+        "reactive",
+        "pi",
+        "fixed8",
+        "cesiumDynamic",
+        "fixed16"
+      ]
+    },
+    {
+      "globalBlockIndex": 20,
+      "deviceId": "pc-a",
+      "perDeviceBlockIndex": 20,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 8,
+      "blockSeed": 20260842,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "reactive",
+        "proposed",
+        "fixed8",
+        "fixed16",
+        "cesiumDynamic",
+        "pi"
+      ]
+    },
+    {
+      "globalBlockIndex": 21,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 1,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 1,
+      "blockSeed": 20260823,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "reactive",
+        "fixed16",
+        "proposed",
+        "pi",
+        "fixed8",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 22,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 2,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 2,
+      "blockSeed": 20260824,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "proposed",
+        "fixed8",
+        "reactive",
+        "pi",
+        "fixed16",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 23,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 3,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 3,
+      "blockSeed": 20260825,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "reactive",
+        "pi",
+        "fixed8",
+        "cesiumDynamic",
+        "fixed16",
+        "proposed"
+      ]
+    },
+    {
+      "globalBlockIndex": 24,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 4,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 4,
+      "blockSeed": 20260826,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "fixed16",
+        "proposed",
+        "fixed8",
+        "cesiumDynamic",
+        "pi",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 25,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 5,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 5,
+      "blockSeed": 20260827,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "cesiumDynamic",
+        "reactive",
+        "fixed16",
+        "pi",
+        "fixed8",
+        "proposed"
+      ]
+    },
+    {
+      "globalBlockIndex": 26,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 6,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 6,
+      "blockSeed": 20260828,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "pi",
+        "fixed16",
+        "proposed",
+        "fixed8",
+        "reactive",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 27,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 7,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 7,
+      "blockSeed": 20260829,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "fixed16",
+        "fixed8",
+        "cesiumDynamic",
+        "reactive",
+        "pi",
+        "proposed"
+      ]
+    },
+    {
+      "globalBlockIndex": 28,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 8,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 8,
+      "blockSeed": 20260830,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "fixed8",
+        "proposed",
+        "pi",
+        "cesiumDynamic",
+        "fixed16",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 29,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 9,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 9,
+      "blockSeed": 20260831,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "proposed",
+        "cesiumDynamic",
+        "fixed16",
+        "reactive",
+        "fixed8",
+        "pi"
+      ]
+    },
+    {
+      "globalBlockIndex": 30,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 10,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 10,
+      "blockSeed": 20260832,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "pi",
+        "fixed16",
+        "fixed8",
+        "cesiumDynamic",
+        "proposed",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 31,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 11,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 11,
+      "blockSeed": 20260833,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "cesiumDynamic",
+        "pi",
+        "fixed16",
+        "proposed",
+        "reactive",
+        "fixed8"
+      ]
+    },
+    {
+      "globalBlockIndex": 32,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 12,
+      "dataset": "bagAmsterdam",
+      "scenario": "pressureBurst",
+      "repeat": 12,
+      "blockSeed": 20260834,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "primary-efficacy",
+      "methodOrder": [
+        "pi",
+        "fixed16",
+        "proposed",
+        "fixed8",
+        "cesiumDynamic",
+        "reactive"
+      ]
+    },
+    {
+      "globalBlockIndex": 33,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 13,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 1,
+      "blockSeed": 20260835,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "reactive",
+        "pi",
+        "proposed",
+        "cesiumDynamic",
+        "fixed16",
+        "fixed8"
+      ]
+    },
+    {
+      "globalBlockIndex": 34,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 14,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 2,
+      "blockSeed": 20260836,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "fixed8",
+        "proposed",
+        "reactive",
+        "pi",
+        "fixed16",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 35,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 15,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 3,
+      "blockSeed": 20260837,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "proposed",
+        "reactive",
+        "fixed8",
+        "pi",
+        "cesiumDynamic",
+        "fixed16"
+      ]
+    },
+    {
+      "globalBlockIndex": 36,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 16,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 4,
+      "blockSeed": 20260838,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "fixed16",
+        "reactive",
+        "pi",
+        "proposed",
+        "cesiumDynamic",
+        "fixed8"
+      ]
+    },
+    {
+      "globalBlockIndex": 37,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 17,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 5,
+      "blockSeed": 20260839,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "pi",
+        "fixed8",
+        "proposed",
+        "fixed16",
+        "reactive",
+        "cesiumDynamic"
+      ]
+    },
+    {
+      "globalBlockIndex": 38,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 18,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 6,
+      "blockSeed": 20260840,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "pi",
+        "proposed",
+        "fixed8",
+        "reactive",
+        "cesiumDynamic",
+        "fixed16"
+      ]
+    },
+    {
+      "globalBlockIndex": 39,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 19,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 7,
+      "blockSeed": 20260841,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "proposed",
+        "reactive",
+        "pi",
+        "fixed8",
+        "cesiumDynamic",
+        "fixed16"
+      ]
+    },
+    {
+      "globalBlockIndex": 40,
+      "deviceId": "pc-b",
+      "perDeviceBlockIndex": 20,
+      "dataset": "bagRotterdam",
+      "scenario": "pressureBurst",
+      "repeat": 8,
+      "blockSeed": 20260842,
+      "networkProfile": "lan",
+      "studyPhase": "confirmatory",
+      "confirmatoryRelease": "D-031",
+      "confirmatoryRole": "external-validation",
+      "methodOrder": [
+        "reactive",
+        "proposed",
+        "fixed8",
+        "fixed16",
+        "cesiumDynamic",
+        "pi"
+      ]
+    }
+  ]
+}

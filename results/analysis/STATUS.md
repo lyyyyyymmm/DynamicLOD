@@ -3,6 +3,7 @@
 - Result files: 480
 - Valid runs (all phases): 430
 - Valid confirmatory runs: 0
+- Valid confirmatory candidates before D-031 filter: 0
 - Valid pilot runs: 336
 - Valid diagnostic runs: 4
 - Valid tuning runs: 0
@@ -10,4 +11,4 @@
 - Complete six-method paired blocks: 0
 
 Formal statistics use confirmatory runs only; pilot, tuning, and legacy records remain audit evidence.
-Formal efficacy claims must remain unset until a confirmatory release and device scope are explicitly frozen.
+Formal efficacy claims must remain unset until D-031 physical confirmatory runs are collected, filtered, and analyzed.

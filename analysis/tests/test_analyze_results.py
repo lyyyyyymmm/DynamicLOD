@@ -7,6 +7,7 @@ from pathlib import Path
 
 from analyze_results import (
     PRIMARY_COMPARATORS,
+    PRIMARY_METHODS,
     hodges_lehmann_paired,
     holm_adjust,
     paired_differences,
@@ -15,6 +16,7 @@ from analyze_results import (
     run_analysis,
     select_pi_parameters,
     wilcoxon_signed_rank,
+    _is_local_origin,
 )
 
 
@@ -197,13 +199,19 @@ class StatisticalHelpersTest(unittest.TestCase):
                 "manifest": {
                     "runId": "run-1",
                     "method": "proposed",
-                    "dataset": "publicStress",
-                    "scenario": "burst",
+                    "dataset": "bagAmsterdam",
+                    "scenario": "pressureBurst",
                     "repeat": 1,
                     "seed": 7,
                     "userAgent": "pc",
                     "deviceId": "pc-a",
                     "studyPhase": "confirmatory",
+                    "confirmatoryRelease": "D-031",
+                    "confirmatoryRole": "primary-efficacy",
+                    "networkProfile": "lan",
+                    "serverTopology": "local",
+                    "pageOrigin": "http://localhost:8088",
+                    "pageHost": "localhost:8088",
                 },
                 "valid": True,
                 "invalidReasons": [],
@@ -255,6 +263,84 @@ class StatisticalHelpersTest(unittest.TestCase):
             status = (output_dir / "STATUS.md").read_text(encoding="utf-8")
             self.assertIn("Valid confirmatory runs: 0", status)
             self.assertIn("Complete six-method paired blocks: 0", status)
+
+    def test_d031_formal_analysis_excludes_android_remote_pilot_diagnostic_and_legacy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            input_dir = root / "input"
+            output_dir = root / "output"
+            input_dir.mkdir()
+
+            def write_run(run_id, method, **manifest_overrides):
+                manifest = {
+                    "runId": run_id,
+                    "method": method,
+                    "dataset": "bagAmsterdam",
+                    "scenario": "pressureBurst",
+                    "repeat": 1,
+                    "seed": 20260823,
+                    "userAgent": "Chrome",
+                    "deviceId": "pc-a",
+                    "studyPhase": "confirmatory",
+                    "confirmatoryRelease": "D-031",
+                    "confirmatoryRole": "primary-efficacy",
+                    "networkProfile": "lan",
+                    "serverTopology": "local",
+                    "pageOrigin": "http://localhost:8088",
+                    "pageHost": "localhost:8088",
+                }
+                manifest.update(manifest_overrides)
+                payload = {
+                    "manifest": manifest,
+                    "valid": True,
+                    "invalidReasons": [],
+                    "summary": {
+                        "violationRate": 0.01 if method == "proposed" else 0.05,
+                        "predictionMaeMs": 1.0,
+                        "persistenceMaeMs": 2.0,
+                    },
+                }
+                (input_dir / f"{run_id}.json").write_text(
+                    json.dumps(payload), encoding="utf-8"
+                )
+
+            for method in ["fixed8", "fixed16", "cesiumDynamic", "reactive", "pi", "proposed"]:
+                write_run(f"d031-{method}", method)
+            write_run("android-proposed", "proposed", deviceId="android-a")
+            write_run("remote-proposed", "proposed", serverTopology="remote", pageOrigin="http://192.168.1.20:8088")
+            write_run("pilot-proposed", "proposed", studyPhase="pilot")
+            write_run(
+                "diagnostic-fixed4",
+                "fixedDiagnostic",
+                studyPhase="diagnostic",
+                diagnosticPurpose="android-workload-identifiability",
+                excludeFromFormalAggregation=True,
+                fixedSse=4,
+            )
+            write_run("legacy-burst-proposed", "proposed", scenario="burst", confirmatoryRelease="legacy-s1s2")
+
+            self.assertEqual(run_analysis(input_dir, output_dir), 0)
+            with (output_dir / "descriptive_violation_rate.csv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                descriptive = list(csv.DictReader(handle))
+            self.assertEqual({row["method"] for row in descriptive}, set(PRIMARY_METHODS))
+            self.assertEqual({row["deviceId"] for row in descriptive}, {"pc-a"})
+            self.assertEqual({row["scenario"] for row in descriptive}, {"pressureBurst"})
+
+            with (output_dir / "planned_pairwise_tests.csv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                comparisons = list(csv.DictReader(handle))
+            self.assertEqual(len(comparisons), 3)
+            self.assertEqual({row["nPairs"] for row in comparisons}, {"1"})
+
+            status = (output_dir / "STATUS.md").read_text(encoding="utf-8")
+            self.assertIn("Valid confirmatory runs: 6", status)
+            self.assertIn("Complete six-method paired blocks: 1", status)
+
+    def test_d031_local_origin_accepts_ipv6_page_host_fallback(self):
+        self.assertTrue(_is_local_origin("not-a-url", "[::1]:8088"))
 
     def test_android_identifiability_diagnostic_exports_distribution_metrics(self):
         with tempfile.TemporaryDirectory() as temporary:

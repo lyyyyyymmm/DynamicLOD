@@ -2,6 +2,17 @@
 
 All notable protocol, implementation, and research-workflow changes are recorded here. Historical entries reconstructed from conversation and project records are marked accordingly.
 
+## D-031 desktop S3 confirmatory release - 2026-09-04
+
+- Released the v2.3.6 desktop S3 confirmatory implementation without changing controller thresholds, workload timing, datasets, baselines, frame budget, readiness policy, or statistical plan.
+- Added `buildDesktopS3ConfirmatoryQueue()` as the approved formal queue: `pc-a` and `pc-b` physical collection, local-server only, D1 `bagAmsterdam + pressureBurst` x12 repeats and D2 `bagRotterdam + pressureBurst` x8 repeats per device, six formal methods, seed `20260823`, `networkProfile=lan`, and `studyPhase=confirmatory`.
+- Preserved the historical `buildMainExperimentQueue()` as a legacy S1/S2 audit trail and marked its runs `legacyConfirmatory=true` / `confirmatoryRelease=legacy-s1s2-unreleased`. The browser UI disables the old main button as `Legacy main batch — do not use` and adds `Run frozen desktop S3 confirmatory`.
+- Added fail-closed D-031 preflight validation for protocol version, device ID, local server topology, local page origin, datasets, scenario, methods, network profile, study phase, release identity, and exact frozen queue plan.
+- Froze D1/S3 ablations separately as `confirmatory-ablation` on PC-A with `noPrediction`, `noRequest`, `noInteraction`, and `noStability`; these do not enter main Friedman/Wilcoxon aggregation.
+- Added manifest fields `confirmatoryRelease`, `confirmatoryRole`, and `ablationPurpose`, plus D-031 analysis filtering so pilot, diagnostic, Android, remote-server, legacy S1/S2, ablation, and smoke/audit records cannot enter formal efficacy inference.
+- Added deterministic freeze artifacts: `results/confirmatory/CONFIRMATORY_FREEZE_v2.3.6.json` and `.md`; queue-plan SHA-256 is `8894288c1254341ccb14014f29b9d27c75a626cab7115488c8872868e96f7ad0`.
+- Added tests for the formal queue, deterministic seeds/method order, legacy-main preservation, fail-closed invalid contexts, analysis isolation, UI exposure, and freeze artifact hash stability.
+
 ## PC-B local-server D1/S3 full pilot gate - 2026-09-04
 
 - The PC-B local-server D1/S3 `pressureBurst` full pilot was completed and reanalyzed. It added 24 valid pilot rows in four complete six-method paired blocks, all correctly marked `deviceId=pc-b`, `dataset=bagAmsterdam`, `scenario=pressureBurst`, `protocolVersion=2.3.6`, `studyPhase=pilot`, `pilotPurpose=full-pilot-v2.3.6-pressure-burst`, `serverTopology=local`, and `pageOrigin=http://localhost:8088`, with no invalid reasons.

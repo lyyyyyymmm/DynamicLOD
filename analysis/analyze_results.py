@@ -10,10 +10,15 @@ import random
 from pathlib import Path
 from statistics import median
 from typing import Iterable, Sequence
+from urllib.parse import urlparse
 
 
 PRIMARY_METHODS = ["fixed8", "fixed16", "cesiumDynamic", "reactive", "pi", "proposed"]
 PRIMARY_COMPARATORS = ["pi", "reactive", "cesiumDynamic"]
+APPROVED_CONFIRMATORY_DEVICES = {"pc-a", "pc-b"}
+APPROVED_CONFIRMATORY_DATASETS = {"bagAmsterdam", "bagRotterdam"}
+APPROVED_LOCAL_HOSTNAMES = {"localhost", "127.0.0.1", "::1"}
+D031_CONFIRMATORY_RELEASE = "D-031"
 
 
 def holm_adjust(p_values: Sequence[float]) -> list[float]:
@@ -260,6 +265,9 @@ def result_to_row(result: dict) -> dict:
         "studyPhase": manifest.get("studyPhase", "legacy"),
         "pilotPurpose": manifest.get("pilotPurpose", "legacy"),
         "diagnosticPurpose": manifest.get("diagnosticPurpose", "none"),
+        "confirmatoryRelease": manifest.get("confirmatoryRelease", "none"),
+        "confirmatoryRole": manifest.get("confirmatoryRole", "none"),
+        "ablationPurpose": manifest.get("ablationPurpose", "none"),
         "fixedSse": manifest.get("fixedSse", math.nan),
         "excludeFromFormalAggregation": bool(manifest.get("excludeFromFormalAggregation", False)),
         "serverTopology": manifest.get("serverTopology", "unspecified"),
@@ -279,6 +287,60 @@ def result_to_row(result: dict) -> dict:
         else:
             row[key] = value
     return row
+
+
+def _is_local_origin(page_origin: object, page_host: object = "") -> bool:
+    origin = str(page_origin or "")
+    try:
+        parsed = urlparse(origin)
+        if parsed.hostname in APPROVED_LOCAL_HOSTNAMES:
+            return True
+    except ValueError:
+        pass
+    raw_host = str(page_host or "").strip().lower()
+    if raw_host.startswith("[") and "]" in raw_host:
+        host = raw_host[1 : raw_host.index("]")]
+    else:
+        host = raw_host.split(":", maxsplit=1)[0]
+    return host in APPROVED_LOCAL_HOSTNAMES
+
+
+def select_d031_confirmatory(frame):
+    if frame.empty:
+        return frame.copy()
+    required_columns = [
+        "studyPhase",
+        "confirmatoryRelease",
+        "deviceId",
+        "dataset",
+        "scenario",
+        "method",
+        "networkProfile",
+        "serverTopology",
+        "pageOrigin",
+        "pageHost",
+        "excludeFromFormalAggregation",
+    ]
+    filtered = frame.copy()
+    for column in required_columns:
+        if column not in filtered.columns:
+            filtered[column] = math.nan
+    mask = (
+        filtered["studyPhase"].eq("confirmatory")
+        & filtered["confirmatoryRelease"].eq(D031_CONFIRMATORY_RELEASE)
+        & filtered["deviceId"].isin(APPROVED_CONFIRMATORY_DEVICES)
+        & filtered["dataset"].isin(APPROVED_CONFIRMATORY_DATASETS)
+        & filtered["scenario"].eq("pressureBurst")
+        & filtered["method"].isin(PRIMARY_METHODS)
+        & filtered["networkProfile"].eq("lan")
+        & filtered["serverTopology"].eq("local")
+        & (~filtered["excludeFromFormalAggregation"].astype(bool))
+        & filtered.apply(
+            lambda row: _is_local_origin(row.get("pageOrigin"), row.get("pageHost")),
+            axis=1,
+        )
+    )
+    return filtered[mask].copy()
 
 
 def load_results(input_dir: Path) -> list[dict]:
@@ -408,7 +470,8 @@ def run_analysis(input_dir: Path, output_dir: Path) -> int:
 
     frame.to_csv(output_dir / "all_runs.csv", index=False)
     valid = frame[frame["valid"] == True].copy()  # noqa: E712
-    confirmatory = valid[valid["studyPhase"] == "confirmatory"].copy()
+    confirmatory_candidates = valid[valid["studyPhase"] == "confirmatory"].copy()
+    confirmatory = select_d031_confirmatory(valid)
     diagnostic = valid[valid["studyPhase"] == "diagnostic"].copy()
     metric = "violationRate"
     if valid.empty or metric not in valid:
@@ -601,6 +664,7 @@ def run_analysis(input_dir: Path, output_dir: Path) -> int:
         f"- Result files: {len(records)}",
         f"- Valid runs (all phases): {len(valid)}",
         f"- Valid confirmatory runs: {len(confirmatory)}",
+        f"- Valid confirmatory candidates before D-031 filter: {len(confirmatory_candidates)}",
         f"- Valid pilot runs: {len(valid[valid['studyPhase'] == 'pilot'])}",
         f"- Valid diagnostic runs: {len(diagnostic)}",
         f"- Valid tuning runs: {len(valid[valid['studyPhase'] == 'tuning'])}",
@@ -608,7 +672,7 @@ def run_analysis(input_dir: Path, output_dir: Path) -> int:
         f"- Complete six-method paired blocks: {complete_block_count}",
         "",
         "Formal statistics use confirmatory runs only; pilot, tuning, and legacy records remain audit evidence.",
-        "Formal efficacy claims must remain unset until a confirmatory release and device scope are explicitly frozen.",
+        "Formal efficacy claims must remain unset until D-031 physical confirmatory runs are collected, filtered, and analyzed.",
     ]
     (output_dir / "STATUS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return 0
